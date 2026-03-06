@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memberships Overview — Jackson Comfort</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f4f6f9; color: #2c3e50; font-size: 14px; }
+  .header { background: linear-gradient(135deg, #1a5276 0%, #2e86c1 100%); color: white; padding: 28px 36px; }
+  .header h1 { font-size: 26px; font-weight: 700; letter-spacing: 0.5px; }
+  .header p { font-size: 13px; opacity: 0.85; margin-top: 6px; }
+  .container { max-width: 1300px; margin: 0 auto; padding: 28px 24px; }
+  .section-title { font-size: 18px; font-weight: 700; color: #1a5276; margin: 32px 0 14px; padding-bottom: 8px; border-bottom: 3px solid #2e86c1; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .kpi { background: white; border-radius: 8px; padding: 18px 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); border-left: 4px solid #2e86c1; }
+  .kpi.red { border-left-color: #e74c3c; }
+  .kpi.orange { border-left-color: #e67e22; }
+  .kpi.green { border-left-color: #27ae60; }
+  .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: #7f8c8d; font-weight: 600; }
+  .kpi-value { font-size: 26px; font-weight: 700; margin-top: 6px; color: #2c3e50; }
+  .kpi-sub { font-size: 11px; color: #95a5a6; margin-top: 4px; }
+  .kpi.red .kpi-value { color: #e74c3c; }
+  .kpi.orange .kpi-value { color: #e67e22; }
+  .kpi.green .kpi-value { color: #27ae60; }
+  .card { background: white; border-radius: 8px; padding: 20px 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); margin-bottom: 20px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { background: #1a5276; color: white; padding: 10px 12px; text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  tbody tr:nth-child(even) { background: #f0f4f8; }
+  tbody tr:hover { background: #d6eaf8; }
+  td { padding: 9px 12px; border-bottom: 1px solid #ecf0f1; vertical-align: top; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+  .badge-red { background: #fde8e8; color: #c0392b; }
+  .badge-orange { background: #fef3e2; color: #d35400; }
+  .badge-green { background: #e8f8f0; color: #1e8449; }
+  .badge-blue { background: #e8f4fd; color: #1a6fa8; }
+  .badge-gray { background: #f2f3f4; color: #566573; }
+  .flag-red { color: #e74c3c; font-weight: 700; }
+  .flag-orange { color: #e67e22; font-weight: 700; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media(max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+  .alert-box { background: #fef9e7; border: 1px solid #f39c12; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; font-size: 13px; }
+  .alert-box strong { color: #d68910; }
+  .insight-box { background: #eaf2ff; border: 1px solid #2e86c1; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; font-size: 13px; }
+  .bar-container { background: #ecf0f1; border-radius: 4px; height: 10px; width: 100%; }
+  .bar-fill { height: 10px; border-radius: 4px; background: #2e86c1; }
+  .bar-fill.red { background: #e74c3c; }
+  .bar-fill.green { background: #27ae60; }
+  .number { font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🏅 Memberships Overview — Jackson Comfort</h1>
+  <p>Analysis Period: All memberships through March 6, 2026 &nbsp;|&nbsp; Report Date: March 6, 2026 &nbsp;|&nbsp; 45,700 Total Memberships</p>
+</div>
+
+<div class="container">
+
+  <!-- TOP KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi green">
+      <div class="kpi-label">Active Members</div>
+      <div class="kpi-value">11,215</div>
+      <div class="kpi-sub">24.5% of all-time memberships</div>
+    </div>
+    <div class="kpi green">
+      <div class="kpi-label">Estimated ARR</div>
+      <div class="kpi-value">$1.57M</div>
+      <div class="kpi-sub">Based on active recurring billing</div>
+    </div>
+    <div class="kpi green">
+      <div class="kpi-label">Estimated MRR</div>
+      <div class="kpi-value">$130.7K</div>
+      <div class="kpi-sub">Annual ÷ 12 + monthly cadence</div>
+    </div>
+    <div class="kpi orange">
+      <div class="kpi-label">Renewals Next 30 Days</div>
+      <div class="kpi-value">967</div>
+      <div class="kpi-sub">$81,012 in upcoming billing</div>
+    </div>
+    <div class="kpi orange">
+      <div class="kpi-label">Renewals Next 90 Days</div>
+      <div class="kpi-value">1,942</div>
+      <div class="kpi-sub">$261,125 in upcoming billing</div>
+    </div>
+    <div class="kpi red">
+      <div class="kpi-label">Expired Memberships</div>
+      <div class="kpi-value">27,870</div>
+      <div class="kpi-sub">60.9% of all-time — renewal opportunity</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 1: MEMBERSHIP HEALTH ===== -->
+  <div class="section-title">Section 1 — Membership Portfolio Health</div>
+
+  <div class="insight-box">
+    <strong>Context:</strong> Jackson Comfort's membership program is branded <em>Jackson Care</em> — a preventive maintenance plan covering HVAC systems. Members receive annual tune-ups and discounted service rates. ARR estimate = (Annual billing × 1) + (Monthly billing × 12) + (Bi-annual × 2) + (Quarterly × 4). One-time memberships (warranties, extended warranties) are excluded from ARR as they are non-recurring.
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <strong>Membership Status Summary</strong>
+      <table style="margin-top:14px">
+        <thead><tr><th>Status</th><th>Count</th><th>% of Total</th><th>Bar</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-green">Active</span></td>
+            <td class="number">11,215</td>
+            <td>24.5%</td>
+            <td><div class="bar-container"><div class="bar-fill green" style="width:40%"></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-gray">Expired</span></td>
+            <td class="number">27,870</td>
+            <td>60.9%</td>
+            <td><div class="bar-container"><div class="bar-fill red" style="width:100%"></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-gray">Deleted</span></td>
+            <td class="number">3,626</td>
+            <td>7.9%</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:13%"></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-red">Canceled</span></td>
+            <td class="number">2,959</td>
+            <td>6.5%</td>
+            <td><div class="bar-container"><div class="bar-fill red" style="width:11%"></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-orange">Suspended</span></td>
+            <td class="number">30</td>
+            <td>0.1%</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:0%"></div></div></td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:#7f8c8d;margin-top:10px">60.9% of all-time memberships are in "Expired" status — this is large and likely reflects annual memberships that were not renewed. Many of these expired members are strong candidates for re-enrollment campaigns, especially if they've had recent service activity.</p>
+    </div>
+
+    <div class="card">
+      <strong>Active Memberships by Type</strong>
+      <table style="margin-top:14px">
+        <thead><tr><th>Membership Type</th><th>Active Count</th></tr></thead>
+        <tbody>
+          <tr><td>Jackson Care</td><td class="number">4,773</td></tr>
+          <tr><td>Ext War - JCS 12 YR</td><td class="number">2,263</td></tr>
+          <tr><td>JCS Labor Warranty</td><td class="number">1,250</td></tr>
+          <tr><td>Install Jackson Care</td><td class="number">1,030</td></tr>
+          <tr><td>Ext War - JCS 10 YR</td><td class="number">610</td></tr>
+          <tr><td>Ext War - JCS 6 YR</td><td class="number">307</td></tr>
+          <tr><td>Jackson Care+</td><td class="number">283</td></tr>
+          <tr><td>Jackson Care (Single Heating)</td><td class="number">240</td></tr>
+          <tr><td>Ext War - JCS 5 YR</td><td class="number">143</td></tr>
+          <tr><td>10% Commercial Membership</td><td class="number">101</td></tr>
+          <tr><td>Parts Warr - 12 Year</td><td class="number">67</td></tr>
+          <tr><td>Jackson Care Furnace &amp; Air (Monthly)</td><td class="number">47</td></tr>
+          <tr><td>Trane 15 year</td><td class="number">37</td></tr>
+          <tr><td>Jackson Care (Single Cooling)</td><td class="number">28</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:#7f8c8d;margin-top:10px">Core "Jackson Care" plan is the largest active segment (4,773). Extended warranties (Ext War series) account for 3,323 active memberships — these are one-time plans from equipment installs, adding long-tail recurring service touchpoints.</p>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 2: REVENUE & ARR ===== -->
+  <div class="section-title">Section 2 — Revenue &amp; ARR Analysis</div>
+
+  <div class="two-col">
+    <div class="card">
+      <strong>Active Revenue by Billing Cadence (ARR Build)</strong>
+      <table style="margin-top:14px">
+        <thead><tr><th>Cadence</th><th>Active Count</th><th>Billing Total</th><th>ARR Contribution</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-blue">Annual</span></td>
+            <td class="number">4,316</td>
+            <td class="number">$1,101,666</td>
+            <td class="number">$1,101,666</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-green">Quarterly</span></td>
+            <td class="number">20</td>
+            <td class="number">$25,146</td>
+            <td class="number">$100,584</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-orange">Bi-annual</span></td>
+            <td class="number">16</td>
+            <td class="number">$17,073</td>
+            <td class="number">$34,146</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-green">Monthly</span></td>
+            <td class="number">1,121</td>
+            <td class="number">$27,628</td>
+            <td class="number">$331,536</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-gray">One Time</span></td>
+            <td class="number">5,742</td>
+            <td class="number">$0</td>
+            <td class="number">$0</td>
+          </tr>
+          <tr style="background:#e8f8f0;font-weight:700">
+            <td>Total ARR (Recurring)</td>
+            <td class="number">5,473</td>
+            <td class="number">$1,171,513</td>
+            <td class="number">$1,567,932</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:#7f8c8d;margin-top:10px">5,742 active memberships are "One Time" billing — these are warranties and extended warranty plans that generate no recurring revenue but do drive service call visits. True recurring revenue base is 5,473 active members generating ~$1.57M ARR.</p>
+    </div>
+
+    <div class="card">
+      <strong>All-Time Revenue Metrics</strong>
+      <table style="margin-top:14px">
+        <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Recognized Revenue (all statuses)</td><td class="number">$7,851,864</td></tr>
+          <tr><td>Actual Total Billed (all statuses)</td><td class="number">$10,053,821</td></tr>
+          <tr><td>Actual Contract Value (all statuses)</td><td class="number">$5,166,382</td></tr>
+          <tr><td>Active Recognized Revenue</td><td class="number">$1,956,389</td></tr>
+        </tbody>
+      </table>
+
+      <strong style="display:block;margin-top:18px;">Top Membership Sellers (Active Memberships)</strong>
+      <table style="margin-top:10px">
+        <thead><tr><th>Sold By</th><th>Count</th><th>Billing Value</th></tr></thead>
+        <tbody>
+          <tr><td>Emily Brzozowski*</td><td class="number">977</td><td class="number">$195,610</td></tr>
+          <tr><td>Breona Holley*</td><td class="number">793</td><td class="number">$176,345</td></tr>
+          <tr><td>Christopher Brooks</td><td class="number">225</td><td class="number">$55,605</td></tr>
+          <tr><td>Rebecca Cameron*</td><td class="number">257</td><td class="number">$54,258</td></tr>
+          <tr><td>Max Martin</td><td class="number">203</td><td class="number">$42,939</td></tr>
+          <tr><td>Phillip Long</td><td class="number">200</td><td class="number">$42,621</td></tr>
+          <tr><td>Jeffrey Campbell</td><td class="number">174</td><td class="number">$41,207</td></tr>
+          <tr><td>Andy Swartz</td><td class="number">131</td><td class="number">$32,640</td></tr>
+          <tr><td>Eli Allenso</td><td class="number">146</td><td class="number">$32,480</td></tr>
+          <tr><td>John Untisz</td><td class="number">152</td><td class="number">$29,850</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:11px;color:#7f8c8d;margin-top:10px">* Asterisk indicates likely former employees now inactive. Top CSRs/techs selling memberships are different from the HVAC install salespeople — this is primarily a field upsell program.</p>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 3: RENEWAL PIPELINE ===== -->
+  <div class="section-title">Section 3 — Renewal Pipeline &amp; Churn Analysis</div>
+
+  <div class="two-col">
+    <div class="card">
+      <strong>Upcoming Renewals</strong>
+      <table style="margin-top:14px">
+        <thead><tr><th>Window</th><th>Memberships</th><th>Billing Value</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-orange">Next 30 days</span></td>
+            <td class="number">967</td>
+            <td class="number">$81,012</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue">Next 90 days</span></td>
+            <td class="number">1,942</td>
+            <td class="number">$261,125</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:#7f8c8d;margin-top:12px">967 memberships are due for renewal within 30 days at $81K in billing. A proactive outreach workflow triggered at 30 days before renewal can significantly improve retention rates on expiring annual memberships.</p>
+    </div>
+
+    <div class="card">
+      <strong>Expired Member Re-Engagement Opportunity</strong>
+      <table style="margin-top:14px">
+        <thead><tr><th>Segment</th><th>Count</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Expired (all)</td>
+            <td class="number">27,870</td>
+            <td>Had a membership, now lapsed</td>
+          </tr>
+          <tr>
+            <td>Canceled</td>
+            <td class="number">2,959</td>
+            <td>Actively canceled — lower re-engagement priority</td>
+          </tr>
+          <tr>
+            <td>Re-engagement at 5%</td>
+            <td class="number">~1,394</td>
+            <td>~$314K new ARR at $225/yr avg</td>
+          </tr>
+          <tr>
+            <td>Re-engagement at 10%</td>
+            <td class="number">~2,787</td>
+            <td>~$627K new ARR at $225/yr avg</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:#7f8c8d;margin-top:12px">27,870 expired members represent past customers who had a care plan at some point. Many may have had equipment replaced (triggering a new plan) or simply let their plan lapse. A targeted win-back campaign — especially timed around system age notifications — could yield meaningful re-enrollment.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <strong>📋 Membership Program Notes</strong>
+    <table style="margin-top:14px">
+      <thead><tr><th>Plan Type</th><th>Description</th><th>Revenue Model</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Jackson Care</td>
+          <td>Core annual PM plan for HVAC systems — includes tune-ups, discounts on service</td>
+          <td>Annual recurring</td>
+        </tr>
+        <tr>
+          <td>Jackson Care Furnace &amp; Air</td>
+          <td>Annual plan covering both heating and cooling systems</td>
+          <td>Annual or monthly recurring</td>
+        </tr>
+        <tr>
+          <td>Install Jackson Care</td>
+          <td>Membership bundled at point of install — activated when new equipment is placed</td>
+          <td>Typically one-time activation; may convert to recurring</td>
+        </tr>
+        <tr>
+          <td>GSP - Guaranteed Savings Plan</td>
+          <td>Performance-based maintenance guarantee</td>
+          <td>Annual recurring</td>
+        </tr>
+        <tr>
+          <td>Ext War - JCS (5/6/10/12 YR)</td>
+          <td>Extended labor warranty sold at install — covers service calls during warranty period</td>
+          <td>One-time at sale; recognized over term</td>
+        </tr>
+        <tr>
+          <td>10% Commercial Membership</td>
+          <td>Flat discount plan for commercial accounts</td>
+          <td>Annual recurring</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align:center;color:#bdc3c7;font-size:11px;margin-top:40px;padding-bottom:20px">
+    Generated March 6, 2026 · Data: jc_memberships_data_03_06_24–03_06_26.xlsx · Jackson Comfort Internal Report
+  </div>
+
+</div>
+</body>
+</html>

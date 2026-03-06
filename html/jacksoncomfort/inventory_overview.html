@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventory &amp; Purchasing Overview — Jackson Comfort</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f4f6f9; color: #2c3e50; font-size: 14px; }
+  .header { background: linear-gradient(135deg, #145a32 0%, #27ae60 100%); color: white; padding: 28px 36px; }
+  .header h1 { font-size: 26px; font-weight: 700; letter-spacing: 0.5px; }
+  .header p { font-size: 13px; opacity: 0.85; margin-top: 6px; }
+  .container { max-width: 1300px; margin: 0 auto; padding: 28px 24px; }
+  .section-title { font-size: 18px; font-weight: 700; color: #145a32; margin: 32px 0 14px; padding-bottom: 8px; border-bottom: 3px solid #27ae60; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .kpi { background: white; border-radius: 8px; padding: 18px 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); border-left: 4px solid #27ae60; }
+  .kpi.red { border-left-color: #e74c3c; }
+  .kpi.orange { border-left-color: #e67e22; }
+  .kpi.blue { border-left-color: #2980b9; }
+  .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: #7f8c8d; font-weight: 600; }
+  .kpi-value { font-size: 26px; font-weight: 700; margin-top: 6px; color: #2c3e50; }
+  .kpi-sub { font-size: 11px; color: #95a5a6; margin-top: 4px; }
+  .kpi.red .kpi-value { color: #e74c3c; }
+  .kpi.orange .kpi-value { color: #e67e22; }
+  .card { background: white; border-radius: 8px; padding: 20px 24px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); margin-bottom: 20px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { background: #145a32; color: white; padding: 10px 12px; text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  tbody tr:nth-child(even) { background: #f8fcf9; }
+  tbody tr:hover { background: #eafaf1; }
+  td { padding: 9px 12px; border-bottom: 1px solid #ecf0f1; vertical-align: top; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+  .badge-red { background: #fde8e8; color: #c0392b; }
+  .badge-orange { background: #fef3e2; color: #d35400; }
+  .badge-green { background: #e8f8f0; color: #1e8449; }
+  .badge-blue { background: #e8f4fd; color: #1a6fa8; }
+  .badge-gray { background: #f2f3f4; color: #566573; }
+  .flag-red { color: #e74c3c; font-weight: 700; }
+  .flag-orange { color: #e67e22; font-weight: 700; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media(max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+  .alert-box { background: #fef9e7; border: 1px solid #f39c12; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; font-size: 13px; }
+  .alert-box strong { color: #d68910; }
+  .insight-box { background: #eafaf1; border: 1px solid #27ae60; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; font-size: 13px; }
+  .bar-container { background: #ecf0f1; border-radius: 4px; height: 10px; width: 100%; }
+  .bar-fill { height: 10px; border-radius: 4px; background: #27ae60; }
+  .bar-fill.red { background: #e74c3c; }
+  .bar-fill.orange { background: #e67e22; }
+  .number { font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📦 Inventory &amp; Purchasing Overview — Jackson Comfort</h1>
+  <p>Analysis Period: March 6, 2024 – March 6, 2026 &nbsp;|&nbsp; Report Date: March 6, 2026 &nbsp;|&nbsp; 407,111 Transaction Lines (3 files combined, 205 duplicates removed)</p>
+</div>
+
+<div class="container">
+
+  <!-- TOP KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi red">
+      <div class="kpi-label">Open PO Value</div>
+      <div class="kpi-value">$10.1M</div>
+      <div class="kpi-sub">Exported + Sent + Partially Received</div>
+    </div>
+    <div class="kpi red">
+      <div class="kpi-label">Unique Open POs</div>
+      <div class="kpi-value">29,432</div>
+      <div class="kpi-sub">Unreceived purchase orders</div>
+    </div>
+    <div class="kpi red">
+      <div class="kpi-label">Open POs &gt;180 Days</div>
+      <div class="kpi-value">29,191</div>
+      <div class="kpi-sub">99.2% of all open POs</div>
+    </div>
+    <div class="kpi red">
+      <div class="kpi-label">Open POs &gt;365 Days</div>
+      <div class="kpi-value">20,517</div>
+      <div class="kpi-sub">$6.83M in year-old+ POs</div>
+    </div>
+    <div class="kpi orange">
+      <div class="kpi-label">Top Vendor Exposure</div>
+      <div class="kpi-value">$3.95M</div>
+      <div class="kpi-sub">Famous Supply (largest single vendor)</div>
+    </div>
+    <div class="kpi orange">
+      <div class="kpi-label">Top BU Exposure</div>
+      <div class="kpi-value">$6.34M</div>
+      <div class="kpi-sub">HVAC Install - RREP - Residential</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 1: OPEN PO SUMMARY ===== -->
+  <div class="section-title">Section 1 — Open Purchase Order Summary</div>
+
+  <div class="alert-box">
+    <strong>⚠️ Critical Finding:</strong> 99.2% of all open PO value ($10.0M of $10.1M) is on purchase orders that are over 180 days old. This is a significant AP hygiene issue — these POs are either already received and not marked as such in ServiceTitan, or represent genuine outstanding orders that are very overdue. Either way, they are distorting financial reporting and should be reconciled against actual vendor statements.
+  </div>
+
+  <div class="insight-box">
+    <strong>Context:</strong> This report covers Purchase Orders with status <em>Exported</em> (sent to vendor), <em>Sent</em>, or <em>Partially Received</em> — all indicating goods not yet fully received. The inventory data was exported in three overlapping date chunks (Mar 2024–Aug 2024, Aug 2024–Jun 2025, Jun 2025–Mar 2026); 205 duplicate lines were removed during combination.
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <strong>Open PO Aging — Unique POs</strong>
+      <table style="margin-top:14px">
+        <thead><tr><th>Age Range</th><th>PO Count</th><th>Total Value</th><th>Bar</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-green">&lt;30 days</span></td>
+            <td class="number">82</td>
+            <td class="number">$60,856</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:1%"></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-green">30–60 days</span></td>
+            <td class="number">31</td>
+            <td class="number">$23,125</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:0%"></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue">60–90 days</span></td>
+            <td class="number">28</td>
+            <td class="number">$9,038</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:0%"></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-orange">90–180 days</span></td>
+            <td class="number">91</td>
+            <td class="number">$51,087</td>
+            <td><div class="bar-container"><div class="bar-fill orange" style="width:1%"></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-orange">180–365 days</span></td>
+            <td class="number">8,674</td>
+            <td class="number">$3,171,755</td>
+            <td><div class="bar-container"><div class="bar-fill orange" style="width:47%"></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-red">365+ days</span></td>
+            <td class="number">20,517</td>
+            <td class="number">$6,828,870</td>
+            <td><div class="bar-container"><div class="bar-fill red" style="width:100%"></div></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <strong>Open PO Status Breakdown</strong>
+      <table style="margin-top:14px">
+        <thead><tr><th>Status</th><th>Line Items</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-orange">Exported</span></td>
+            <td class="number">70,524</td>
+            <td>Sent to vendor, no receipt recorded</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue">Partially Received</span></td>
+            <td class="number">3,299</td>
+            <td>Some items received, remainder open</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-green">Sent</span></td>
+            <td class="number">388</td>
+            <td>Submitted but not yet acknowledged</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-gray">Pending</span></td>
+            <td class="number">13</td>
+            <td>Draft / not yet sent to vendor</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:#7f8c8d;margin-top:12px">The overwhelming majority (95.0%) are in "Exported" status — meaning they were sent to the vendor but receipt was never recorded in ServiceTitan. This is the most common source of phantom open POs: the goods arrived, were used, but the PO was never received/matched in the system.</p>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 2: VENDOR BREAKDOWN ===== -->
+  <div class="section-title">Section 2 — Open PO Exposure by Vendor</div>
+
+  <div class="two-col">
+    <div class="card">
+      <strong>Top Vendors by Open PO Value</strong>
+      <table style="margin-top:14px">
+        <thead><tr><th>Vendor</th><th>Open Value</th><th>Bar</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Famous Supply</td>
+            <td class="flag-red number">$3,953,339</td>
+            <td><div class="bar-container"><div class="bar-fill red" style="width:100%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Daikin Comfort Technologies Distribution</td>
+            <td class="flag-red number">$3,790,801</td>
+            <td><div class="bar-container"><div class="bar-fill red" style="width:96%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Lennox Industries Inc.</td>
+            <td class="flag-orange number">$422,369</td>
+            <td><div class="bar-container"><div class="bar-fill orange" style="width:11%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Wolff Bros.</td>
+            <td class="number">$234,567</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:6%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Roberts Mechanical</td>
+            <td class="number">$167,152</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:4%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Refrigeration Sales</td>
+            <td class="number">$162,626</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:4%"></div></div></td>
+          </tr>
+          <tr>
+            <td>SupplyHouse</td>
+            <td class="number">$108,744</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:3%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Active Plumbing</td>
+            <td class="number">$96,156</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:2%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Northrich Company</td>
+            <td class="number">$94,660</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:2%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Trutech Tools</td>
+            <td class="number">$90,932</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:2%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Robertson Heating Supply</td>
+            <td class="number">$82,805</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:2%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Clean Air America</td>
+            <td class="number">$78,431</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:2%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Advance Excavating</td>
+            <td class="number">$77,116</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:2%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Ferguson HVAC</td>
+            <td class="number">$76,548</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:2%"></div></div></td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:#e74c3c;margin-top:10px">⚠️ Famous Supply and Daikin together represent $7.74M (76.3%) of open PO exposure. These are Jackson Comfort's primary equipment and supply vendors — reconciling these two accounts alone would resolve the vast majority of the open PO backlog.</p>
+    </div>
+
+    <div class="card">
+      <strong>Open PO Value by Business Unit</strong>
+      <table style="margin-top:14px">
+        <thead><tr><th>Business Unit</th><th>Open Value</th><th>Bar</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>HVAC Install - RREP - Residential</td>
+            <td class="flag-red number">$6,342,882</td>
+            <td><div class="bar-container"><div class="bar-fill red" style="width:100%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Plumbing Service - Residential</td>
+            <td class="flag-orange number">$1,013,684</td>
+            <td><div class="bar-container"><div class="bar-fill orange" style="width:16%"></div></div></td>
+          </tr>
+          <tr>
+            <td>HVAC Service - Residential</td>
+            <td class="number">$947,906</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:15%"></div></div></td>
+          </tr>
+          <tr>
+            <td>HVAC Install - RREP - Commercial</td>
+            <td class="number">$843,385</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:13%"></div></div></td>
+          </tr>
+          <tr>
+            <td>HVAC Service - Commercial</td>
+            <td class="number">$402,338</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:6%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Plumbing Install - Residential</td>
+            <td class="number">$155,133</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:2%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Sewer Install - Residential</td>
+            <td class="number">$125,801</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:2%"></div></div></td>
+          </tr>
+          <tr>
+            <td>MA - Residential</td>
+            <td class="number">$123,892</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:2%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Sewer Service - Residential</td>
+            <td class="number">$91,185</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:1%"></div></div></td>
+          </tr>
+          <tr>
+            <td>MA - Commercial</td>
+            <td class="number">$53,675</td>
+            <td><div class="bar-container"><div class="bar-fill" style="width:1%"></div></div></td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:#7f8c8d;margin-top:10px">HVAC Install - RREP - Residential dominates at $6.34M (62.5% of total). This aligns with the primary business line — equipment POs for residential installs are the largest category and most likely to accumulate open POs as technicians receive equipment at the job site without logging receipts in ServiceTitan.</p>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 3: DATA NOTES ===== -->
+  <div class="section-title">Section 3 — Data Notes &amp; Recommended Actions</div>
+
+  <div class="card">
+    <strong>📋 Inventory Data Processing Notes</strong>
+    <table style="margin-top:14px">
+      <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Source Files</strong></td>
+          <td>3 separate exports: Mar 6–Aug 1, 2024 (83,835 rows) · Aug 1, 2024–Jun 5, 2025 (171,625 rows) · Jun 6, 2025–Mar 6, 2026 (151,856 rows)</td>
+        </tr>
+        <tr>
+          <td><strong>Combined Total</strong></td>
+          <td>407,316 raw rows → 407,111 after deduplication (205 overlapping rows removed from Aug 1, 2024 boundary)</td>
+        </tr>
+        <tr>
+          <td><strong>Transaction Types</strong></td>
+          <td>PurchaseOrder (103,349) · Receipt (101,525) · Bill (100,027) · UsedItems (81,266) · Transfer (8,977) · Return (7,230) · Adjustment (4,721)</td>
+        </tr>
+        <tr>
+          <td><strong>Open PO Definition</strong></td>
+          <td>Transaction Type = "PurchaseOrder" AND Transaction Status IN ("Exported", "Sent", "Partially Received", "Pending")</td>
+        </tr>
+        <tr>
+          <td><strong>Total Row Handling</strong></td>
+          <td>3 total/summary rows (Transaction Type = NaN, one per file) were excluded from all calculations</td>
+        </tr>
+        <tr>
+          <td><strong>NaN Transaction Status</strong></td>
+          <td>182,807 rows have no Transaction Status — confirmed as legitimate Receipts (101,525) and UsedItems (81,266), which carry no PO status by design</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <strong>✅ Recommended Actions — Open PO Reconciliation</strong>
+    <table style="margin-top:14px">
+      <thead><tr><th>Priority</th><th>Action</th><th>Impact</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-red">High</span></td>
+          <td>Reconcile Famous Supply open POs ($3.95M) against vendor statements — most are likely received but not marked in ServiceTitan</td>
+          <td>Could clear majority of open PO backlog</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-red">High</span></td>
+          <td>Reconcile Daikin open POs ($3.79M) — HVAC equipment for residential installs; cross-reference with install job completions</td>
+          <td>Improves job costing accuracy for HVAC Install BU</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-orange">Medium</span></td>
+          <td>Implement a monthly PO receipt workflow — require technicians to mark POs received at time of equipment sign-off</td>
+          <td>Prevents future accumulation</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-orange">Medium</span></td>
+          <td>Review 20,517 POs older than 365 days — void or receive based on actual status</td>
+          <td>Reduces phantom liability on balance sheet</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-blue">Low</span></td>
+          <td>Audit Partially Received POs (3,299 lines) — confirm remaining quantities are still outstanding</td>
+          <td>Improves AP accuracy</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align:center;color:#bdc3c7;font-size:11px;margin-top:40px;padding-bottom:20px">
+    Generated March 6, 2026 · Data: jc_inventory_line_items (3 files combined) · Jackson Comfort Internal Report
+  </div>
+
+</div>
+</body>
+</html>
