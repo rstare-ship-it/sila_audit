@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Memberships – Dave's World</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#060a18;--surface:#0c1228;--surface2:#101830;--border:#182040;--accent:#6366f1;--text:#f1f5f9;--muted:#64748b;--red:#ef4444;--green:#22c55e;--yellow:#f59e0b;--orange:#f97316;--blue:#3b82f6}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+nav{background:rgba(6,10,24,0.97);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:0 2rem}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-brand{font-size:1rem;font-weight:700;color:var(--accent);text-decoration:none}
+.nav-links{display:flex;gap:1.5rem;align-items:center}
+.nav-links a{font-size:0.8rem;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--accent)}
+.hero{background:linear-gradient(135deg,#020510 0%,#060a18 60%,#080c1a 100%);border-bottom:1px solid var(--border);padding:2.5rem 2rem}
+.hero-inner{max-width:1200px;margin:0 auto}
+.report-tag{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.25);border-radius:50px;padding:0.3rem 0.9rem;font-size:0.75rem;font-weight:600;color:#c7d2fe;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:1rem}
+h1{font-size:2rem;font-weight:800;margin-bottom:0.4rem}
+h1 span{color:var(--accent)}
+.hero-sub{font-size:0.9rem;color:var(--muted);line-height:1.6}
+.kpi-strip{background:var(--surface);border-bottom:1px solid var(--border);padding:1.5rem 2rem}
+.kpi-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.5rem}
+.kpi{text-align:center}
+.kpi-val{font-size:1.7rem;font-weight:800;line-height:1}
+.kpi-label{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-top:0.25rem}
+.kpi-sub{font-size:0.68rem;color:var(--muted);margin-top:0.15rem}
+.indigo{color:var(--accent)}.red{color:var(--red)}.green{color:var(--green)}.yellow{color:var(--yellow)}.orange{color:var(--orange)}.blue{color:var(--blue)}
+.section{max-width:1200px;margin:0 auto;padding:2.5rem 2rem}
+.section-header{margin-bottom:1.5rem}
+.section-title{font-size:1.1rem;font-weight:700;margin-bottom:0.3rem}
+.section-desc{font-size:0.83rem;color:var(--muted);line-height:1.6}
+.cards-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.cards-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+@media(max-width:900px){.cards-2,.cards-3,.cards-4{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.cards-2,.cards-3,.cards-4{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem}
+.card-title{font-size:0.8rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:0.5rem}
+.card-val{font-size:1.6rem;font-weight:800;line-height:1.1}
+.card-sub{font-size:0.78rem;color:var(--muted);margin-top:0.4rem;line-height:1.5}
+.card.alert{border-left:3px solid var(--red)}
+.card.warn{border-left:3px solid var(--yellow)}
+.card.ok{border-left:3px solid var(--green)}
+.card.info{border-left:3px solid var(--blue)}
+.card.primary{border-left:3px solid var(--accent)}
+.divider{border:none;border-top:1px solid var(--border);margin:0}
+table{width:100%;border-collapse:collapse;font-size:0.82rem}
+th{text-align:left;padding:0.6rem 0.8rem;color:var(--muted);font-weight:600;font-size:0.73rem;text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid var(--border)}
+td{padding:0.6rem 0.8rem;border-bottom:1px solid rgba(24,32,64,0.5);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(99,102,241,0.04)}
+.badge{display:inline-block;padding:0.2rem 0.55rem;border-radius:4px;font-size:0.7rem;font-weight:600}
+.badge-red{background:rgba(239,68,68,0.15);color:#fca5a5}
+.badge-yellow{background:rgba(245,158,11,0.15);color:#fcd34d}
+.badge-blue{background:rgba(59,130,246,0.15);color:#93c5fd}
+.badge-green{background:rgba(34,197,94,0.15);color:#86efac}
+.badge-indigo{background:rgba(99,102,241,0.15);color:#c7d2fe}
+.insight-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.3rem;margin-top:1rem}
+.insight-box h4{font-size:0.82rem;font-weight:700;margin-bottom:0.4rem}
+.insight-box p{font-size:0.8rem;color:var(--muted);line-height:1.6}
+.insight-box strong{color:var(--text)}
+.insight-box.flag h4{color:var(--yellow)}
+.insight-box.positive h4{color:var(--green)}
+.insight-box.critical h4{color:var(--red)}
+footer{border-top:1px solid var(--border);padding:1.2rem 2rem;text-align:center;color:var(--muted);font-size:0.75rem}
+footer a{color:var(--accent);text-decoration:none}
+.big-insight{background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(59,130,246,0.05));border:1px solid rgba(99,102,241,0.25);border-radius:12px;padding:1.8rem;margin-bottom:1.5rem}
+.big-insight h3{font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:0.75rem}
+.big-insight p{font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:0.5rem}
+.big-insight strong{color:var(--text)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">← Dave's World</a>
+    <div class="nav-links">
+      <a href="jobs_overview.html">Jobs</a>
+      <a href="inventory_overview.html">Inventory</a>
+      <a href="estimates_overview.html">Estimates</a>
+      <a href="../../index.html">Sila Home</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="report-tag">🔖 Memberships & Anomalies</div>
+    <h1>Dave's World – <span>Membership Analysis</span></h1>
+    <p class="hero-sub">Membership health, warranty tracking vs. service plans, and anomaly detection · 9,390 records analyzed · Mar 2024 – Mar 2026</p>
+  </div>
+</div>
+
+<div class="kpi-strip">
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-val indigo">9,390</div><div class="kpi-label">Total Memberships</div><div class="kpi-sub">All statuses</div></div>
+    <div class="kpi"><div class="kpi-val green">8,558</div><div class="kpi-label">Active</div><div class="kpi-sub">91.1% of total</div></div>
+    <div class="kpi"><div class="kpi-val yellow">461</div><div class="kpi-label">Expired</div><div class="kpi-sub">4.9% expiration rate</div></div>
+    <div class="kpi"><div class="kpi-val red">342</div><div class="kpi-label">Deleted</div><div class="kpi-sub">3.6% of total</div></div>
+    <div class="kpi"><div class="kpi-val blue">29</div><div class="kpi-label">Cancelled</div><div class="kpi-sub">Very low churn</div></div>
+    <div class="kpi"><div class="kpi-val orange">~200</div><div class="kpi-label">Paying Members</div><div class="kpi-sub">Est. Comfort Club</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="big-insight">
+    <h3>🔍 Key Finding: Dave's World Uses Memberships Primarily for Warranty Tracking</h3>
+    <p>Unlike a typical membership program, <strong>~8,300 of Dave's World's 8,558 "active" memberships are product warranties</strong> — not paying service subscriptions. These appear as <strong>"z[Division] Imported Warranty"</strong> and <strong>"Coil to Coil Warranty"</strong> membership types, with $0 billing templates and no billing history.</p>
+    <p>This explains why 8,499 active memberships appear to have "never been billed" — they're not meant to be billed. The actual <strong>recurring-revenue membership program (Standard Comfort Club)</strong> is much smaller, with approximately <strong>~200–300 enrolled paying members</strong> across all divisions.</p>
+    <p>This is an important distinction when benchmarking against other Sila brands. Dave's World's membership module is serving double duty as a <strong>warranty registry and a service plan tracker</strong>.</p>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">Active Membership Breakdown</div>
+    <div class="section-desc">The majority of "active" memberships are $0-billing warranty records. The Standard Comfort Club memberships generate actual recurring revenue.</div>
+  </div>
+  <div class="card">
+    <table>
+      <thead><tr><th>Membership Type</th><th>Count (Active)</th><th>Annual Billing</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td>zWD Imported Warranty</td><td>2,075</td><td class="muted">$0</td><td><span class="badge badge-blue">Warranty</span></td></tr>
+        <tr><td>zSC Imported Warranty</td><td>1,573</td><td class="muted">$0</td><td><span class="badge badge-blue">Warranty</span></td></tr>
+        <tr><td>zDF Imported Warranty</td><td>1,450</td><td class="muted">$0</td><td><span class="badge badge-blue">Warranty</span></td></tr>
+        <tr><td>zEL Imported Warranty</td><td>1,106</td><td class="muted">$0</td><td><span class="badge badge-blue">Warranty</span></td></tr>
+        <tr><td>Coil to Coil Warranty - ED</td><td>413</td><td class="muted">$0</td><td><span class="badge badge-blue">Warranty</span></td></tr>
+        <tr><td>zAG Imported Warranty</td><td>415</td><td class="muted">$0</td><td><span class="badge badge-blue">Warranty</span></td></tr>
+        <tr><td>Coil to Coil Warranty - WD</td><td>318</td><td class="muted">$0</td><td><span class="badge badge-blue">Warranty</span></td></tr>
+        <tr><td>Coil to Coil Warranty - SC</td><td>222</td><td class="muted">$0</td><td><span class="badge badge-blue">Warranty</span></td></tr>
+        <tr><td>Coil to Coil Warranty - DF</td><td>213</td><td class="muted">$0</td><td><span class="badge badge-blue">Warranty</span></td></tr>
+        <tr><td>Coil to Coil Warranty - AG</td><td>181</td><td class="muted">$0</td><td><span class="badge badge-blue">Warranty</span></td></tr>
+        <tr><td>zED Imported Warranty</td><td>169</td><td class="muted">$0</td><td><span class="badge badge-blue">Warranty</span></td></tr>
+        <tr><td>Coil to Coil Warranty - EL</td><td>138</td><td class="muted">$0</td><td><span class="badge badge-blue">Warranty</span></td></tr>
+        <tr><td>Standard Comfort Club - DF</td><td>36</td><td class="green">$4,392</td><td><span class="badge badge-green">Paying</span></td></tr>
+        <tr><td><em>Other Comfort Club types...</em></td><td>~200</td><td class="green">~$22K est.</td><td><span class="badge badge-green">Paying</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">Membership Status Overview</div>
+  </div>
+  <div class="cards-4">
+    <div class="card ok">
+      <div class="card-title">Active</div>
+      <div class="card-val green">8,558</div>
+      <div class="card-sub">91.1% of portfolio<br/>Primarily warranty records</div>
+    </div>
+    <div class="card warn">
+      <div class="card-title">Expired</div>
+      <div class="card-val yellow">461</div>
+      <div class="card-sub">4.9% of total<br/>Natural warranty expirations</div>
+    </div>
+    <div class="card warn">
+      <div class="card-title">Deleted</div>
+      <div class="card-val orange">342</div>
+      <div class="card-sub">3.6% of total<br/>Should be reviewed</div>
+    </div>
+    <div class="card ok">
+      <div class="card-title">Cancelled</div>
+      <div class="card-val green">29</div>
+      <div class="card-sub">0.3% cancellation rate<br/>Extremely low churn</div>
+    </div>
+  </div>
+  <div class="insight-box flag" style="margin-top:1.5rem">
+    <h4>💡 342 Deleted Memberships</h4>
+    <p>342 membership records in "Deleted" status warrant a quick review. While deletes may be legitimate corrections, <strong>deleted records can hide warranty coverage or billing history</strong>. Recommend auditing who deleted these and whether any active warranty customers are affected.</p>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">Cancellation Analysis</div>
+    <div class="section-desc">Only 29 cancellations across the entire portfolio — exceptionally low. Most cancellations were handled by two team members.</div>
+  </div>
+  <div class="card">
+    <table>
+      <thead><tr><th>Cancelled By</th><th>Count</th></tr></thead>
+      <tbody>
+        <tr><td>Megan Moreau</td><td>11</td></tr>
+        <tr><td>Julianna Maddocks</td><td>11</td></tr>
+        <tr><td>Dan Sharrow</td><td>4</td></tr>
+        <tr><td>Laura Chadwick</td><td>1</td></tr>
+        <tr><td>Rebecca Frost</td><td>1</td></tr>
+        <tr><td>Joshua Girroir</td><td>1</td></tr>
+      </tbody>
+    </table>
+    <div class="insight-box positive">
+      <h4>✅ Very Low Cancellation Rate</h4>
+      <p>With only <strong>29 cancellations</strong> out of 9,390 memberships (0.3%), Dave's World has essentially zero churn in its warranty and membership portfolio. This is a positive signal for customer retention and satisfaction — though it also reflects the nature of product warranties, which are rarely "cancelled" by customers.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">Opportunity: Comfort Club Expansion</div>
+    <div class="section-desc">Dave's World has a large base of warranty customers who are excellent candidates for upsell into a paying Comfort Club maintenance plan.</div>
+  </div>
+  <div class="cards-2">
+    <div class="card primary">
+      <div class="card-title">Warranty Customers (Active)</div>
+      <div class="card-val indigo">~8,300</div>
+      <div class="card-sub">Customers with active equipment warranties — already engaged with Dave's World services and likely receptive to a maintenance plan offer.</div>
+    </div>
+    <div class="card ok">
+      <div class="card-title">Est. Comfort Club Members</div>
+      <div class="card-val green">~200–300</div>
+      <div class="card-sub">Current paying maintenance members. Significant room for growth from the existing warranty customer base with targeted outreach.</div>
+    </div>
+  </div>
+  <div class="insight-box positive" style="margin-top:1rem">
+    <h4>✅ High-Value Upsell Opportunity</h4>
+    <p>Assuming even a <strong>10% conversion of warranty customers</strong> to a $200/year Comfort Club plan, that represents <strong>~$166K in new annual recurring revenue</strong>. Dave's World's warranty database is a valuable, underutilized CRM asset. A targeted outreach campaign to customers approaching warranty expiration could significantly grow the recurring revenue base.</p>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html">← Dave's World Overview</a> &nbsp;|&nbsp;
+  <a href="../../index.html">Sila Brands Home</a> &nbsp;|&nbsp;
+  Data: Mar 2024 – Mar 2026
+</footer>
+</body>
+</html>
