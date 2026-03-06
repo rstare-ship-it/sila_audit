@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Large data files - keep locally, don't push to GitHub
+*.xlsx
+*.xls
+*.csv
+
+# Nested git repos
+tenant_data/auchinachieservices/.git
