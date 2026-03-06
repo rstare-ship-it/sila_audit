@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Plumber — Jobs Overview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; font-size: 14px; }
+  nav { background: #1a1a2e; color: white; padding: 0 36px; display: flex; align-items: center; height: 52px; gap: 16px; }
+  nav a { color: #f39c12; text-decoration: none; font-size: 13px; opacity: 0.85; }
+  nav a:hover { opacity: 1; }
+  nav span { color: rgba(255,255,255,0.3); }
+  .header { background: linear-gradient(135deg, #784212 0%, #e67e22 100%); color: white; padding: 44px 36px 36px; }
+  .header-inner { max-width: 1200px; margin: 0 auto; }
+  .header h1 { font-size: 30px; font-weight: 800; }
+  .header h1 span { color: #fdebd0; }
+  .header p { font-size: 14px; opacity: 0.85; margin-top: 8px; }
+  .header-meta { font-size: 12px; opacity: 0.65; margin-top: 6px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 36px; }
+  .kpi { background: white; border-radius: 10px; padding: 18px 16px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 3px solid #e67e22; }
+  .kpi-val { font-size: 24px; font-weight: 800; color: #784212; }
+  .kpi-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: #7f8c8d; margin-top: 4px; font-weight: 600; }
+  .kpi-sub { font-size: 11px; color: #bdc3c7; margin-top: 3px; }
+  .kpi.red { border-top-color: #e74c3c; } .kpi.red .kpi-val { color: #c0392b; }
+  .kpi.green { border-top-color: #27ae60; } .kpi.green .kpi-val { color: #1e8449; }
+  .section { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 24px; }
+  .section-title { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; padding-bottom: 10px; border-bottom: 2px solid #fef9f0; display: flex; align-items: center; gap: 8px; }
+  .section-sub { font-size: 12px; color: #95a5a6; font-weight: 400; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  @media(max-width:768px) { .two-col { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+  th { background: #fef9f0; color: #784212; font-weight: 700; padding: 9px 10px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 9px 10px; border-bottom: 1px solid #f4f6f7; color: #2c3e50; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fef9f0; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+  .badge-green { background: #eafaf1; color: #1e8449; }
+  .badge-red { background: #fdedec; color: #c0392b; }
+  .badge-yellow { background: #fef9e7; color: #b7950b; }
+  .badge-gray { background: #f4f6f7; color: #7f8c8d; }
+  .badge-orange { background: #fef5e7; color: #d35400; }
+  .insight { display: flex; gap: 10px; padding: 12px 14px; border-radius: 8px; margin-top: 10px; font-size: 13px; line-height: 1.5; }
+  .insight.warn { background: #fef5e7; border-left: 3px solid #f39c12; }
+  .insight.info { background: #eaf4fb; border-left: 3px solid #2980b9; }
+  .insight.danger { background: #fdedec; border-left: 3px solid #e74c3c; }
+  footer { background: #1a1a2e; color: rgba(255,255,255,0.4); text-align: center; padding: 20px; font-size: 12px; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html">← Sila Brands</a>
+  <span>/</span>
+  <a href="index.html">My Plumber</a>
+  <span>/</span>
+  <span style="color:rgba(255,255,255,0.7)">Jobs Overview</span>
+</nav>
+
+<div class="header">
+  <div class="header-inner">
+    <h1>My Plumber — <span>Jobs Overview</span></h1>
+    <p>Job costing, gross margin, stale jobs, and cancellation analysis</p>
+    <div class="header-meta">Data period: Mar 2024 – Mar 2026 · 89,174 jobs · Exported Mar 6, 2026</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="kpi-strip">
+    <div class="kpi green">
+      <div class="kpi-val">$65.5M</div>
+      <div class="kpi-lbl">Revenue (2yr)</div>
+      <div class="kpi-sub">Completed jobs</div>
+    </div>
+    <div class="kpi green">
+      <div class="kpi-val">67.5%</div>
+      <div class="kpi-lbl">Gross Margin</div>
+      <div class="kpi-sub">Completed jobs</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">71,853</div>
+      <div class="kpi-lbl">Completed Jobs</div>
+      <div class="kpi-sub">80.6% completion rate</div>
+    </div>
+    <div class="kpi red">
+      <div class="kpi-val">54</div>
+      <div class="kpi-lbl">Stale Jobs</div>
+      <div class="kpi-sub">Open &gt;30 days</div>
+    </div>
+    <div class="kpi red">
+      <div class="kpi-val">973</div>
+      <div class="kpi-lbl">Neg Margin Jobs</div>
+      <div class="kpi-sub">Completed, GM &lt; 0</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">$178K</div>
+      <div class="kpi-lbl">Outstanding Balance</div>
+      <div class="kpi-sub">51 completed jobs</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: COMPLETED JOBS -->
+  <div class="section">
+    <div class="section-title">Completed Job Performance <span class="section-sub">— 71,853 jobs · Mar 2024–Mar 2026</span></div>
+    <div class="insight info">
+      My Plumber's 67.5% gross margin leads the Sila portfolio — driven by high-margin sewer work and strong residential plumbing volume. Plumbing Service alone generated $29.7M (45% of total revenue) across 27,158 jobs.
+    </div>
+    <table>
+      <thead><tr><th>Business Unit</th><th class="num">Jobs</th><th class="num">Revenue</th><th class="num">Gross Margin</th><th class="num">GM%</th></tr></thead>
+      <tbody>
+        <tr><td>Plumbing Service - Residential</td><td class="num">27,158</td><td class="num">$29,722,230</td><td class="num">$19,999,410</td><td class="num"><span class="badge badge-green">67.3%</span></td></tr>
+        <tr><td>HVAC Installation - RREP - Residential</td><td class="num">1,998</td><td class="num">$16,175,325</td><td class="num">$7,970,909</td><td class="num"><span class="badge badge-yellow">49.3%</span></td></tr>
+        <tr><td>Sewer Installation - Residential</td><td class="num">1,474</td><td class="num">$4,660,249</td><td class="num">$4,293,984</td><td class="num"><span class="badge badge-green">92.1%</span></td></tr>
+        <tr><td>HVAC Service - Residential</td><td class="num">11,810</td><td class="num">$3,946,822</td><td class="num">$3,035,637</td><td class="num"><span class="badge badge-green">76.9%</span></td></tr>
+        <tr><td>MA - Residential</td><td class="num">10,327</td><td class="num">$3,115,076</td><td class="num">$2,462,642</td><td class="num"><span class="badge badge-green">79.1%</span></td></tr>
+        <tr><td>Electrical Service - Residential</td><td class="num">4,109</td><td class="num">$3,014,418</td><td class="num">$2,455,719</td><td class="num"><span class="badge badge-green">81.5%</span></td></tr>
+        <tr><td>Sewer Service - Residential</td><td class="num">6,621</td><td class="num">$2,244,515</td><td class="num">$2,214,756</td><td class="num"><span class="badge badge-green">98.7%</span></td></tr>
+        <tr><td>Plumbing Maintenance</td><td class="num">2,550</td><td class="num">$1,745,866</td><td class="num">$1,204,555</td><td class="num"><span class="badge badge-green">69.0%</span></td></tr>
+        <tr><td>Electrical Maintenance</td><td class="num">879</td><td class="num">$328,002</td><td class="num">$280,010</td><td class="num"><span class="badge badge-green">85.4%</span></td></tr>
+        <tr><td>Home Repair</td><td class="num">481</td><td class="num">$251,617</td><td class="num">$217,023</td><td class="num"><span class="badge badge-green">86.3%</span></td></tr>
+        <tr><td>Water Quality Service</td><td class="num">120</td><td class="num">$228,808</td><td class="num">$122,081</td><td class="num"><span class="badge badge-yellow">53.4%</span></td></tr>
+        <tr><td>Other / Administrative</td><td class="num">1,526</td><td class="num">$47,568</td><td class="num">$43,068</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-title">Top Salespeople <span class="section-sub">by Revenue (Completed)</span></div>
+      <table>
+        <thead><tr><th>Salesperson</th><th class="num">Jobs</th><th class="num">Revenue</th></tr></thead>
+        <tbody>
+          <tr><td>Peter Archuleta</td><td class="num">701</td><td class="num">$7,524,519</td></tr>
+          <tr><td>Hooman Khazei</td><td class="num">456</td><td class="num">$4,926,521</td></tr>
+          <tr><td>Matt Brown</td><td class="num">276</td><td class="num">$3,384,703</td></tr>
+          <tr><td>Troy Van Winkle</td><td class="num">233</td><td class="num">$1,655,519</td></tr>
+          <tr><td>Gerald Bennett</td><td class="num">139</td><td class="num">$1,257,626</td></tr>
+          <tr><td>Stephen Pinkowski</td><td class="num">49</td><td class="num">$369,292</td></tr>
+          <tr><td>Matt Mayo</td><td class="num">32</td><td class="num">$192,554</td></tr>
+          <tr><td>Candice Bibbs</td><td class="num">13</td><td class="num">$123,852</td></tr>
+          <tr><td>Sajjad Ahmed</td><td class="num">59</td><td class="num">$107,860</td></tr>
+          <tr><td>James Fleming</td><td class="num">8</td><td class="num">$77,002</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Completed Jobs with Outstanding Balance</div>
+      <div class="insight danger">51 completed jobs carrying $177,931 in uncollected revenue. Several flagged with "Atrny Acct" prefix — attorney-managed accounts that may require special collection handling.</div>
+      <table>
+        <thead><tr><th>Job #</th><th>Customer</th><th>BU</th><th class="num">Balance</th></tr></thead>
+        <tbody>
+          <tr><td>581854736</td><td>Atrny Acct Sharon/Willie Calhoun</td><td>Sewer Install</td><td class="num">$21,958</td></tr>
+          <tr><td>320538286</td><td>Atrny Acct (JS) Dana Banks</td><td>Plumbing Svc</td><td class="num">$19,652</td></tr>
+          <tr><td>324533803</td><td>Atrny Acct Kiran Siddiqui</td><td>HVAC Install</td><td class="num">$15,820</td></tr>
+          <tr><td>610568768</td><td>Jessica Lewis</td><td>Plumbing Svc</td><td class="num">$13,685</td></tr>
+          <tr><td>656905261</td><td>James Martin</td><td>HVAC Install</td><td class="num">$11,444</td></tr>
+          <tr><td>593421802</td><td>Atrny Acct Erica Long</td><td>Plumbing Svc</td><td class="num">$10,734</td></tr>
+          <tr><td>611362634</td><td>Atrny Acct Dominique Robinson</td><td>Plumbing Svc</td><td class="num">$9,911</td></tr>
+          <tr><td>654674456</td><td>Franconia Fire Dept</td><td>HVAC Service</td><td class="num">$7,510</td></tr>
+          <tr><td>599608817</td><td>Lara Stang</td><td>Sewer Install</td><td class="num">$7,500</td></tr>
+          <tr><td>662909012</td><td>Upper Occoquan Service Authority</td><td>Sewer Install</td><td class="num">$5,392</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Negative Gross Margin Jobs <span class="section-sub">— 973 completed jobs with GM &lt; 0 · Total revenue: $323,897</span></div>
+    <div class="insight warn">
+      973 completed jobs show negative gross margin. The majority are small-dollar jobs where labor and materials exceeded revenue — review pricing floors and tech incentive alignment. Top 10 by revenue shown below.
+    </div>
+    <table>
+      <thead><tr><th>Job #</th><th>Business Unit</th><th>Customer</th><th class="num">Revenue</th><th class="num">GM%</th></tr></thead>
+      <tbody>
+        <tr><td>325660485</td><td>HVAC Install - RREP</td><td>Franconia Fire Department</td><td class="num">$27,600</td><td class="num"><span class="badge badge-red">-0.0%</span></td></tr>
+        <tr><td>615683294</td><td>HVAC Install - RREP</td><td>Ramaswamy Chandramouli</td><td class="num">$14,143</td><td class="num"><span class="badge badge-red">-0.2%</span></td></tr>
+        <tr><td>505875288</td><td>Plumbing Service</td><td>Michelle Sumner</td><td class="num">$13,052</td><td class="num"><span class="badge badge-red">-0.1%</span></td></tr>
+        <tr><td>593589981</td><td>HVAC Install - RREP</td><td>David Hickernell</td><td class="num">$10,500</td><td class="num"><span class="badge badge-red">-0.1%</span></td></tr>
+        <tr><td>618874858</td><td>Plumbing Service</td><td>Robin Smith</td><td class="num">$9,334</td><td class="num"><span class="badge badge-red">-0.3%</span></td></tr>
+        <tr><td>505987844</td><td>Plumbing Service</td><td>Erin &amp; Evan Daugherty</td><td class="num">$9,000</td><td class="num"><span class="badge badge-red">-0.1%</span></td></tr>
+        <tr><td>610367168</td><td>Electrical Service</td><td>William/Sherry Greene</td><td class="num">$9,000</td><td class="num"><span class="badge badge-red">-1.4%</span></td></tr>
+        <tr><td>319020648</td><td>Plumbing Service</td><td>Jennifer Granderson</td><td class="num">$8,983</td><td class="num"><span class="badge badge-red">-0.1%</span></td></tr>
+        <tr><td>616838097</td><td>Plumbing Service</td><td>Donald/Funda Carter</td><td class="num">$8,745</td><td class="num"><span class="badge badge-red">-0.5%</span></td></tr>
+        <tr><td>589915114</td><td>HVAC Install - RREP</td><td>Donald Melanson</td><td class="num">$8,444</td><td class="num"><span class="badge badge-red">-0.1%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 2: STALE & CANCELLATIONS -->
+  <div class="section">
+    <div class="section-title">Stale Jobs — Open &gt;30 Days <span class="section-sub">54 jobs across Hold / In Progress / Scheduled</span></div>
+    <div class="insight warn">
+      54 stale jobs — relatively clean for a brand this size, but 18 are over 1 year old. The oldest is a Home Repair job at 730 days (Amy Figueroa). Review Hold and In Progress jobs for parts availability or customer communication issues.
+    </div>
+    <div class="two-col" style="margin-top:16px; margin-bottom:0">
+      <table>
+        <thead><tr><th>Age Bucket</th><th class="num">Jobs</th></tr></thead>
+        <tbody>
+          <tr><td>31–90 days</td><td class="num">13</td></tr>
+          <tr><td>91–180 days</td><td class="num">16</td></tr>
+          <tr><td>181–365 days</td><td class="num">7</td></tr>
+          <tr><td>1–2 years</td><td class="num">18</td></tr>
+          <tr><td>2+ years</td><td class="num">0</td></tr>
+        </tbody>
+      </table>
+      <table>
+        <thead><tr><th>Status</th><th class="num">Count</th></tr></thead>
+        <tbody>
+          <tr><td>Hold</td><td class="num">28</td></tr>
+          <tr><td>In Progress</td><td class="num">20</td></tr>
+          <tr><td>Scheduled</td><td class="num">6</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <table style="margin-top:16px">
+      <thead><tr><th>Job #</th><th>Business Unit</th><th>Status</th><th>Customer</th><th class="num">Age (Days)</th></tr></thead>
+      <tbody>
+        <tr><td>316210564</td><td>Home Repair</td><td><span class="badge badge-yellow">Hold</span></td><td>Amy Figueroa</td><td class="num">730</td></tr>
+        <tr><td>316552022</td><td>Electrical Service</td><td><span class="badge badge-orange">Scheduled</span></td><td>Kasthuri Chellappa</td><td class="num">725</td></tr>
+        <tr><td>316651898</td><td>HVAC Service</td><td><span class="badge badge-gray">In Progress</span></td><td>Anthony Blackman</td><td class="num">724</td></tr>
+        <tr><td>317539265</td><td>HVAC Service</td><td><span class="badge badge-yellow">Hold</span></td><td>Juan Cobbin</td><td class="num">718</td></tr>
+        <tr><td>318081606</td><td>Plumbing Service</td><td><span class="badge badge-yellow">Hold</span></td><td>Gwen Cloutier</td><td class="num">714</td></tr>
+        <tr><td>318127514</td><td>Sewer Installation</td><td><span class="badge badge-gray">In Progress</span></td><td>Robert Hill</td><td class="num">712</td></tr>
+        <tr><td>318650672</td><td>Electrical Service</td><td><span class="badge badge-yellow">Hold</span></td><td>Atrny Acct Trina Poindexter</td><td class="num">707</td></tr>
+        <tr><td>318939108</td><td>Sewer Installation</td><td><span class="badge badge-gray">In Progress</span></td><td>Carl Clark</td><td class="num">703</td></tr>
+        <tr><td>319018166</td><td>Plumbing Service</td><td><span class="badge badge-yellow">Hold</span></td><td>Marshall Ramsey</td><td class="num">702</td></tr>
+        <tr><td>319052988</td><td>Sewer Installation</td><td><span class="badge badge-yellow">Hold</span></td><td>Ivan Ayala</td><td class="num">701</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Cancellation Analysis <span class="section-sub">— 17,167 canceled jobs (19.2% of all jobs)</span></div>
+    <div class="insight info">
+      "Customer declined service" accounts for nearly half of all cancellations (47.3%) — this is a pricing/presentation concern. "Used Another Company" at 8.6% represents direct competitive loss. Combined with "Cheaper Estimate" (0.1%), roughly 9% of cancels are competitive.
+    </div>
+    <table>
+      <thead><tr><th>Cancel Reason</th><th class="num">Count</th><th class="num">% of Cancels</th></tr></thead>
+      <tbody>
+        <tr><td>Customer declined service</td><td class="num">8,116</td><td class="num">47.3%</td></tr>
+        <tr><td>Duplicate Call</td><td class="num">1,719</td><td class="num">10.0%</td></tr>
+        <tr><td>Customer Unreachable</td><td class="num">1,618</td><td class="num">9.4%</td></tr>
+        <tr><td>Used Another Company</td><td class="num">1,470</td><td class="num">8.6%</td></tr>
+        <tr><td>Self fix / Issue Stopped</td><td class="num">1,342</td><td class="num">7.8%</td></tr>
+        <tr><td>Customer Had to Leave</td><td class="num">1,305</td><td class="num">7.6%</td></tr>
+        <tr><td>Nobody Home</td><td class="num">539</td><td class="num">3.1%</td></tr>
+        <tr><td>Ran Higher Priority</td><td class="num">363</td><td class="num">2.1%</td></tr>
+        <tr><td>Cancelled In Route</td><td class="num">254</td><td class="num">1.5%</td></tr>
+        <tr><td>Not Due for Maintenance</td><td class="num">248</td><td class="num">1.4%</td></tr>
+        <tr><td>Old Booking</td><td class="num">113</td><td class="num">0.7%</td></tr>
+        <tr><td>Other</td><td class="num">80</td><td class="num">0.5%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<footer>My Plumber · Jobs Overview · Data from ServiceTitan · Generated March 2026</footer>
+</body>
+</html>

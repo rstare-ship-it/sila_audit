@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Plumber — Inventory Overview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; font-size: 14px; }
+  nav { background: #1a1a2e; color: white; padding: 0 36px; display: flex; align-items: center; height: 52px; gap: 16px; }
+  nav a { color: #f39c12; text-decoration: none; font-size: 13px; opacity: 0.85; }
+  nav a:hover { opacity: 1; }
+  nav span { color: rgba(255,255,255,0.3); }
+  .header { background: linear-gradient(135deg, #145a32 0%, #27ae60 100%); color: white; padding: 44px 36px 36px; }
+  .header-inner { max-width: 1200px; margin: 0 auto; }
+  .header h1 { font-size: 30px; font-weight: 800; }
+  .header h1 span { color: #d5f5e3; }
+  .header p { font-size: 14px; opacity: 0.85; margin-top: 8px; }
+  .header-meta { font-size: 12px; opacity: 0.65; margin-top: 6px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 36px; }
+  .kpi { background: white; border-radius: 10px; padding: 18px 16px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 3px solid #27ae60; }
+  .kpi-val { font-size: 24px; font-weight: 800; color: #145a32; }
+  .kpi-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: #7f8c8d; margin-top: 4px; font-weight: 600; }
+  .kpi-sub { font-size: 11px; color: #bdc3c7; margin-top: 3px; }
+  .kpi.red { border-top-color: #e74c3c; } .kpi.red .kpi-val { color: #c0392b; }
+  .section { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 24px; }
+  .section-title { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; padding-bottom: 10px; border-bottom: 2px solid #eafaf1; display: flex; align-items: center; gap: 8px; }
+  .section-sub { font-size: 12px; color: #95a5a6; font-weight: 400; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  @media(max-width:768px) { .two-col { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+  th { background: #eafaf1; color: #145a32; font-weight: 700; padding: 9px 10px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 9px 10px; border-bottom: 1px solid #f4f6f7; color: #2c3e50; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #eafaf1; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+  .badge-red { background: #fdedec; color: #c0392b; }
+  .badge-yellow { background: #fef9e7; color: #b7950b; }
+  .badge-gray { background: #f4f6f7; color: #7f8c8d; }
+  .insight { display: flex; gap: 10px; padding: 12px 14px; border-radius: 8px; margin-top: 10px; font-size: 13px; line-height: 1.5; }
+  .insight.warn { background: #fef5e7; border-left: 3px solid #f39c12; }
+  .insight.info { background: #eaf4fb; border-left: 3px solid #2980b9; }
+  .insight.danger { background: #fdedec; border-left: 3px solid #e74c3c; }
+  .note-box { background: #f8f9fa; border-radius: 8px; padding: 14px 16px; font-size: 12px; color: #566573; line-height: 1.7; }
+  .note-box strong { color: #2c3e50; }
+  footer { background: #1a1a2e; color: rgba(255,255,255,0.4); text-align: center; padding: 20px; font-size: 12px; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html">← Sila Brands</a>
+  <span>/</span>
+  <a href="index.html">My Plumber</a>
+  <span>/</span>
+  <span style="color:rgba(255,255,255,0.7)">Inventory Overview</span>
+</nav>
+
+<div class="header">
+  <div class="header-inner">
+    <h1>My Plumber — <span>Inventory Overview</span></h1>
+    <p>Unreceived purchase order analysis by age, vendor, and business unit</p>
+    <div class="header-meta">5 data files combined · 670,964 total rows · 0 duplicates · Mar 2024–Mar 2026</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="kpi-strip">
+    <div class="kpi red">
+      <div class="kpi-val">$7.35M</div>
+      <div class="kpi-lbl">Open PO Value</div>
+      <div class="kpi-sub">Unreceived POs</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">15,567</div>
+      <div class="kpi-lbl">Unique Open POs</div>
+      <div class="kpi-sub">79,332 line items</div>
+    </div>
+    <div class="kpi red">
+      <div class="kpi-val">15,448</div>
+      <div class="kpi-lbl">POs &gt;180 Days</div>
+      <div class="kpi-sub">99.2% of open POs</div>
+    </div>
+    <div class="kpi red">
+      <div class="kpi-val">12,595</div>
+      <div class="kpi-lbl">POs &gt;365 Days</div>
+      <div class="kpi-sub">$5.91M exposure</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">$3.25M</div>
+      <div class="kpi-lbl">Ferguson Enterprises</div>
+      <div class="kpi-sub">Largest vendor</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">$3.71M</div>
+      <div class="kpi-lbl">Plumbing Svc Res</div>
+      <div class="kpi-sub">Largest BU exposure</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">⚠️ Critical Finding: Phantom PO Exposure</div>
+    <div class="insight danger">
+      99.2% of all open PO value ($7.31M of $7.35M) is over 180 days old. This strongly indicates these are phantom POs — goods that were physically received but never marked as received in ServiceTitan. The Exported status dominates (98.8% of line items), meaning these POs were sent to vendors but never closed out after delivery.
+    </div>
+    <div class="insight warn">
+      Ferguson Enterprises ($3.25M) and Carrier Enterprise ($2.08M) account for 72.1% of open PO value. Focus reconciliation efforts with these two vendors first. Ferguson's volume suggests this is largely routine plumbing supply that has been received and consumed.
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-title">Open PO Aging <span class="section-sub">by unique PO count</span></div>
+      <table>
+        <thead><tr><th>Age Bucket</th><th class="num">Unique POs</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td>0–30 days</td><td class="num">35</td><td class="num">$18,124</td></tr>
+          <tr><td>31–90 days</td><td class="num">30</td><td class="num">$8,458</td></tr>
+          <tr><td>91–180 days</td><td class="num">44</td><td class="num">$11,476</td></tr>
+          <tr><td><strong>181–365 days</strong></td><td class="num"><strong>2,853</strong></td><td class="num"><strong>$1,399,313</strong></td></tr>
+          <tr><td><strong>365+ days</strong></td><td class="num"><strong>12,595</strong></td><td class="num"><strong>$5,908,329</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">PO Status Breakdown</div>
+      <table>
+        <thead><tr><th>Status</th><th class="num">Line Items</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td>Exported</td><td class="num">78,366</td><td class="num">$7,256,138</td></tr>
+          <tr><td>Partially Received</td><td class="num">499</td><td class="num">$41,325</td></tr>
+          <tr><td>Sent</td><td class="num">298</td><td class="num">$26,860</td></tr>
+          <tr><td>Pending</td><td class="num">169</td><td class="num">$27,352</td></tr>
+        </tbody>
+      </table>
+      <div class="insight info" style="margin-top:12px">98.8% of line items are "Exported" — sent to vendors but never acknowledged as received. This is the primary driver of the phantom PO problem.</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-title">Top Vendors by Open PO Value</div>
+      <table>
+        <thead><tr><th>Vendor</th><th class="num">POs</th><th class="num">Open Value</th></tr></thead>
+        <tbody>
+          <tr><td>Ferguson Enterprises LLC</td><td class="num">7,053</td><td class="num">$3,252,161</td></tr>
+          <tr><td>Carrier Enterprise CMA</td><td class="num">1,445</td><td class="num">$2,078,853</td></tr>
+          <tr><td>VAMAC, Inc.</td><td class="num">879</td><td class="num">$494,182</td></tr>
+          <tr><td>R.E. Michel Company</td><td class="num">1,227</td><td class="num">$243,215</td></tr>
+          <tr><td>The Home Depot</td><td class="num">2,732</td><td class="num">$241,877</td></tr>
+          <tr><td>Ferguson Enterprises HVAC</td><td class="num">407</td><td class="num">$237,190</td></tr>
+          <tr><td>Plumbers Choice</td><td class="num">8</td><td class="num">$127,200</td></tr>
+          <tr><td>W.E. Kingswell</td><td class="num">64</td><td class="num">$101,292</td></tr>
+          <tr><td>Rexel USA, Inc.</td><td class="num">250</td><td class="num">$100,644</td></tr>
+          <tr><td>Capital Electric</td><td class="num">275</td><td class="num">$64,896</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Open PO Value by Business Unit</div>
+      <table>
+        <thead><tr><th>Business Unit</th><th class="num">POs</th><th class="num">Open Value</th></tr></thead>
+        <tbody>
+          <tr><td>Plumbing Service - Residential</td><td class="num">9,142</td><td class="num">$3,712,893</td></tr>
+          <tr><td>HVAC Installation - RREP</td><td class="num">2,647</td><td class="num">$2,452,368</td></tr>
+          <tr><td>HVAC Service - Residential</td><td class="num">1,201</td><td class="num">$357,979</td></tr>
+          <tr><td>Plumbing Maintenance</td><td class="num">448</td><td class="num">$229,160</td></tr>
+          <tr><td>Electrical Service - Residential</td><td class="num">849</td><td class="num">$198,546</td></tr>
+          <tr><td>Water Quality Service</td><td class="num">52</td><td class="num">$174,761</td></tr>
+          <tr><td>Sewer Installation - Residential</td><td class="num">501</td><td class="num">$90,406</td></tr>
+          <tr><td>Administrative</td><td class="num">197</td><td class="num">$54,119</td></tr>
+          <tr><td>MA - Residential</td><td class="num">176</td><td class="num">$39,625</td></tr>
+          <tr><td>Sewer Service - Residential</td><td class="num">144</td><td class="num">$14,996</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Data Processing Notes &amp; Recommended Actions</div>
+    <div class="note-box">
+      <strong>Data combination:</strong> 5 inventory export files with non-overlapping date ranges (Mar 2024–May 2024, Jun–Sep 2024, Oct 2024–Mar 2025, Apr–Sep 2025, Oct 2025–Mar 2026) were combined into a single dataset of 670,964 rows. Deduplication confirmed 0 overlapping records.<br><br>
+      <strong>Transaction type breakdown:</strong> UsedItems (150,327) · Bill (140,514) · Receipt (140,506) · PurchaseOrder (138,253) · Adjustment (56,017) · ReplenishmentRequests (21,620) · Transfer (20,760) · Return (2,962)<br><br>
+      <strong>Open PO definition:</strong> Transaction Type = PurchaseOrder AND Transaction Status IN (Exported, Sent, Partially Received, Pending). Items with NaN Transaction Status are Receipts and UsedItems — not total rows.
+    </div>
+    <table style="margin-top:16px">
+      <thead><tr><th>Recommended Action</th><th>Priority</th><th>Est. Value</th></tr></thead>
+      <tbody>
+        <tr><td>Reconcile all Ferguson Enterprises POs &gt;365 days — verify goods received and close out</td><td><span class="badge badge-red">High</span></td><td class="num">~$3.25M</td></tr>
+        <tr><td>Reconcile all Carrier Enterprise POs &gt;365 days — high unit cost HVAC equipment</td><td><span class="badge badge-red">High</span></td><td class="num">~$2.08M</td></tr>
+        <tr><td>Build a recurring process: mark POs received within 7 days of delivery</td><td><span class="badge badge-yellow">Medium</span></td><td class="num">Ongoing</td></tr>
+        <tr><td>Audit 12,595 POs over 365 days — identify any genuinely unreceived (write-off risk)</td><td><span class="badge badge-yellow">Medium</span></td><td class="num">$5.91M</td></tr>
+        <tr><td>Review Water Quality Service POs ($174K) — unusually high for relatively low job volume</td><td><span class="badge badge-gray">Low</span></td><td class="num">$174K</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<footer>My Plumber · Inventory Overview · Data from ServiceTitan · Generated March 2026</footer>
+</body>
+</html>
