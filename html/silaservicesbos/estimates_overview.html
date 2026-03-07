@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sila Services BOS — Estimates Overview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; font-size: 14px; }
+  nav { background: #1a1a2e; color: white; padding: 0 36px; display: flex; align-items: center; height: 52px; gap: 16px; }
+  nav a { color: #f39c12; text-decoration: none; font-size: 13px; opacity: 0.85; }
+  nav a:hover { opacity: 1; }
+  nav span { color: rgba(255,255,255,0.3); }
+  .header { background: linear-gradient(135deg, #1a2c6e 0%, #3498db 100%); color: white; padding: 44px 36px 36px; }
+  .header-inner { max-width: 1200px; margin: 0 auto; }
+  .header h1 { font-size: 30px; font-weight: 800; }
+  .header h1 span { color: #d6eaf8; }
+  .header p { font-size: 14px; opacity: 0.85; margin-top: 8px; }
+  .header-meta { font-size: 12px; opacity: 0.65; margin-top: 6px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 36px; }
+  .kpi { background: white; border-radius: 10px; padding: 18px 16px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 3px solid #3498db; }
+  .kpi-val { font-size: 24px; font-weight: 800; color: #1a2c6e; }
+  .kpi-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: #7f8c8d; margin-top: 4px; font-weight: 600; }
+  .kpi-sub { font-size: 11px; color: #bdc3c7; margin-top: 3px; }
+  .kpi.red { border-top-color: #e74c3c; } .kpi.red .kpi-val { color: #c0392b; }
+  .kpi.yellow { border-top-color: #f39c12; } .kpi.yellow .kpi-val { color: #d35400; }
+  .kpi.green { border-top-color: #27ae60; } .kpi.green .kpi-val { color: #1e8449; }
+  .section { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 24px; }
+  .section-title { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; padding-bottom: 10px; border-bottom: 2px solid #eaf4fb; display: flex; align-items: center; gap: 8px; }
+  .section-sub { font-size: 12px; color: #95a5a6; font-weight: 400; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  @media(max-width:768px) { .two-col { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+  th { background: #eaf4fb; color: #1a2c6e; font-weight: 700; padding: 9px 10px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 9px 10px; border-bottom: 1px solid #f4f6f7; color: #2c3e50; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #eaf4fb; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+  .badge-red { background: #fdedec; color: #c0392b; }
+  .badge-yellow { background: #fef9e7; color: #b7950b; }
+  .badge-green { background: #eafaf1; color: #1e8449; }
+  .badge-blue { background: #eaf4fb; color: #1a5276; }
+  .bar-wrap { background: #f0f2f5; border-radius: 4px; height: 8px; margin-top: 4px; }
+  .bar { height: 8px; border-radius: 4px; background: #3498db; }
+  .insight { display: flex; gap: 10px; padding: 12px 14px; border-radius: 8px; margin-top: 10px; font-size: 13px; line-height: 1.5; }
+  .insight.warn { background: #fef5e7; border-left: 3px solid #f39c12; }
+  .insight.danger { background: #fdedec; border-left: 3px solid #e74c3c; }
+  .insight.info { background: #eaf4fb; border-left: 3px solid #2980b9; }
+  .insight.success { background: #eafaf1; border-left: 3px solid #27ae60; }
+  .recovery-box { background: linear-gradient(135deg, #eafaf1, #d5f5e3); border: 1px solid #a9dfbf; border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; }
+  .recovery-box h3 { font-size: 15px; font-weight: 700; color: #1e8449; margin-bottom: 12px; }
+  .recovery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .recovery-item { text-align: center; }
+  .recovery-val { font-size: 22px; font-weight: 800; color: #1e8449; }
+  .recovery-lbl { font-size: 11px; color: #27ae60; font-weight: 600; margin-top: 3px; }
+  footer { background: #1a1a2e; color: rgba(255,255,255,0.4); text-align: center; padding: 20px; font-size: 12px; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html">← Sila Brands</a>
+  <span>/</span>
+  <a href="index.html">Sila Services BOS</a>
+  <span>/</span>
+  <span style="color:rgba(255,255,255,0.7)">Estimates Overview</span>
+</nav>
+
+<div class="header">
+  <div class="header-inner">
+    <h1>Sila Services BOS — <span>Estimates Overview</span></h1>
+    <p>$913M total pipeline · Follow-up gap analysis · Win rate · Recovery opportunity</p>
+    <div class="header-meta">85,865 estimates · 2 files combined · 0 duplicates · Mar 2024–Mar 2026</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="kpi-strip">
+    <div class="kpi">
+      <div class="kpi-val">$913.4M</div>
+      <div class="kpi-lbl">Total Pipeline</div>
+      <div class="kpi-sub">Open + Sold + Dismissed</div>
+    </div>
+    <div class="kpi red">
+      <div class="kpi-val">$540.6M</div>
+      <div class="kpi-lbl">Open Pipeline</div>
+      <div class="kpi-sub">45,666 estimates</div>
+    </div>
+    <div class="kpi red">
+      <div class="kpi-val">95.4%</div>
+      <div class="kpi-lbl">0 Follow-Ups</div>
+      <div class="kpi-sub">43,556 never contacted</div>
+    </div>
+    <div class="kpi yellow">
+      <div class="kpi-val">348 days</div>
+      <div class="kpi-lbl">Avg Open Age</div>
+      <div class="kpi-sub">Median: 317 days</div>
+    </div>
+    <div class="kpi green">
+      <div class="kpi-val">25.8%</div>
+      <div class="kpi-lbl">Win Rate</div>
+      <div class="kpi-sub">22,174 sold</div>
+    </div>
+    <div class="kpi yellow">
+      <div class="kpi-val">18,025</div>
+      <div class="kpi-lbl">Dismissed</div>
+      <div class="kpi-sub">$277M dismissed value</div>
+    </div>
+  </div>
+
+  <div class="recovery-box">
+    <h3>💰 Recovery Opportunity Sizing</h3>
+    <div class="insight success" style="margin-bottom:12px;">
+      25,705 open estimates are under 1 year old and worth $279M. These are the most recoverable — structured follow-up could generate significant incremental revenue without adding new marketing spend.
+    </div>
+    <div class="recovery-grid">
+      <div class="recovery-item">
+        <div class="recovery-val">$5.6M</div>
+        <div class="recovery-lbl">2% Close Rate Recovery</div>
+      </div>
+      <div class="recovery-item">
+        <div class="recovery-val">$13.9M</div>
+        <div class="recovery-lbl">5% Close Rate Recovery</div>
+      </div>
+      <div class="recovery-item">
+        <div class="recovery-val">$27.9M</div>
+        <div class="recovery-lbl">10% Close Rate Recovery</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#27ae60;margin-top:10px;">Based on 25,705 open estimates &lt;1 year old, total value $279M</div>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-title">Open Estimate Age Distribution</div>
+      <div class="insight danger">
+        78% of open estimate value ($424M) is over 180 days old with no follow-up. At an average age of 348 days, most of these estimates have gone cold — but structured outreach on the under-1-year cohort still has meaningful recovery potential.
+      </div>
+      <table>
+        <thead><tr><th>Age</th><th class="num">Estimates</th><th class="num">Value</th><th class="num">%</th></tr></thead>
+        <tbody>
+          <tr><td>&lt;30 days</td><td class="num">2,200</td><td class="num">$17.0M</td><td class="num">3.1%</td></tr>
+          <tr><td>30–60 days</td><td class="num">2,448</td><td class="num">$22.3M</td><td class="num">4.1%</td></tr>
+          <tr><td>60–90 days</td><td class="num">1,922</td><td class="num">$16.6M</td><td class="num">3.1%</td></tr>
+          <tr><td>90–180 days</td><td class="num">6,234</td><td class="num">$64.3M</td><td class="num">11.9%</td></tr>
+          <tr><td style="color:#d35400;font-weight:600">181–365 days</td><td class="num">12,947</td><td class="num">$159.2M</td><td class="num">29.4%</td></tr>
+          <tr><td style="color:#c0392b;font-weight:600">&gt;365 days</td><td class="num">19,915</td><td class="num">$261.3M</td><td class="num">48.3%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Pipeline by Status</div>
+      <table>
+        <thead><tr><th>Status</th><th class="num">Count</th><th class="num">Value</th><th class="num">%</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-blue">Open</span></td>
+            <td class="num">45,666</td><td class="num">$540.6M</td><td class="num">59.2%</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-green">Sold</span></td>
+            <td class="num">22,174</td><td class="num">$95.5M</td><td class="num">10.5%</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-red">Dismissed</span></td>
+            <td class="num">18,025</td><td class="num">$277.3M</td><td class="num">30.3%</td>
+          </tr>
+          <tr style="font-weight:600;border-top:2px solid #eaf4fb;">
+            <td>Total</td>
+            <td class="num">85,865</td><td class="num">$913.4M</td><td class="num">100%</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="insight warn" style="margin-top:12px;">
+        18,025 dismissed estimates worth $277M — the dismissed rate (21%) is notably high. Reviewing the dismissal workflow to understand whether these were legitimately declined or prematurely closed could reveal additional recovery.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Open Estimates by Business Unit</div>
+    <div class="insight info">
+      SB-Sales BU holds 53% of open pipeline value ($287M across 11,115 estimates) — this is likely the dedicated sales team's pre-commit pipeline. HVAC Service holds another 32% ($171M). Together these two BUs represent 85% of all open estimate value and should be the primary focus for follow-up outreach.
+    </div>
+    <table>
+      <thead><tr><th>Business Unit</th><th class="num">Estimates</th><th class="num">Open Value</th><th class="num">% of Open</th><th>Value Bar</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>SB-Sales</strong></td><td class="num">11,115</td><td class="num">$287,201,109</td><td class="num">53.1%</td>
+          <td><div class="bar-wrap"><div class="bar" style="width:100%"></div></div></td>
+        </tr>
+        <tr>
+          <td><strong>SB-HVAC Service - Residential</strong></td><td class="num">19,017</td><td class="num">$171,207,034</td><td class="num">31.7%</td>
+          <td><div class="bar-wrap"><div class="bar" style="width:59.6%"></div></div></td>
+        </tr>
+        <tr>
+          <td>SB-Plumbing Service - Residential</td><td class="num">6,557</td><td class="num">$34,564,035</td><td class="num">6.4%</td>
+          <td><div class="bar-wrap"><div class="bar" style="width:12.0%"></div></div></td>
+        </tr>
+        <tr>
+          <td>SB-Sales - Technician</td><td class="num">736</td><td class="num">$16,576,202</td><td class="num">3.1%</td>
+          <td><div class="bar-wrap"><div class="bar" style="width:5.8%"></div></div></td>
+        </tr>
+        <tr>
+          <td>SB-MA - Residential</td><td class="num">2,572</td><td class="num">$12,546,646</td><td class="num">2.3%</td>
+          <td><div class="bar-wrap"><div class="bar" style="width:4.4%"></div></div></td>
+        </tr>
+        <tr>
+          <td>SB-Electrical Service - Residential</td><td class="num">695</td><td class="num">$7,441,109</td><td class="num">1.4%</td>
+          <td><div class="bar-wrap"><div class="bar" style="width:2.6%"></div></div></td>
+        </tr>
+        <tr>
+          <td>SB-HVAC Install - RREP</td><td class="num">324</td><td class="num">$5,000,605</td><td class="num">0.9%</td>
+          <td><div class="bar-wrap"><div class="bar" style="width:1.7%"></div></div></td>
+        </tr>
+        <tr>
+          <td>SB-Multi Year Warranty</td><td class="num">3,913</td><td class="num">$3,851,445</td><td class="num">0.7%</td>
+          <td><div class="bar-wrap"><div class="bar" style="width:1.3%"></div></div></td>
+        </tr>
+        <tr>
+          <td>Other BUs</td><td class="num">737</td><td class="num">$2,249,724</td><td class="num">0.4%</td>
+          <td><div class="bar-wrap"><div class="bar" style="width:0.8%"></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Top Sold Business Units</div>
+    <table>
+      <thead><tr><th>Business Unit</th><th class="num">Sold Count</th><th class="num">Sold Value</th></tr></thead>
+      <tbody>
+        <tr><td>SB-HVAC Service - Residential</td><td class="num">10,841</td><td class="num">$35,978,554</td></tr>
+        <tr><td>SB-Sales</td><td class="num">1,503</td><td class="num">$33,057,690</td></tr>
+        <tr><td>SB-Plumbing Service - Residential</td><td class="num">6,026</td><td class="num">$12,982,874</td></tr>
+        <tr><td>SB-Sales - Technician</td><td class="num">421</td><td class="num">$8,268,490</td></tr>
+        <tr><td>SB-Electrical Service - Residential</td><td class="num">1,362</td><td class="num">$3,783,090</td></tr>
+        <tr><td>SB-MA - Residential</td><td class="num">1,046</td><td class="num">$3,163,216</td></tr>
+        <tr><td>SB-HVAC Install - RREP</td><td class="num">159</td><td class="num">$1,165,742</td></tr>
+        <tr><td>SB-Multi Year Warranty</td><td class="num">532</td><td class="num">$835,340</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Recommended Actions</div>
+    <table>
+      <thead><tr><th>Action</th><th>Priority</th><th>Rationale</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Launch immediate follow-up campaign for SB-Sales BU estimates under 1 year old — 11K+ estimates worth $287M with near-zero follow-up</td>
+          <td><span class="badge badge-red">Critical</span></td>
+          <td>SB-Sales holds 53% of open value; $5.6M–$13.9M recovery potential at 2–5% close rate</td>
+        </tr>
+        <tr>
+          <td>Configure Last Follow Up Date tracking enforcement in ServiceTitan — 95.4% zero contacts is a workflow gap</td>
+          <td><span class="badge badge-red">High</span></td>
+          <td>Cannot improve what isn't tracked; follow-up contacts need to be logged consistently</td>
+        </tr>
+        <tr>
+          <td>Investigate 18,025 dismissed estimates ($277M) — review dismissal reasons to identify premature closures</td>
+          <td><span class="badge badge-yellow">Medium</span></td>
+          <td>21% dismiss rate is high; some portion may be re-workable or should be reclassified to open</td>
+        </tr>
+        <tr>
+          <td>Prioritize HVAC Service follow-up (19,017 open estimates, $171M) — high volume with manageable avg ticket</td>
+          <td><span class="badge badge-yellow">Medium</span></td>
+          <td>This is the highest-count BU in the open pipeline; systematic outreach would have outsized volume impact</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<footer>Sila Services BOS · Estimates Overview · Data from ServiceTitan · Generated March 2026</footer>
+</body>
+</html>

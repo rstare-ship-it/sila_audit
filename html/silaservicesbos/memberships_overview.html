@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sila Services BOS — Memberships Overview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; font-size: 14px; }
+  nav { background: #1a1a2e; color: white; padding: 0 36px; display: flex; align-items: center; height: 52px; gap: 16px; }
+  nav a { color: #f39c12; text-decoration: none; font-size: 13px; opacity: 0.85; }
+  nav a:hover { opacity: 1; }
+  nav span { color: rgba(255,255,255,0.3); }
+  .header { background: linear-gradient(135deg, #1a2c6e 0%, #3498db 100%); color: white; padding: 44px 36px 36px; }
+  .header-inner { max-width: 1200px; margin: 0 auto; }
+  .header h1 { font-size: 30px; font-weight: 800; }
+  .header h1 span { color: #d6eaf8; }
+  .header p { font-size: 14px; opacity: 0.85; margin-top: 8px; }
+  .header-meta { font-size: 12px; opacity: 0.65; margin-top: 6px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 36px; }
+  .kpi { background: white; border-radius: 10px; padding: 18px 16px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 3px solid #3498db; }
+  .kpi-val { font-size: 24px; font-weight: 800; color: #1a2c6e; }
+  .kpi-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: #7f8c8d; margin-top: 4px; font-weight: 600; }
+  .kpi-sub { font-size: 11px; color: #bdc3c7; margin-top: 3px; }
+  .kpi.red { border-top-color: #e74c3c; } .kpi.red .kpi-val { color: #c0392b; }
+  .kpi.yellow { border-top-color: #f39c12; } .kpi.yellow .kpi-val { color: #d35400; }
+  .kpi.green { border-top-color: #27ae60; } .kpi.green .kpi-val { color: #1e8449; }
+  .section { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 24px; }
+  .section-title { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; padding-bottom: 10px; border-bottom: 2px solid #eaf4fb; display: flex; align-items: center; gap: 8px; }
+  .section-sub { font-size: 12px; color: #95a5a6; font-weight: 400; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  @media(max-width:768px) { .two-col { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+  th { background: #eaf4fb; color: #1a2c6e; font-weight: 700; padding: 9px 10px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 9px 10px; border-bottom: 1px solid #f4f6f7; color: #2c3e50; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #eaf4fb; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+  .badge-red { background: #fdedec; color: #c0392b; }
+  .badge-yellow { background: #fef9e7; color: #b7950b; }
+  .badge-green { background: #eafaf1; color: #1e8449; }
+  .badge-blue { background: #eaf4fb; color: #1a5276; }
+  .badge-gray { background: #f4f6f7; color: #566573; }
+  .insight { display: flex; gap: 10px; padding: 12px 14px; border-radius: 8px; margin-top: 10px; font-size: 13px; line-height: 1.5; }
+  .insight.warn { background: #fef5e7; border-left: 3px solid #f39c12; }
+  .insight.danger { background: #fdedec; border-left: 3px solid #e74c3c; }
+  .insight.info { background: #eaf4fb; border-left: 3px solid #2980b9; }
+  .insight.success { background: #eafaf1; border-left: 3px solid #27ae60; }
+  .data-note { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px 16px; font-size: 13px; color: #566573; line-height: 1.7; margin-bottom: 24px; }
+  footer { background: #1a1a2e; color: rgba(255,255,255,0.4); text-align: center; padding: 20px; font-size: 12px; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html">← Sila Brands</a>
+  <span>/</span>
+  <a href="index.html">Sila Services BOS</a>
+  <span>/</span>
+  <span style="color:rgba(255,255,255,0.7)">Memberships Overview</span>
+</nav>
+
+<div class="header">
+  <div class="header-inner">
+    <h1>Sila Services BOS — <span>Memberships Overview</span></h1>
+    <p>Active member base · ARR composition · Warranty vs. recurring plan breakdown · Renewal pipeline</p>
+    <div class="header-meta">30,658 total membership records · All statuses included · Mar 2024–Mar 2026</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="data-note">
+    ℹ️ <strong>Data context:</strong> Unlike My Plumber, this export includes all membership statuses — Active, Expired, Deleted, Canceled, and Suspended. The 8,837 "Active" records are dominated by <strong>warranty products</strong> (7,821 are "One Time" billing, meaning no recurring revenue). True recurring ARR comes from 1,016 Monthly and Annual members only.
+  </div>
+
+  <div class="kpi-strip">
+    <div class="kpi green">
+      <div class="kpi-val">8,837</div>
+      <div class="kpi-lbl">Active Members</div>
+      <div class="kpi-sub">7,821 warranty / 1,016 recurring</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">$344,740</div>
+      <div class="kpi-lbl">ARR</div>
+      <div class="kpi-sub">Recurring members only</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">$28,728</div>
+      <div class="kpi-lbl">MRR</div>
+      <div class="kpi-sub">Monthly equivalent</div>
+    </div>
+    <div class="kpi yellow">
+      <div class="kpi-val">18,265</div>
+      <div class="kpi-lbl">Expired</div>
+      <div class="kpi-sub">Largest status group</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">459</div>
+      <div class="kpi-lbl">Renewals in 30d</div>
+      <div class="kpi-sub">Next billing due</div>
+    </div>
+    <div class="kpi red">
+      <div class="kpi-val">959</div>
+      <div class="kpi-lbl">Canceled</div>
+      <div class="kpi-sub">2-year period</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Membership Status Breakdown</div>
+    <div class="insight warn">
+      18,265 expired memberships is a significant re-engagement opportunity. If even 10% of expired members can be re-activated through outreach, that would add ~1,800 members and ~$63K ARR assuming the current average ticket. A win-back campaign targeting recently expired (within 12 months) should be prioritized.
+    </div>
+    <table>
+      <thead><tr><th>Status</th><th class="num">Count</th><th class="num">% of Total</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-yellow">Expired</span></td><td class="num">18,265</td><td class="num">59.6%</td></tr>
+        <tr><td><span class="badge badge-green">Active</span></td><td class="num">8,837</td><td class="num">28.8%</td></tr>
+        <tr><td><span class="badge badge-gray">Deleted</span></td><td class="num">2,580</td><td class="num">8.4%</td></tr>
+        <tr><td><span class="badge badge-red">Canceled</span></td><td class="num">959</td><td class="num">3.1%</td></tr>
+        <tr><td><span class="badge badge-gray">Suspended</span></td><td class="num">17</td><td class="num">0.1%</td></tr>
+        <tr style="font-weight:600;border-top:2px solid #eaf4fb;"><td>Total</td><td class="num">30,658</td><td class="num">100%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-title">Active Member Billing Cadence</div>
+      <div class="insight info">
+        88.5% of active members (7,821) are "One Time" billing — these are warranty and install products with no recurring revenue. The business's true recurring membership base is 1,016 members generating $344.7K ARR.
+      </div>
+      <table>
+        <thead><tr><th>Billing Cadence</th><th class="num">Members</th><th class="num">ARR</th></tr></thead>
+        <tbody>
+          <tr><td>One Time (Warranty / Install)</td><td class="num">7,821</td><td class="num">$0</td></tr>
+          <tr><td>Monthly</td><td class="num">688</td><td class="num">$235,836</td></tr>
+          <tr><td>Annual</td><td class="num">328</td><td class="num">$108,904</td></tr>
+          <tr style="font-weight:600;border-top:2px solid #eaf4fb;"><td>Total Active</td><td class="num">8,837</td><td class="num">$344,740</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Top Active Membership Types</div>
+      <table>
+        <thead><tr><th>Membership Type</th><th class="num">Active</th></tr></thead>
+        <tbody>
+          <tr><td>Extended Warranty HEAT/AC</td><td class="num">2,272</td></tr>
+          <tr><td>Extended Warranty COOL</td><td class="num">1,653</td></tr>
+          <tr><td>Extended Warranty HEAT</td><td class="num">1,394</td></tr>
+          <tr><td>Complimentary Whole Home Comfort Club</td><td class="num">723</td></tr>
+          <tr><td>Complete Comfort Club</td><td class="num">460</td></tr>
+          <tr><td>Standard Comfort Club</td><td class="num">444</td></tr>
+          <tr><td>Install Warranty</td><td class="num">332</td></tr>
+          <tr><td>Extended Warranty Ductless System</td><td class="num">202</td></tr>
+          <tr><td>Extended Warranty HEAT PUMP</td><td class="num">149</td></tr>
+          <tr><td>Whole Home Comfort Club</td><td class="num">122</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-title">Active by Business Unit</div>
+      <table>
+        <thead><tr><th>Business Unit</th><th class="num">Active</th></tr></thead>
+        <tbody>
+          <tr><td>SB-Multi Year Warranty - Residential</td><td class="num">5,273</td></tr>
+          <tr><td>SB-MA - Residential</td><td class="num">2,044</td></tr>
+          <tr><td>SB-HVAC Install - RREP - Residential</td><td class="num">1,139</td></tr>
+          <tr><td>HVAC Installation-RINS - Residential</td><td class="num">194</td></tr>
+          <tr><td>SB-Service Plans - Residential</td><td class="num">160</td></tr>
+          <tr><td>SB-HVAC Service - Residential</td><td class="num">11</td></tr>
+          <tr><td>Other</td><td class="num">16</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Top Sellers by ARR</div>
+      <div class="insight success">
+        Wesley JeanBaptiste ($88.7K ARR) and Dru Smith ($42.0K) are standout membership sellers. The top 4 account for nearly $188K of the $344.7K total ARR — high concentration in a small group of salespeople.
+      </div>
+      <table>
+        <thead><tr><th>Sold By</th><th class="num">ARR Generated</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Wesley JeanBaptiste</strong></td><td class="num">$88,715</td></tr>
+          <tr><td>Dru Smith CIST</td><td class="num">$42,015</td></tr>
+          <tr><td>Claudine Clarke</td><td class="num">$30,523</td></tr>
+          <tr><td>House Account</td><td class="num">$26,533</td></tr>
+          <tr><td>Liam Smartt CIST</td><td class="num">$13,293</td></tr>
+          <tr><td>Justin Ladd</td><td class="num">$12,624</td></tr>
+          <tr><td>Unique Rivera</td><td class="num">$9,670</td></tr>
+          <tr><td>Preston McPheters CIST</td><td class="num">$9,456</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Recommended Actions</div>
+    <table>
+      <thead><tr><th>Action</th><th>Priority</th><th>Rationale</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Launch win-back campaign for recently expired members (within 12 months) — 18,265 expired members is a large re-engagement pool</td>
+          <td><span class="badge badge-red">High</span></td>
+          <td>10% re-activation rate = ~1,800 members; existing customer relationships lower cost of reacquisition</td>
+        </tr>
+        <tr>
+          <td>Convert One Time warranty holders (7,821) to recurring Comfort Club plans at service touchpoints — especially at warranty expiration</td>
+          <td><span class="badge badge-red">High</span></td>
+          <td>Converting 10% of warranty holders to recurring plans would roughly double ARR; warranty expiration is a high-intent conversion moment</td>
+        </tr>
+        <tr>
+          <td>Action 459 renewals due in the next 30 days — proactive outreach before billing reduces non-payment cancellations</td>
+          <td><span class="badge badge-yellow">Medium</span></td>
+          <td>Preventive retention is cheaper than win-back; a brief pre-renewal call or text increases renewal rate</td>
+        </tr>
+        <tr>
+          <td>Replicate Wesley JeanBaptiste's sales approach across the team — $88.7K ARR from a single rep indicates a repeatable playbook</td>
+          <td><span class="badge badge-yellow">Medium</span></td>
+          <td>ARR concentration in 2-3 reps is a risk; scaling the approach to 5+ reps would materially increase recurring revenue</td>
+        </tr>
+        <tr>
+          <td>Clarify why 2,580 records are "Deleted" — determine if these are true deletions or data cleaning artifacts that should be Canceled or Expired</td>
+          <td><span class="badge badge-yellow">Medium</span></td>
+          <td>8.4% "Deleted" status is unusual — could be masking true cancellation count or churn analysis gaps</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<footer>Sila Services BOS · Memberships Overview · Data from ServiceTitan · Generated March 2026</footer>
+</body>
+</html>
