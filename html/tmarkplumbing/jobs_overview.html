@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T-Mark — Jobs Overview</title>
+<style>  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; font-size: 14px; }
+  nav { background: #1a1a2e; color: white; padding: 0 36px; display: flex; align-items: center; height: 52px; gap: 16px; }
+  nav a { color: #f472b6; text-decoration: none; font-size: 13px; opacity: 0.85; }
+  nav a:hover { opacity: 1; }
+  nav span { color: rgba(255,255,255,0.3); }
+  .header { background: linear-gradient(135deg, #4a0e2c 0%, #ec4899 100%); color: white; padding: 44px 36px 36px; }
+  .header-inner { max-width: 1200px; margin: 0 auto; }
+  .header h1 { font-size: 30px; font-weight: 800; }
+  .header h1 span { color: #fce7f3; }
+  .header p { font-size: 14px; opacity: 0.85; margin-top: 8px; }
+  .header-meta { font-size: 12px; opacity: 0.65; margin-top: 6px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 36px; }
+  .kpi { background: white; border-radius: 10px; padding: 18px 16px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 3px solid #ec4899; }
+  .kpi-val { font-size: 24px; font-weight: 800; color: #4a0e2c; }
+  .kpi-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: #7f8c8d; margin-top: 4px; font-weight: 600; }
+  .kpi-sub { font-size: 11px; color: #bdc3c7; margin-top: 3px; }
+  .kpi.red { border-top-color: #e74c3c; } .kpi.red .kpi-val { color: #c0392b; }
+  .kpi.green { border-top-color: #27ae60; } .kpi.green .kpi-val { color: #1e8449; }
+  .kpi.yellow { border-top-color: #f39c12; } .kpi.yellow .kpi-val { color: #d35400; }
+  .section { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 24px; }
+  .section-title { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; padding-bottom: 10px; border-bottom: 2px solid #fce7f3; display: flex; align-items: center; gap: 8px; }
+  .section-sub { font-size: 12px; color: #95a5a6; font-weight: 400; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  @media(max-width:768px) { .two-col { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+  th { background: #fce7f3; color: #4a0e2c; font-weight: 700; padding: 9px 10px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 9px 10px; border-bottom: 1px solid #f4f6f7; color: #2c3e50; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fce7f3; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+  .badge-green { background: #eafaf1; color: #1e8449; }
+  .badge-red { background: #fdedec; color: #c0392b; }
+  .badge-yellow { background: #fef9e7; color: #b7950b; }
+  .badge-gray { background: #f4f6f7; color: #7f8c8d; }
+  .badge-orange { background: #fef5e7; color: #d35400; }
+  .badge-blue { background: #fce7f3; color: #4a0e2c; }
+  .bar-wrap { background: #f0f2f5; border-radius: 4px; height: 8px; margin-top: 4px; }
+  .bar { height: 8px; border-radius: 4px; background: #ec4899; }
+  .bar.red { background: #e74c3c; }
+  .insight { display: flex; gap: 10px; padding: 12px 14px; border-radius: 8px; margin-top: 10px; font-size: 13px; line-height: 1.5; }
+  .insight.warn { background: #fef5e7; border-left: 3px solid #f39c12; }
+  .insight.info { background: #fce7f3; border-left: 3px solid #ec4899; }
+  .insight.danger { background: #fdedec; border-left: 3px solid #e74c3c; }
+  .insight.success { background: #eafaf1; border-left: 3px solid #27ae60; }
+  .data-note { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px 16px; font-size: 13px; color: #566573; line-height: 1.7; margin-bottom: 24px; }
+  .recovery-box { background: linear-gradient(135deg, #eafaf1, #d5f5e3); border: 1px solid #a9dfbf; border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; }
+  .recovery-box h3 { font-size: 15px; font-weight: 700; color: #1e8449; margin-bottom: 12px; }
+  .recovery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .recovery-item { text-align: center; }
+  .recovery-val { font-size: 22px; font-weight: 800; color: #1e8449; }
+  .recovery-lbl { font-size: 11px; color: #27ae60; font-weight: 600; margin-top: 3px; }
+  footer { background: #1a1a2e; color: rgba(255,255,255,0.4); text-align: center; padding: 20px; font-size: 12px; margin-top: 20px; }</style>
+</head>
+<body>
+<nav>
+  <a href="../../index.html">← Sila Brands</a><span>/</span>
+  <a href="index.html" style="color:#f472b6">T-Mark Plumbing Heating &amp; Cooling</a><span>/</span>
+  <span style="color:rgba(255,255,255,0.7)">Jobs Overview</span>
+</nav>
+<div class="header">
+  <div class="header-inner">
+    <h1>Jobs <span>Overview</span></h1>
+    <p>Revenue by business unit, gross margin analysis, open queue health, cancellation patterns, and outstanding balances.</p>
+    <div class="header-meta">134,577 jobs · 2 files joined (Mar 2024–Mar 2026) · $79.7M revenue · 51.3% GM</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="kpi-strip">
+    <div class="kpi"><div class="kpi-val">$79.7M</div><div class="kpi-lbl">Total Revenue</div><div class="kpi-sub">Completed jobs</div></div>
+    <div class="kpi"><div class="kpi-val">51.3%</div><div class="kpi-lbl">Gross Margin</div><div class="kpi-sub">Incl. Imported Default</div></div>
+    <div class="kpi"><div class="kpi-val">118,985</div><div class="kpi-lbl">Completed</div><div class="kpi-sub">88.4% of all jobs</div></div>
+    <div class="kpi yellow"><div class="kpi-val">15,211</div><div class="kpi-lbl">Cancelled</div><div class="kpi-sub">11.3% cancel rate</div></div>
+    <div class="kpi green"><div class="kpi-val">1</div><div class="kpi-lbl">Stale Jobs</div><div class="kpi-sub">Near-clean queue</div></div>
+    <div class="kpi red"><div class="kpi-val">$1.60M</div><div class="kpi-lbl">Outstanding</div><div class="kpi-sub">652 completed jobs</div></div>
+  </div>
+
+  <div class="data-note">
+    <strong>📋 Data Note — 2-File Join:</strong> Jobs data was exported in two ranges (Mar 2024–Feb 2025 and Mar 2025–Mar 2026) and joined for this analysis. All 134,577 jobs represent the full 2-year period. The "Imported Default Businessunit" (11,263 jobs at 100% GM) reflects legacy-imported jobs with no cost data — this is a data artifact, not an operational BU. Gross margin figures excluding this BU are approximately 48–50%.
+  </div>
+
+  <div class="section">
+    <div class="section-title">📋 Revenue by Business Unit <span class="section-sub">Completed jobs only · Sorted by revenue</span></div>
+    <div class="insight warn">⚠️ <strong>Imported Default Businessunit:</strong> 11,263 jobs at 100% GM is a data artifact from legacy-imported jobs with no cost data. This BU artificially inflates overall GM. Exclude from operational benchmarking.</div>
+    <table>
+      <tr><th>Business Unit</th><th class="num">Jobs</th><th class="num">Revenue</th><th class="num">Rev %</th><th class="num">Gross Margin</th><th class="num">GM %</th></tr>
+      <tr><td>BF-HVAC Installation - RREP - Residential</td><td class="num">8,969</td><td class="num">$42,626K</td><td class="num">53.5%</td><td class="num">$18,714K</td><td class="num">43.9%</td></tr>
+      <tr><td><em>Imported Default Businessunit <span style="color:#e74c3c;font-size:10px;font-weight:700">[DATA ARTIFACT]</span></em></td><td class="num"><em>11,263</em></td><td class="num"><em>$8,389K</em></td><td class="num"><em>10.5%</em></td><td class="num"><em>$8,389K</em></td><td class="num" style="color:#e74c3c"><em>100.0%</em></td></tr>
+      <tr><td>BF-Plumbing Service - Residential</td><td class="num">17,016</td><td class="num">$7,906K</td><td class="num">9.9%</td><td class="num">$3,613K</td><td class="num">45.7%</td></tr>
+      <tr><td>BF-Electrical Installation - Residential</td><td class="num">2,403</td><td class="num">$5,507K</td><td class="num">6.9%</td><td class="num">$3,249K</td><td class="num">59.0%</td></tr>
+      <tr><td>BF-Sewer Installation - Residential</td><td class="num">1,492</td><td class="num">$4,421K</td><td class="num">5.5%</td><td class="num">$2,953K</td><td class="num">66.8%</td></tr>
+      <tr><td>BF-HVAC Service - Residential</td><td class="num">28,095</td><td class="num">$3,651K</td><td class="num">4.6%</td><td class="num">$1,325K</td><td class="num">36.3%</td></tr>
+      <tr><td>BF-Generator Installation - Residential</td><td class="num">330</td><td class="num">$2,579K</td><td class="num">3.2%</td><td class="num">$889K</td><td class="num">34.5%</td></tr>
+      <tr><td>BF-Electrical Service - Residential</td><td class="num">6,395</td><td class="num">$1,696K</td><td class="num">2.1%</td><td class="num">$1,013K</td><td class="num">59.7%</td></tr>
+      <tr><td>BF-Sewer Service - Residential</td><td class="num">6,767</td><td class="num">$1,664K</td><td class="num">2.1%</td><td class="num">$948K</td><td class="num">56.9%</td></tr>
+      <tr><td>GV-HVAC Installation - RREP - Residential</td><td class="num">85</td><td class="num">$535K</td><td class="num">0.7%</td><td class="num">$188K</td><td class="num">35.2%</td></tr>
+      <tr><td style="color:#95a5a6"><em>All other BUs</em></td><td class="num" style="color:#95a5a6">—</td><td class="num" style="color:#95a5a6">$753K</td><td class="num" style="color:#95a5a6">0.9%</td><td class="num" style="color:#95a5a6">—</td><td class="num" style="color:#95a5a6">—</td></tr>
+      <tr style="background:#fce7f3;font-weight:700"><td><strong>TOTAL</strong></td><td class="num">118,985</td><td class="num">$79,727K</td><td class="num">100%</td><td class="num">$40,916K</td><td class="num">51.3%</td></tr>
+    </table>
+    <div class="insight info">💡 Excluding the Imported Default artifact, the true operational revenue is ~$71.3M at ~48–50% GM. HVAC Install RREP is the dominant revenue engine at $42.6M (59.8% of operational revenue). Sewer Install at 66.8% and Electrical at 59%/59.7% are the margin leaders.</div>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-title">👤 Top Salespeople <span class="section-sub">By completed job revenue</span></div>
+      <table>
+        <tr><th>Salesperson</th><th class="num">Revenue</th></tr>
+        <tr><td>Richard Pelc</td><td class="num">$11,132K</td></tr>
+        <tr><td>Ian Donnelly</td><td class="num">$10,723K</td></tr>
+        <tr><td>Brian Anderson</td><td class="num">$9,504K</td></tr>
+        <tr><td>Greg Thie</td><td class="num">$7,065K</td></tr>
+        <tr><td>Joe Notaro</td><td class="num">$4,755K</td></tr>
+        <tr><td>Alex Beback</td><td class="num">$4,565K</td></tr>
+        <tr><td>Jon Stachura</td><td class="num">$2,925K</td></tr>
+        <tr><td>Craig Moeller</td><td class="num">$2,326K</td></tr>
+      </table>
+      <div class="insight info">💡 Top 3 sellers (Pelc, Donnelly, Anderson) account for $31.4M — 39% of total revenue. Strong concentration in top performers typical of RREP-driven businesses.</div>
+    </div>
+    <div class="section">
+      <div class="section-title">❌ Cancellation Analysis <span class="section-sub">15,211 cancelled jobs · 11.3% rate</span></div>
+      <table>
+        <tr><th>Cancel Reason</th><th class="num">Count</th><th class="num">%</th></tr>
+        <tr><td>Problem fixed itself</td><td class="num">5,400</td><td class="num">35.5%</td></tr>
+        <tr><td>Duplicate/Error</td><td class="num">4,308</td><td class="num">28.3%</td></tr>
+        <tr><td>Competitor Booked or Arrived Earlier</td><td class="num">2,532</td><td class="num">16.6%</td></tr>
+        <tr><td>Could Not Reach Customer @ Appt</td><td class="num">1,214</td><td class="num">8.0%</td></tr>
+        <tr><td>Call Back in a Few Days</td><td class="num">502</td><td class="num">3.3%</td></tr>
+        <tr><td>Office Error</td><td class="num">415</td><td class="num">2.7%</td></tr>
+        <tr><td>Finished Job Early</td><td class="num">71</td><td class="num">0.5%</td></tr>
+        <tr><td>T-Mark was late</td><td class="num">28</td><td class="num">0.2%</td></tr>
+      </table>
+      <div class="insight warn">⚠️ 16.6% of cancels are competitor-driven. "Problem fixed itself" (35.5%) is typical for service industries but represents scheduling capacity that could convert with faster response times.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📂 Open Job Queue Health <span class="section-sub">379 total open jobs · 1 stale (&gt;30 days)</span></div>
+    <div class="insight success">✅ Only 1 stale job detected out of 379 open — near-perfect queue hygiene. This represents strong dispatch and scheduling discipline across a high-volume operation.</div>
+    <table>
+      <tr><th>Status</th><th class="num">Count</th><th class="num">% of Open</th><th>Notes</th></tr>
+      <tr><td><span class="badge badge-yellow">Hold</span></td><td class="num">50</td><td class="num">13.2%</td><td>1 stale (Job 291558, BF-Electrical Install, 54 days)</td></tr>
+      <tr><td><span class="badge badge-blue">Scheduled</span></td><td class="num">267</td><td class="num">70.4%</td><td>All recently scheduled, no stale detected</td></tr>
+      <tr><td><span class="badge badge-green">In Progress</span></td><td class="num">62</td><td class="num">16.4%</td><td>Active jobs in field</td></tr>
+      <tr style="font-weight:700"><td>TOTAL OPEN</td><td class="num">379</td><td class="num">100%</td><td></td></tr>
+    </table>
+    <div class="insight info">💡 The single stale job (291558) should be reviewed for disposition — reschedule, close, or cancel. The Hold queue (50 jobs) should be spot-checked monthly to prevent future aging.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">💵 Outstanding Balances <span class="section-sub">Completed jobs with unpaid balance</span></div>
+    <div class="insight danger">🚨 $1,597K outstanding across 652 completed jobs — work delivered but not collected. This is a high-probability AR recovery given the work is already done and the customer relationship exists.</div>
+    <table>
+      <tr><th>Metric</th><th class="num">Value</th></tr>
+      <tr><td>Total outstanding balance</td><td class="num" style="font-weight:700;color:#c0392b">$1,597,167</td></tr>
+      <tr><td>Jobs with outstanding balance (&gt;$0.50)</td><td class="num">652</td></tr>
+      <tr><td>Average balance per job</td><td class="num">$2,449</td></tr>
+    </table>
+    <div class="insight warn">⚠️ A systematic collections outreach on these 652 jobs — starting with the highest-balance accounts — should be prioritized. Most are invoiced and contactable, making collection straightforward relative to the dollar value at stake.</div>
+  </div>
+
+</div>
+<footer>T-Mark Plumbing Heating &amp; Cooling · Operational Intelligence · Data from ServiceTitan · Generated March 2026</footer>
+</body>
+</html>

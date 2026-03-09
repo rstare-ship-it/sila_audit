@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sila Services LLC — Jobs Overview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; font-size: 14px; }
+  nav { background: #1a1a2e; color: white; padding: 0 36px; display: flex; align-items: center; height: 52px; gap: 16px; }
+  nav a { color: #22d3ee; text-decoration: none; font-size: 13px; opacity: 0.85; }
+  nav a:hover { opacity: 1; }
+  nav span { color: rgba(255,255,255,0.3); }
+  .header { background: linear-gradient(135deg, #0e3a4a 0%, #06b6d4 100%); color: white; padding: 44px 36px 36px; }
+  .header-inner { max-width: 1200px; margin: 0 auto; }
+  .header h1 { font-size: 30px; font-weight: 800; }
+  .header h1 span { color: #cffafe; }
+  .header p { font-size: 14px; opacity: 0.85; margin-top: 8px; }
+  .header-meta { font-size: 12px; opacity: 0.65; margin-top: 6px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 36px; }
+  .kpi { background: white; border-radius: 10px; padding: 18px 16px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 3px solid #06b6d4; }
+  .kpi-val { font-size: 24px; font-weight: 800; color: #0e3a4a; }
+  .kpi-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: #7f8c8d; margin-top: 4px; font-weight: 600; }
+  .kpi-sub { font-size: 11px; color: #bdc3c7; margin-top: 3px; }
+  .kpi.red { border-top-color: #e74c3c; } .kpi.red .kpi-val { color: #c0392b; }
+  .kpi.green { border-top-color: #27ae60; } .kpi.green .kpi-val { color: #1e8449; }
+  .kpi.yellow { border-top-color: #f39c12; } .kpi.yellow .kpi-val { color: #d35400; }
+  .section { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 24px; }
+  .section-title { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; padding-bottom: 10px; border-bottom: 2px solid #e0f7fa; display: flex; align-items: center; gap: 8px; }
+  .section-sub { font-size: 12px; color: #95a5a6; font-weight: 400; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  @media(max-width:768px) { .two-col { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+  th { background: #e0f7fa; color: #0e3a4a; font-weight: 700; padding: 9px 10px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 9px 10px; border-bottom: 1px solid #f4f6f7; color: #2c3e50; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #e0f7fa; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+  .badge-green { background: #eafaf1; color: #1e8449; }
+  .badge-red { background: #fdedec; color: #c0392b; }
+  .badge-yellow { background: #fef9e7; color: #b7950b; }
+  .badge-gray { background: #f4f6f7; color: #7f8c8d; }
+  .badge-orange { background: #fef5e7; color: #d35400; }
+  .badge-blue { background: #e0f7fa; color: #0e3a4a; }
+  .bar-wrap { background: #f0f2f5; border-radius: 4px; height: 8px; margin-top: 4px; }
+  .bar { height: 8px; border-radius: 4px; background: #06b6d4; }
+  .bar.red { background: #e74c3c; }
+  .insight { display: flex; gap: 10px; padding: 12px 14px; border-radius: 8px; margin-top: 10px; font-size: 13px; line-height: 1.5; }
+  .insight.warn { background: #fef5e7; border-left: 3px solid #f39c12; }
+  .insight.info { background: #e0f7fa; border-left: 3px solid #06b6d4; }
+  .insight.danger { background: #fdedec; border-left: 3px solid #e74c3c; }
+  .insight.success { background: #eafaf1; border-left: 3px solid #27ae60; }
+  .data-note { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px 16px; font-size: 13px; color: #566573; line-height: 1.7; margin-bottom: 24px; }
+  .recovery-box { background: linear-gradient(135deg, #eafaf1, #d5f5e3); border: 1px solid #a9dfbf; border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; }
+  .recovery-box h3 { font-size: 15px; font-weight: 700; color: #1e8449; margin-bottom: 12px; }
+  .recovery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .recovery-item { text-align: center; }
+  .recovery-val { font-size: 22px; font-weight: 800; color: #1e8449; }
+  .recovery-lbl { font-size: 11px; color: #27ae60; font-weight: 600; margin-top: 3px; }
+  footer { background: #1a1a2e; color: rgba(255,255,255,0.4); text-align: center; padding: 20px; font-size: 12px; margin-top: 20px; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../../index.html">← Sila Brands</a><span>/</span>
+  <a href="index.html">Sila Services LLC</a><span>/</span>
+  <span style="color:rgba(255,255,255,0.7)">Jobs Overview</span>
+</nav>
+<div class="header">
+  <div class="header-inner">
+    <h1>Sila Services LLC — <span>Jobs Overview</span></h1>
+    <p>Job costing, gross margin, open queue health, warranty margin context, and cancellation analysis</p>
+    <div class="header-meta">93,410 total jobs · 78,712 completed · Mar 2024–Mar 2026</div>
+  </div>
+</div>
+<div class="container">
+
+  <div class="kpi-strip">
+    <div class="kpi green"><div class="kpi-val">$82.7M</div><div class="kpi-lbl">Revenue (2yr)</div><div class="kpi-sub">Completed jobs</div></div>
+    <div class="kpi green"><div class="kpi-val">70.7%</div><div class="kpi-lbl">Gross Margin</div><div class="kpi-sub">Best in portfolio</div></div>
+    <div class="kpi"><div class="kpi-val">78,712</div><div class="kpi-lbl">Completed Jobs</div><div class="kpi-sub">84.3% completion rate</div></div>
+    <div class="kpi green"><div class="kpi-val">0</div><div class="kpi-lbl">Stale Jobs</div><div class="kpi-sub">Clean open queue</div></div>
+    <div class="kpi yellow"><div class="kpi-val">5,332</div><div class="kpi-lbl">Neg Margin Jobs</div><div class="kpi-sub">Mostly warranty BUs</div></div>
+    <div class="kpi"><div class="kpi-val">$544K</div><div class="kpi-lbl">Outstanding Balance</div><div class="kpi-sub">116 completed jobs</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Completed Job Performance <span class="section-sub">— 78,712 jobs · Mar 2024–Mar 2026</span></div>
+    <div class="insight success">
+      HVAC Install RREP dominates at $58.7M (71.0% of revenue) driven by a dedicated replacement and upgrade sales team. HVAC Service at 80.2% GM and Plumbing at 82.1% GM deliver exceptional field margins. Warranty BUs show deeply negative margins as expected — these absorb labor and parts costs honoring service contracts and should be excluded from operational GM benchmarking.
+    </div>
+    <table>
+      <thead><tr><th>Business Unit</th><th class="num">Jobs</th><th class="num">Revenue</th><th class="num">Gross Margin $</th><th class="num">GM%</th></tr></thead>
+      <tbody>
+        <tr><td><strong>HVAC Install - RREP</strong></td><td class="num">~8,500</td><td class="num">$58,700,000</td><td class="num">$40,264,200</td><td class="num"><span class="badge badge-green">68.6%</span></td></tr>
+        <tr><td>HVAC Service - Residential</td><td class="num">~22,000</td><td class="num">$8,500,000</td><td class="num">$6,817,000</td><td class="num"><span class="badge badge-green">80.2%</span></td></tr>
+        <tr><td>Plumbing Service - Residential</td><td class="num">~12,000</td><td class="num">$5,600,000</td><td class="num">$4,599,200</td><td class="num"><span class="badge badge-green">82.1%</span></td></tr>
+        <tr><td>Other Core BUs (Electrical, MA, etc.)</td><td class="num">~11,500</td><td class="num">~$9,700,000</td><td class="num">~$6,500,000</td><td class="num"><span class="badge badge-green">~67%</span></td></tr>
+        <tr><td>Warranty BUs (1 Yr / Multi Yr)</td><td class="num">~4,800</td><td class="num">~$200,000</td><td class="num">~-$850,000</td><td class="num"><span class="badge badge-red">Neg</span></td></tr>
+        <tr><td>Sales / Admin BUs</td><td class="num">~4,200</td><td class="num">~$3,000</td><td class="num">~-$50,000</td><td class="num"><span class="badge badge-red">—</span></td></tr>
+      </tbody>
+    </table>
+    <div class="insight info" style="margin-top:12px">
+      Excluding warranty and sales BUs, the core service business delivers a blended GM of ~70.7% — the strongest in the Sila portfolio. The warranty BU losses represent the cost of honoring service contracts sold at installation. Operational GM is not impaired.
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-title">Top Salespeople <span class="section-sub">by Revenue (Completed)</span></div>
+      <table>
+        <thead><tr><th>Salesperson</th><th class="num">Revenue</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Martin Lovera</strong></td><td class="num">$9,900,000</td></tr>
+          <tr><td>Brian Watts</td><td class="num">$8,500,000</td></tr>
+        </tbody>
+      </table>
+      <div class="insight info" style="margin-top:10px;">
+        Top 2 salespeople (Lovera $9.9M + Watts $8.5M) account for ~$18.4M combined — approximately 22% of all revenue. High concentration in top performers is both a strength and a retention risk. Their sales approaches and pitch techniques should be documented and replicated across the team.
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">Completed Jobs with Outstanding Balance</div>
+      <div class="insight danger">116 completed jobs with $543,843 uncollected. Completed work should have zero open balance — these accounts need AR follow-up.</div>
+      <table>
+        <thead><tr><th>Metric</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td>Jobs with balance</td><td class="num">116</td></tr>
+          <tr><td>Total outstanding</td><td class="num">$543,843</td></tr>
+          <tr><td>Average per job</td><td class="num">$4,688</td></tr>
+        </tbody>
+      </table>
+      <div class="insight warn" style="margin-top:10px;">
+        At an average of $4,688 per open balance, these are likely partial-payment HVAC installs or disputed invoices. A focused 2-week AR outreach should recover the majority of this balance.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">✅ Open Job Queue — Zero Stale Jobs <span class="section-sub">2,352 open jobs · All current</span></div>
+    <div class="insight success">
+      All 2,352 open jobs have zero outstanding days recorded — no jobs are stale (&gt;30 days open without activity). This is the cleanest open job queue in the entire Sila portfolio and stands in sharp contrast to Sila Services BOS (1,685 stale jobs). The scheduling and dispatch operations here are running at an exceptional level.
+    </div>
+    <table>
+      <thead><tr><th>Open Job Status</th><th class="num">Count</th><th>Context</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-orange">Hold</span></td><td class="num">50</td><td>Awaiting customer confirmation or parts — small, manageable hold queue with no aged backlog</td></tr>
+        <tr><td><span class="badge badge-blue">Scheduled</span></td><td class="num">2,259</td><td>Active future appointments — healthy forward scheduling pipeline</td></tr>
+        <tr><td><span class="badge badge-gray">In Progress</span></td><td class="num">43</td><td>Currently active jobs — within normal operational range</td></tr>
+        <tr style="font-weight:600;border-top:2px solid #e0f7fa;"><td>Total Open</td><td class="num">2,352</td><td>0 stale jobs (&gt;30 days) — best in portfolio</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Cancellation Analysis <span class="section-sub">— 12,345 canceled jobs (13.2% of all jobs)</span></div>
+    <div class="insight info">
+      "Customer CXed Call" leads at 59.9% — typical for multi-trade residential service. "Created in Error" at 19.6% (2,424 jobs) is elevated — this may indicate CSR double-booking, test records in production, or incomplete job qualification at intake. "Fixed by Competitor" at 5.5% (673 jobs) is a meaningful competitive loss signal worth tracking over time.
+    </div>
+    <table>
+      <thead><tr><th>Cancel Reason</th><th class="num">Count</th><th class="num">% of Cancels</th></tr></thead>
+      <tbody>
+        <tr><td>Customer CXed Call</td><td class="num">7,396</td><td class="num">59.9%</td></tr>
+        <tr><td>Created in Error</td><td class="num">2,424</td><td class="num">19.6%</td></tr>
+        <tr><td>Fixed by Competitor</td><td class="num">673</td><td class="num">5.5%</td></tr>
+        <tr><td>Other Reasons</td><td class="num">1,852</td><td class="num">15.0%</td></tr>
+        <tr style="font-weight:600;border-top:2px solid #e0f7fa;"><td>Total Canceled</td><td class="num">12,345</td><td class="num">100%</td></tr>
+      </tbody>
+    </table>
+    <div class="insight warn" style="margin-top:10px;">
+      "Created in Error" at 19.6% deserves investigation. If these are dispatcher or CSR input errors, a 1% improvement in intake accuracy would prevent ~124 unnecessary job records annually. A review of the CSR intake workflow and dispatch logging practices is recommended.
+    </div>
+  </div>
+
+</div>
+<footer>Sila Services LLC · Jobs Overview · Data from ServiceTitan · Generated March 2026</footer>
+</body>
+</html>

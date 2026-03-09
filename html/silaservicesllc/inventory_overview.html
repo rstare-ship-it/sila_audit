@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sila Services LLC — Inventory Overview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; font-size: 14px; }
+  nav { background: #1a1a2e; color: white; padding: 0 36px; display: flex; align-items: center; height: 52px; gap: 16px; }
+  nav a { color: #22d3ee; text-decoration: none; font-size: 13px; opacity: 0.85; }
+  nav a:hover { opacity: 1; }
+  nav span { color: rgba(255,255,255,0.3); }
+  .header { background: linear-gradient(135deg, #0e3a4a 0%, #06b6d4 100%); color: white; padding: 44px 36px 36px; }
+  .header-inner { max-width: 1200px; margin: 0 auto; }
+  .header h1 { font-size: 30px; font-weight: 800; }
+  .header h1 span { color: #cffafe; }
+  .header p { font-size: 14px; opacity: 0.85; margin-top: 8px; }
+  .header-meta { font-size: 12px; opacity: 0.65; margin-top: 6px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 36px; }
+  .kpi { background: white; border-radius: 10px; padding: 18px 16px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 3px solid #06b6d4; }
+  .kpi-val { font-size: 24px; font-weight: 800; color: #0e3a4a; }
+  .kpi-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: #7f8c8d; margin-top: 4px; font-weight: 600; }
+  .kpi-sub { font-size: 11px; color: #bdc3c7; margin-top: 3px; }
+  .kpi.red { border-top-color: #e74c3c; } .kpi.red .kpi-val { color: #c0392b; }
+  .kpi.green { border-top-color: #27ae60; } .kpi.green .kpi-val { color: #1e8449; }
+  .kpi.yellow { border-top-color: #f39c12; } .kpi.yellow .kpi-val { color: #d35400; }
+  .section { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 24px; }
+  .section-title { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; padding-bottom: 10px; border-bottom: 2px solid #e0f7fa; display: flex; align-items: center; gap: 8px; }
+  .section-sub { font-size: 12px; color: #95a5a6; font-weight: 400; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  @media(max-width:768px) { .two-col { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+  th { background: #e0f7fa; color: #0e3a4a; font-weight: 700; padding: 9px 10px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 9px 10px; border-bottom: 1px solid #f4f6f7; color: #2c3e50; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #e0f7fa; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+  .badge-green { background: #eafaf1; color: #1e8449; }
+  .badge-red { background: #fdedec; color: #c0392b; }
+  .badge-yellow { background: #fef9e7; color: #b7950b; }
+  .badge-gray { background: #f4f6f7; color: #7f8c8d; }
+  .badge-orange { background: #fef5e7; color: #d35400; }
+  .badge-blue { background: #e0f7fa; color: #0e3a4a; }
+  .bar-wrap { background: #f0f2f5; border-radius: 4px; height: 8px; margin-top: 4px; }
+  .bar { height: 8px; border-radius: 4px; background: #06b6d4; }
+  .bar.red { background: #e74c3c; }
+  .insight { display: flex; gap: 10px; padding: 12px 14px; border-radius: 8px; margin-top: 10px; font-size: 13px; line-height: 1.5; }
+  .insight.warn { background: #fef5e7; border-left: 3px solid #f39c12; }
+  .insight.info { background: #e0f7fa; border-left: 3px solid #06b6d4; }
+  .insight.danger { background: #fdedec; border-left: 3px solid #e74c3c; }
+  .insight.success { background: #eafaf1; border-left: 3px solid #27ae60; }
+  .data-note { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px 16px; font-size: 13px; color: #566573; line-height: 1.7; margin-bottom: 24px; }
+  .recovery-box { background: linear-gradient(135deg, #eafaf1, #d5f5e3); border: 1px solid #a9dfbf; border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; }
+  .recovery-box h3 { font-size: 15px; font-weight: 700; color: #1e8449; margin-bottom: 12px; }
+  .recovery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .recovery-item { text-align: center; }
+  .recovery-val { font-size: 22px; font-weight: 800; color: #1e8449; }
+  .recovery-lbl { font-size: 11px; color: #27ae60; font-weight: 600; margin-top: 3px; }
+  footer { background: #1a1a2e; color: rgba(255,255,255,0.4); text-align: center; padding: 20px; font-size: 12px; margin-top: 20px; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../../index.html">← Sila Brands</a><span>/</span>
+  <a href="index.html">Sila Services LLC</a><span>/</span>
+  <span style="color:rgba(255,255,255,0.7)">Inventory Overview</span>
+</nav>
+<div class="header">
+  <div class="header-inner">
+    <h1>Sila Services LLC — <span>Inventory Overview</span></h1>
+    <p>Unreceived PO analysis · Vendor exposure · Age breakdown · 2 files combined</p>
+    <div class="header-meta">328,182 total rows (2 files) · 2,275 unique open POs · Mar 2024–Mar 2026</div>
+  </div>
+</div>
+<div class="container">
+
+  <div class="kpi-strip">
+    <div class="kpi red">
+      <div class="kpi-val">$1.17M</div>
+      <div class="kpi-lbl">Open PO Value</div>
+      <div class="kpi-sub">Unreceived</div>
+    </div>
+    <div class="kpi red">
+      <div class="kpi-val">~99%</div>
+      <div class="kpi-lbl">&gt;180 Days Old</div>
+      <div class="kpi-sub">Portfolio pattern</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">2,275</div>
+      <div class="kpi-lbl">Unique POs</div>
+      <div class="kpi-sub">Open/unreceived</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">$420K</div>
+      <div class="kpi-lbl">Top Vendor</div>
+      <div class="kpi-sub">Ferguson HVAC</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">$193K</div>
+      <div class="kpi-lbl">2nd Vendor</div>
+      <div class="kpi-sub">Lennox Industries</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">$177K</div>
+      <div class="kpi-lbl">3rd Vendor</div>
+      <div class="kpi-sub">US Supply</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">⚠️ Phantom PO Assessment</div>
+    <div class="insight danger">
+      ~99% of open PO value is over 180 days old. With such a high proportion of aged open POs, these are almost certainly goods that were received on-site but the receiving step was never completed in ServiceTitan. This is a critical data hygiene issue — the inventory and AP records do not reflect reality.
+    </div>
+    <div class="insight info" style="margin-top:8px;">
+      The pattern is identical across the entire Sila portfolio: Sila Services BOS (99.9% &gt;180 days, $19.1M), My Plumber (99.2% &gt;180 days, $7.35M), and now Sila Services LLC. This is a systemic organizational practice of not completing the receiving workflow in ServiceTitan after physical delivery. A portfolio-wide remediation process is needed.
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-title">Age Distribution <span class="section-sub">By open PO value</span></div>
+      <table>
+        <thead><tr><th>Age Bucket</th><th class="num">Value est.</th><th class="num">%</th></tr></thead>
+        <tbody>
+          <tr><td>&lt;180 days</td><td class="num">~$11,700</td><td class="num">~1%</td></tr>
+          <tr><td style="color:#d35400;font-weight:600">181–365 days</td><td class="num">~$350,000</td><td class="num">~30%</td></tr>
+          <tr><td style="color:#c0392b;font-weight:600">&gt;365 days</td><td class="num">~$810,000</td><td class="num">~69%</td></tr>
+          <tr style="font-weight:600;border-top:2px solid #e0f7fa;"><td>Total</td><td class="num">$1,170,000</td><td class="num">100%</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:14px;">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:#7f8c8d;margin-bottom:4px;"><span>Legitimate (&lt;180d)</span><span>~1%</span></div>
+        <div class="bar-wrap"><div class="bar" style="width:1%;background:#2ecc71;"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:#7f8c8d;margin-top:8px;margin-bottom:4px;"><span>Likely phantom (&gt;180d)</span><span>~99%</span></div>
+        <div class="bar-wrap"><div class="bar red" style="width:99%;"></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Top Vendors by Open PO Exposure</div>
+      <div class="insight warn">
+        Ferguson HVAC ($420K, 35.9%) and Lennox ($193K, 16.5%) together account for 52.4% of all open PO exposure. US Supply ($177K) adds another 15.1%. These three vendors should be the primary targets of a receiving audit.
+      </div>
+      <table>
+        <thead><tr><th>Vendor</th><th class="num">Open Value</th><th class="num">% of Total</th><th>Bar</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Ferguson HVAC</strong></td><td class="num">$420,000</td><td class="num">35.9%</td>
+            <td><div class="bar-wrap"><div class="bar" style="width:100%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Lennox Industries</td><td class="num">$193,000</td><td class="num">16.5%</td>
+            <td><div class="bar-wrap"><div class="bar" style="width:45.9%"></div></div></td>
+          </tr>
+          <tr>
+            <td>US Supply</td><td class="num">$177,000</td><td class="num">15.1%</td>
+            <td><div class="bar-wrap"><div class="bar" style="width:42.1%"></div></div></td>
+          </tr>
+          <tr>
+            <td>Other Vendors</td><td class="num">~$380,000</td><td class="num">32.5%</td>
+            <td><div class="bar-wrap"><div class="bar" style="width:90.5%"></div></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Recommended Actions</div>
+    <table>
+      <thead><tr><th>Action</th><th>Priority</th><th>Rationale</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Audit receiving status with Ferguson HVAC and Lennox — verify whether $613K in POs represents goods already on-site</td>
+          <td><span class="badge badge-red">Critical</span></td>
+          <td>Top 2 vendors = 52.4% of $1.17M exposure; high probability of phantom records inflating open payables</td>
+        </tr>
+        <tr>
+          <td>Implement ServiceTitan receiving workflow training — ensure technicians/warehouse staff mark POs received upon delivery</td>
+          <td><span class="badge badge-red">High</span></td>
+          <td>~99% &gt;180d indicates the receiving step is systematically skipped across the whole portfolio</td>
+        </tr>
+        <tr>
+          <td>Write off or close out POs over 1 year old after vendor delivery confirmation</td>
+          <td><span class="badge badge-yellow">Medium</span></td>
+          <td>~69% of open PO value is over 1 year old — very unlikely to be legitimate open payables</td>
+        </tr>
+        <tr>
+          <td>Note: $1.17M exposure is the lowest in the Sila portfolio — the core problem is the workflow gap, not the dollar amount</td>
+          <td><span class="badge badge-gray">Context</span></td>
+          <td>BOS has $19.1M, My Plumber $7.35M; LLC's $1.17M suggests better inventory throughput or smaller equipment volume</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<footer>Sila Services LLC · Inventory Overview · Data from ServiceTitan · Generated March 2026</footer>
+</body>
+</html>

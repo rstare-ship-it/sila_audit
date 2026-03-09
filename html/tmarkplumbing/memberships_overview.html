@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T-Mark — Memberships Overview</title>
+<style>  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; font-size: 14px; }
+  nav { background: #1a1a2e; color: white; padding: 0 36px; display: flex; align-items: center; height: 52px; gap: 16px; }
+  nav a { color: #f472b6; text-decoration: none; font-size: 13px; opacity: 0.85; }
+  nav a:hover { opacity: 1; }
+  nav span { color: rgba(255,255,255,0.3); }
+  .header { background: linear-gradient(135deg, #4a0e2c 0%, #ec4899 100%); color: white; padding: 44px 36px 36px; }
+  .header-inner { max-width: 1200px; margin: 0 auto; }
+  .header h1 { font-size: 30px; font-weight: 800; }
+  .header h1 span { color: #fce7f3; }
+  .header p { font-size: 14px; opacity: 0.85; margin-top: 8px; }
+  .header-meta { font-size: 12px; opacity: 0.65; margin-top: 6px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 36px; }
+  .kpi { background: white; border-radius: 10px; padding: 18px 16px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 3px solid #ec4899; }
+  .kpi-val { font-size: 24px; font-weight: 800; color: #4a0e2c; }
+  .kpi-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: #7f8c8d; margin-top: 4px; font-weight: 600; }
+  .kpi-sub { font-size: 11px; color: #bdc3c7; margin-top: 3px; }
+  .kpi.red { border-top-color: #e74c3c; } .kpi.red .kpi-val { color: #c0392b; }
+  .kpi.green { border-top-color: #27ae60; } .kpi.green .kpi-val { color: #1e8449; }
+  .kpi.yellow { border-top-color: #f39c12; } .kpi.yellow .kpi-val { color: #d35400; }
+  .section { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 24px; }
+  .section-title { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; padding-bottom: 10px; border-bottom: 2px solid #fce7f3; display: flex; align-items: center; gap: 8px; }
+  .section-sub { font-size: 12px; color: #95a5a6; font-weight: 400; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  @media(max-width:768px) { .two-col { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+  th { background: #fce7f3; color: #4a0e2c; font-weight: 700; padding: 9px 10px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 9px 10px; border-bottom: 1px solid #f4f6f7; color: #2c3e50; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fce7f3; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+  .badge-green { background: #eafaf1; color: #1e8449; }
+  .badge-red { background: #fdedec; color: #c0392b; }
+  .badge-yellow { background: #fef9e7; color: #b7950b; }
+  .badge-gray { background: #f4f6f7; color: #7f8c8d; }
+  .badge-orange { background: #fef5e7; color: #d35400; }
+  .badge-blue { background: #fce7f3; color: #4a0e2c; }
+  .bar-wrap { background: #f0f2f5; border-radius: 4px; height: 8px; margin-top: 4px; }
+  .bar { height: 8px; border-radius: 4px; background: #ec4899; }
+  .bar.red { background: #e74c3c; }
+  .insight { display: flex; gap: 10px; padding: 12px 14px; border-radius: 8px; margin-top: 10px; font-size: 13px; line-height: 1.5; }
+  .insight.warn { background: #fef5e7; border-left: 3px solid #f39c12; }
+  .insight.info { background: #fce7f3; border-left: 3px solid #ec4899; }
+  .insight.danger { background: #fdedec; border-left: 3px solid #e74c3c; }
+  .insight.success { background: #eafaf1; border-left: 3px solid #27ae60; }
+  .data-note { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px 16px; font-size: 13px; color: #566573; line-height: 1.7; margin-bottom: 24px; }
+  .recovery-box { background: linear-gradient(135deg, #eafaf1, #d5f5e3); border: 1px solid #a9dfbf; border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; }
+  .recovery-box h3 { font-size: 15px; font-weight: 700; color: #1e8449; margin-bottom: 12px; }
+  .recovery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .recovery-item { text-align: center; }
+  .recovery-val { font-size: 22px; font-weight: 800; color: #1e8449; }
+  .recovery-lbl { font-size: 11px; color: #27ae60; font-weight: 600; margin-top: 3px; }
+  footer { background: #1a1a2e; color: rgba(255,255,255,0.4); text-align: center; padding: 20px; font-size: 12px; margin-top: 20px; }</style>
+</head>
+<body>
+<nav>
+  <a href="../../index.html">← Sila Brands</a><span>/</span>
+  <a href="index.html" style="color:#f472b6">T-Mark Plumbing Heating &amp; Cooling</a><span>/</span>
+  <span style="color:rgba(255,255,255,0.7)">Memberships Overview</span>
+</nav>
+<div class="header">
+  <div class="header-inner">
+    <h1>Memberships <span>Overview</span></h1>
+    <p>Active member base, ARR composition, billing cadence breakdown, and re-engagement opportunity for lapsed members.</p>
+    <div class="header-meta">3,066 total membership records · 1,134 active · All active are recurring · ~$292K ARR</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="kpi-strip">
+    <div class="kpi"><div class="kpi-val">3,066</div><div class="kpi-lbl">Total Records</div><div class="kpi-sub">Full history</div></div>
+    <div class="kpi green"><div class="kpi-val">1,134</div><div class="kpi-lbl">Active Members</div><div class="kpi-sub">37.0% of total</div></div>
+    <div class="kpi green"><div class="kpi-val">100%</div><div class="kpi-lbl">Recurring</div><div class="kpi-sub">No one-time active</div></div>
+    <div class="kpi"><div class="kpi-val">~$292K</div><div class="kpi-lbl">Annualized ARR</div><div class="kpi-sub">Monthly + cadenced</div></div>
+    <div class="kpi yellow"><div class="kpi-val">1,609</div><div class="kpi-lbl">Lapsed Members</div><div class="kpi-sub">Expired + Cancelled</div></div>
+    <div class="kpi"><div class="kpi-val">$19.78</div><div class="kpi-lbl">Avg Monthly Fee</div><div class="kpi-sub">Per active monthly member</div></div>
+  </div>
+
+  <div class="data-note">
+    <strong>📋 Data Note — ARR Methodology:</strong> ARR is computed by annualizing active member billing template totals: Monthly × 12, Bi-annual × 2, Quarterly × 4. The ~$292K figure reflects the billing template total — actual collected ARR may differ slightly due to billing failures, paused memberships, or pricing adjustments. All 1,134 active members are on recurring plans (Monthly: 1,034 / Bi-annual: 90 / Quarterly: 10) — there are no One Time billing active members, making this a clean recurring revenue base.
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-title">📊 Membership Status Breakdown</div>
+      <table>
+        <tr><th>Status</th><th class="num">Count</th><th class="num">%</th></tr>
+        <tr><td><span class="badge badge-green">Active</span></td><td class="num">1,134</td><td class="num">37.0%</td></tr>
+        <tr><td><span class="badge badge-red">Cancelled</span></td><td class="num">1,347</td><td class="num">43.9%</td></tr>
+        <tr><td><span class="badge badge-gray">Deleted</span></td><td class="num">321</td><td class="num">10.5%</td></tr>
+        <tr><td><span class="badge badge-orange">Expired</span></td><td class="num">262</td><td class="num">8.5%</td></tr>
+        <tr><td><span class="badge badge-yellow">Suspended</span></td><td class="num">1</td><td class="num">0.0%</td></tr>
+        <tr><td><span class="badge badge-gray">Unknown/Other</span></td><td class="num">1</td><td class="num">0.0%</td></tr>
+        <tr style="font-weight:700"><td>TOTAL</td><td class="num">3,066</td><td class="num">100%</td></tr>
+      </table>
+      <div class="insight info">💡 1,609 expired + cancelled members represent the primary re-engagement pool. Many held T-Mark maintenance plans before canceling — these customers know the brand and may respond well to win-back offers.</div>
+    </div>
+    <div class="section">
+      <div class="section-title">🔄 Active Billing Cadence</div>
+      <table>
+        <tr><th>Billing Cadence</th><th class="num">Members</th><th class="num">% Active</th><th class="num">Est. Annual Value</th></tr>
+        <tr><td><span class="badge badge-green">Monthly</span></td><td class="num">1,034</td><td class="num">91.2%</td><td class="num">~$245K</td></tr>
+        <tr><td><span class="badge badge-blue">Bi-annual</span></td><td class="num">90</td><td class="num">7.9%</td><td class="num">~$33K</td></tr>
+        <tr><td><span class="badge badge-yellow">Quarterly</span></td><td class="num">10</td><td class="num">0.9%</td><td class="num">~$14K</td></tr>
+        <tr style="font-weight:700"><td>TOTAL ACTIVE</td><td class="num">1,134</td><td class="num">100%</td><td class="num">~$292K</td></tr>
+      </table>
+      <div class="insight success">✅ 100% of active members are on recurring billing — no one-time billing active members. This is a clean, predictable recurring revenue base. Monthly cadence (91.2%) dominates, providing consistent monthly cash flow.</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-title">🏷️ Active Membership Types <span class="section-sub">Top 10 by count</span></div>
+      <table>
+        <tr><th>Membership Type</th><th class="num">Count</th></tr>
+        <tr><td>BF Home Team Monthly Generator Only (1 Visit)</td><td class="num">363</td></tr>
+        <tr><td>BF Home Team Monthly 2-Visit Heating &amp; Cooling</td><td class="num">317</td></tr>
+        <tr><td>BF Home Team Monthly 1 Heating Visit</td><td class="num">281</td></tr>
+        <tr><td>BF Commercial Annual Maintenance (2 Visit)</td><td class="num">96</td></tr>
+        <tr><td>BF Home Team Monthly 3-Visit + Generator</td><td class="num">30</td></tr>
+        <tr><td>BF Home Team Monthly 1 Cooling Visit</td><td class="num">23</td></tr>
+        <tr><td>GV Home Team Monthly 2-Visit Heating &amp; Cooling</td><td class="num">12</td></tr>
+        <tr><td>GV Home Team Monthly 1 Heating Visit</td><td class="num">6</td></tr>
+        <tr><td>BF Commercial Annual 1 Visit (Heat)</td><td class="num">3</td></tr>
+        <tr><td>All other types</td><td class="num">3</td></tr>
+      </table>
+    </div>
+    <div class="section">
+      <div class="section-title">👤 Top Sellers by ARR Contribution</div>
+      <table>
+        <tr><th>Seller</th><th class="num">ARR Contribution</th></tr>
+        <tr><td>Jade Erhart</td><td class="num">$68,120</td></tr>
+        <tr><td>Clara Stitz</td><td class="num">$30,840</td></tr>
+        <tr><td>Zachary Doel</td><td class="num">$18,840</td></tr>
+        <tr><td>Brian Anderson</td><td class="num">$18,096</td></tr>
+        <tr><td>Julie Gruen</td><td class="num">$17,796</td></tr>
+        <tr><td>Rose Koch</td><td class="num">$16,344</td></tr>
+        <tr><td>Kaitlyn Gazzo</td><td class="num">$11,580</td></tr>
+        <tr><td>Dyllon Kowalski</td><td class="num">$9,960</td></tr>
+      </table>
+      <div class="insight info">💡 Jade Erhart alone accounts for $68K ARR (23.3% of total). Brian Anderson appears in both the jobs top sellers ($9.5M revenue) and membership sellers — a key cross-sell performer worth recognizing and replicating.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🏗️ Active Members by Business Unit</div>
+    <table>
+      <tr><th>Business Unit</th><th class="num">Active Members</th><th class="num">% of Active</th></tr>
+      <tr><td>BF-MA - Residential (Membership Admin)</td><td class="num">833</td><td class="num">73.5%</td></tr>
+      <tr><td>BF-HVAC Service - Residential</td><td class="num">162</td><td class="num">14.3%</td></tr>
+      <tr><td>BF-Generator Service - Residential</td><td class="num">98</td><td class="num">8.6%</td></tr>
+      <tr><td>GV-MA - Residential</td><td class="num">19</td><td class="num">1.7%</td></tr>
+      <tr><td>BF-Electrical Service - Residential</td><td class="num">9</td><td class="num">0.8%</td></tr>
+      <tr><td>All other BUs</td><td class="num">13</td><td class="num">1.1%</td></tr>
+      <tr style="font-weight:700"><td>TOTAL</td><td class="num">1,134</td><td class="num">100%</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">✅ Recommended Actions</div>
+    <table>
+      <tr><th>Priority</th><th>Action</th><th>Potential Impact</th></tr>
+      <tr><td><span class="badge badge-red">HIGH</span></td><td>Re-engage 262 expired members — these have the highest likelihood of renewal as they had a prior T-Mark maintenance relationship</td><td>If 30% renew at avg $240/yr = +$19K ARR</td></tr>
+      <tr><td><span class="badge badge-yellow">MED</span></td><td>Launch win-back campaign for 1,347 cancelled members — focus on generator program (363 active) as an upsell entry point</td><td>If 10% convert = +$113 members, +$27K ARR</td></tr>
+      <tr><td><span class="badge badge-yellow">MED</span></td><td>Cross-sell HVAC Service members (162) into 2-Visit Heating &amp; Cooling plan — upgrade 1-visit to 2-visit at service touchpoints</td><td>ARPU increase per upgraded member</td></tr>
+      <tr><td><span class="badge badge-yellow">MED</span></td><td>Leverage Brian Anderson's cross-sell model — he sells both high-value installation jobs and memberships. Train the rest of the sales team on membership enrollment at job close</td><td>Increase membership attach rate on new installs</td></tr>
+      <tr><td><span class="badge badge-gray">LOW</span></td><td>Expand commercial program — only 96 commercial members (BF Commercial Annual). Targeting multi-unit or commercial accounts could significantly expand ARR</td><td>Commercial accounts typically 3–5x residential ARR</td></tr>
+    </table>
+  </div>
+
+</div>
+<footer>T-Mark Plumbing Heating &amp; Cooling · Operational Intelligence · Data from ServiceTitan · Generated March 2026</footer>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T-Mark — Inventory Overview</title>
+<style>  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; font-size: 14px; }
+  nav { background: #1a1a2e; color: white; padding: 0 36px; display: flex; align-items: center; height: 52px; gap: 16px; }
+  nav a { color: #f472b6; text-decoration: none; font-size: 13px; opacity: 0.85; }
+  nav a:hover { opacity: 1; }
+  nav span { color: rgba(255,255,255,0.3); }
+  .header { background: linear-gradient(135deg, #4a0e2c 0%, #ec4899 100%); color: white; padding: 44px 36px 36px; }
+  .header-inner { max-width: 1200px; margin: 0 auto; }
+  .header h1 { font-size: 30px; font-weight: 800; }
+  .header h1 span { color: #fce7f3; }
+  .header p { font-size: 14px; opacity: 0.85; margin-top: 8px; }
+  .header-meta { font-size: 12px; opacity: 0.65; margin-top: 6px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 36px; }
+  .kpi { background: white; border-radius: 10px; padding: 18px 16px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 3px solid #ec4899; }
+  .kpi-val { font-size: 24px; font-weight: 800; color: #4a0e2c; }
+  .kpi-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: #7f8c8d; margin-top: 4px; font-weight: 600; }
+  .kpi-sub { font-size: 11px; color: #bdc3c7; margin-top: 3px; }
+  .kpi.red { border-top-color: #e74c3c; } .kpi.red .kpi-val { color: #c0392b; }
+  .kpi.green { border-top-color: #27ae60; } .kpi.green .kpi-val { color: #1e8449; }
+  .kpi.yellow { border-top-color: #f39c12; } .kpi.yellow .kpi-val { color: #d35400; }
+  .section { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 24px; }
+  .section-title { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; padding-bottom: 10px; border-bottom: 2px solid #fce7f3; display: flex; align-items: center; gap: 8px; }
+  .section-sub { font-size: 12px; color: #95a5a6; font-weight: 400; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  @media(max-width:768px) { .two-col { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+  th { background: #fce7f3; color: #4a0e2c; font-weight: 700; padding: 9px 10px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 9px 10px; border-bottom: 1px solid #f4f6f7; color: #2c3e50; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fce7f3; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+  .badge-green { background: #eafaf1; color: #1e8449; }
+  .badge-red { background: #fdedec; color: #c0392b; }
+  .badge-yellow { background: #fef9e7; color: #b7950b; }
+  .badge-gray { background: #f4f6f7; color: #7f8c8d; }
+  .badge-orange { background: #fef5e7; color: #d35400; }
+  .badge-blue { background: #fce7f3; color: #4a0e2c; }
+  .bar-wrap { background: #f0f2f5; border-radius: 4px; height: 8px; margin-top: 4px; }
+  .bar { height: 8px; border-radius: 4px; background: #ec4899; }
+  .bar.red { background: #e74c3c; }
+  .insight { display: flex; gap: 10px; padding: 12px 14px; border-radius: 8px; margin-top: 10px; font-size: 13px; line-height: 1.5; }
+  .insight.warn { background: #fef5e7; border-left: 3px solid #f39c12; }
+  .insight.info { background: #fce7f3; border-left: 3px solid #ec4899; }
+  .insight.danger { background: #fdedec; border-left: 3px solid #e74c3c; }
+  .insight.success { background: #eafaf1; border-left: 3px solid #27ae60; }
+  .data-note { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px 16px; font-size: 13px; color: #566573; line-height: 1.7; margin-bottom: 24px; }
+  .recovery-box { background: linear-gradient(135deg, #eafaf1, #d5f5e3); border: 1px solid #a9dfbf; border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; }
+  .recovery-box h3 { font-size: 15px; font-weight: 700; color: #1e8449; margin-bottom: 12px; }
+  .recovery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .recovery-item { text-align: center; }
+  .recovery-val { font-size: 22px; font-weight: 800; color: #1e8449; }
+  .recovery-lbl { font-size: 11px; color: #27ae60; font-weight: 600; margin-top: 3px; }
+  footer { background: #1a1a2e; color: rgba(255,255,255,0.4); text-align: center; padding: 20px; font-size: 12px; margin-top: 20px; }</style>
+</head>
+<body>
+<nav>
+  <a href="../../index.html">← Sila Brands</a><span>/</span>
+  <a href="index.html" style="color:#f472b6">T-Mark Plumbing Heating &amp; Cooling</a><span>/</span>
+  <span style="color:rgba(255,255,255,0.7)">Inventory Overview</span>
+</nav>
+<div class="header">
+  <div class="header-inner">
+    <h1>Inventory <span>Overview</span></h1>
+    <p>Unreceived purchase orders, vendor exposure, and business unit breakdown across 2 years of inventory data.</p>
+    <div class="header-meta">269,088 inventory lines · 2 files joined · $1.67M unreceived POs · 6,140 unique PO numbers</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="kpi-strip">
+    <div class="kpi yellow"><div class="kpi-val">$1.67M</div><div class="kpi-lbl">Open PO Value</div><div class="kpi-sub">Unreceived lines</div></div>
+    <div class="kpi"><div class="kpi-val">7,488</div><div class="kpi-lbl">PO Lines</div><div class="kpi-sub">Qty outstanding &gt; 0</div></div>
+    <div class="kpi"><div class="kpi-val">6,140</div><div class="kpi-lbl">Unique POs</div><div class="kpi-sub">Distinct PO numbers</div></div>
+    <div class="kpi yellow"><div class="kpi-val">~99%</div><div class="kpi-lbl">&gt;180 Days</div><div class="kpi-sub">No date data recorded</div></div>
+    <div class="kpi"><div class="kpi-val">VP Supply</div><div class="kpi-lbl">Top Vendor</div><div class="kpi-sub">$470K · 28.1%</div></div>
+    <div class="kpi"><div class="kpi-val">HVAC</div><div class="kpi-lbl">Top BU</div><div class="kpi-sub">Install RREP · 56.3%</div></div>
+  </div>
+
+  <div class="data-note">
+    <strong>📋 Data Note — 2-File Join &amp; Age Data:</strong> Inventory data was exported in two ranges and joined for this analysis. The "unreceived" filter uses PO lines where Quantity Outstanding &gt; 0. <strong>No date sent/created data is populated</strong> for T-Mark's unreceived POs — this is the same "phantom PO" pattern seen across the Sila portfolio, where goods are received in the field but the receiving step is never completed in ServiceTitan. The ~99% &gt;180 days estimate is based on this pattern; an actual audit would require cross-referencing against vendor invoices.
+  </div>
+
+  <div class="section">
+    <div class="section-title">🔍 Phantom PO Assessment <span class="section-sub">Why open POs are almost always &gt;180 days old</span></div>
+    <div class="insight warn">⚠️ <strong>Root Cause:</strong> Technicians receive materials at the supply house or at the job site, but the "Receive" step in ServiceTitan is not completed. The PO remains open indefinitely. This creates artificial inventory liability that doesn't reflect actual stock on hand.</div>
+    <div class="insight info">💡 <strong>Resolution Path:</strong> (1) Pull the list of vendor invoices matching open POs from VP Supply, Irr Supply, and Home Depot. (2) Verify delivery against field records. (3) Mass-receive confirmed-delivered POs in ServiceTitan. (4) Write off any POs where goods were consumed but not trackable. VP Supply ($470K) and Irr Supply ($237K) should be the first audit targets.</div>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-title">🏪 Top Vendors by Unreceived Value</div>
+      <table>
+        <tr><th>Vendor</th><th class="num">Value</th><th class="num">%</th><th>Bar</th></tr>
+        <tr><td>VP Supply, Corp</td><td class="num">$470K</td><td class="num">28.1%</td><td><div class="bar-wrap"><div class="bar" style="width:100%"></div></div></td></tr>
+        <tr><td>Irr Supply Center, Inc</td><td class="num">$237K</td><td class="num">14.2%</td><td><div class="bar-wrap"><div class="bar" style="width:50.4%"></div></div></td></tr>
+        <tr><td>Home Depot</td><td class="num">$196K</td><td class="num">11.7%</td><td><div class="bar-wrap"><div class="bar" style="width:41.7%"></div></div></td></tr>
+        <tr><td>City of Buffalo - Permits</td><td class="num">$128K</td><td class="num">7.6%</td><td><div class="bar-wrap"><div class="bar" style="width:27.2%"></div></div></td></tr>
+        <tr><td>T-Mark (Internal)</td><td class="num">$88K</td><td class="num">5.3%</td><td><div class="bar-wrap"><div class="bar" style="width:18.7%"></div></div></td></tr>
+        <tr><td>Generac Power Systems</td><td class="num">$58K</td><td class="num">3.5%</td><td><div class="bar-wrap"><div class="bar" style="width:12.3%"></div></div></td></tr>
+        <tr><td>Amherst Building Permit</td><td class="num">$51K</td><td class="num">3.1%</td><td><div class="bar-wrap"><div class="bar" style="width:10.9%"></div></div></td></tr>
+        <tr><td>F.W. Webb Company</td><td class="num">$44K</td><td class="num">2.6%</td><td><div class="bar-wrap"><div class="bar" style="width:9.3%"></div></div></td></tr>
+        <tr><td>Amazon</td><td class="num">$42K</td><td class="num">2.5%</td><td><div class="bar-wrap"><div class="bar" style="width:8.9%"></div></div></td></tr>
+        <tr><td>Supply House</td><td class="num">$36K</td><td class="num">2.2%</td><td><div class="bar-wrap"><div class="bar" style="width:7.7%"></div></div></td></tr>
+        <tr><td>All other vendors</td><td class="num">$322K</td><td class="num">19.3%</td><td><div class="bar-wrap"><div class="bar" style="width:68.5%"></div></div></td></tr>
+      </table>
+      <div class="insight info">💡 Note: $128K in "City of Buffalo - Permits" and $51K in "Amherst Building Permit" are permit fees — these may represent legitimate open permit applications rather than phantom material POs.</div>
+    </div>
+    <div class="section">
+      <div class="section-title">🏗️ Unreceived POs by Business Unit</div>
+      <table>
+        <tr><th>Business Unit</th><th class="num">Value</th><th class="num">%</th></tr>
+        <tr><td>BF-HVAC Installation - RREP</td><td class="num">$942K</td><td class="num">56.3%</td></tr>
+        <tr><td>BF-Plumbing Service</td><td class="num">$193K</td><td class="num">11.5%</td></tr>
+        <tr><td>BF-Generator Installation</td><td class="num">$120K</td><td class="num">7.2%</td></tr>
+        <tr><td>BF-Electrical Installation</td><td class="num">$90K</td><td class="num">5.4%</td></tr>
+        <tr><td>BF-HVAC Service</td><td class="num">$83K</td><td class="num">5.0%</td></tr>
+        <tr><td>BF-Sewer Installation</td><td class="num">$67K</td><td class="num">4.0%</td></tr>
+        <tr><td>BF-Administrative</td><td class="num">$59K</td><td class="num">3.5%</td></tr>
+        <tr><td>All other BUs</td><td class="num">$119K</td><td class="num">7.1%</td></tr>
+      </table>
+      <div class="insight info">💡 56.3% of open PO exposure is in HVAC Install RREP — consistent with it being the dominant revenue BU. Equipment and supply orders for large HVAC replacements are the most common source of unreceived POs.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">✅ Recommended Actions</div>
+    <table>
+      <tr><th>Priority</th><th>Action</th><th>Impact</th></tr>
+      <tr><td><span class="badge badge-red">HIGH</span></td><td>Audit VP Supply Corp ($470K) and Irr Supply Center ($237K) — request vendor invoices and cross-reference against field delivery records</td><td>Resolves ~42% of open PO exposure ($707K)</td></tr>
+      <tr><td><span class="badge badge-red">HIGH</span></td><td>Separate permit POs ($179K across Buffalo + Amherst) from material POs — permits follow different resolution path</td><td>Reduces material PO exposure by $179K</td></tr>
+      <tr><td><span class="badge badge-yellow">MED</span></td><td>Implement field receiving workflow for HVAC Install RREP technicians — require PO receipt confirmation before job close-out</td><td>Prevents future phantom PO accumulation in dominant BU</td></tr>
+      <tr><td><span class="badge badge-yellow">MED</span></td><td>Review T-Mark internal POs ($88K) — these are likely inter-company transfers that should be reconciled against the warehouse</td><td>Cleans up internal tracking discrepancies</td></tr>
+      <tr><td><span class="badge badge-gray">LOW</span></td><td>Set quarterly PO aging review process — any unreceived PO &gt;90 days triggers an automatic vendor check</td><td>Prevents phantom PO accumulation going forward</td></tr>
+    </table>
+  </div>
+
+</div>
+<footer>T-Mark Plumbing Heating &amp; Cooling · Operational Intelligence · Data from ServiceTitan · Generated March 2026</footer>
+</body>
+</html>

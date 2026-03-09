@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sila Services LLC — Memberships Overview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; font-size: 14px; }
+  nav { background: #1a1a2e; color: white; padding: 0 36px; display: flex; align-items: center; height: 52px; gap: 16px; }
+  nav a { color: #22d3ee; text-decoration: none; font-size: 13px; opacity: 0.85; }
+  nav a:hover { opacity: 1; }
+  nav span { color: rgba(255,255,255,0.3); }
+  .header { background: linear-gradient(135deg, #0e3a4a 0%, #06b6d4 100%); color: white; padding: 44px 36px 36px; }
+  .header-inner { max-width: 1200px; margin: 0 auto; }
+  .header h1 { font-size: 30px; font-weight: 800; }
+  .header h1 span { color: #cffafe; }
+  .header p { font-size: 14px; opacity: 0.85; margin-top: 8px; }
+  .header-meta { font-size: 12px; opacity: 0.65; margin-top: 6px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+  .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 36px; }
+  .kpi { background: white; border-radius: 10px; padding: 18px 16px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 3px solid #06b6d4; }
+  .kpi-val { font-size: 24px; font-weight: 800; color: #0e3a4a; }
+  .kpi-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: #7f8c8d; margin-top: 4px; font-weight: 600; }
+  .kpi-sub { font-size: 11px; color: #bdc3c7; margin-top: 3px; }
+  .kpi.red { border-top-color: #e74c3c; } .kpi.red .kpi-val { color: #c0392b; }
+  .kpi.green { border-top-color: #27ae60; } .kpi.green .kpi-val { color: #1e8449; }
+  .kpi.yellow { border-top-color: #f39c12; } .kpi.yellow .kpi-val { color: #d35400; }
+  .section { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 24px; }
+  .section-title { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; padding-bottom: 10px; border-bottom: 2px solid #e0f7fa; display: flex; align-items: center; gap: 8px; }
+  .section-sub { font-size: 12px; color: #95a5a6; font-weight: 400; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  @media(max-width:768px) { .two-col { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+  th { background: #e0f7fa; color: #0e3a4a; font-weight: 700; padding: 9px 10px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 9px 10px; border-bottom: 1px solid #f4f6f7; color: #2c3e50; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #e0f7fa; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+  .badge-green { background: #eafaf1; color: #1e8449; }
+  .badge-red { background: #fdedec; color: #c0392b; }
+  .badge-yellow { background: #fef9e7; color: #b7950b; }
+  .badge-gray { background: #f4f6f7; color: #7f8c8d; }
+  .badge-orange { background: #fef5e7; color: #d35400; }
+  .badge-blue { background: #e0f7fa; color: #0e3a4a; }
+  .bar-wrap { background: #f0f2f5; border-radius: 4px; height: 8px; margin-top: 4px; }
+  .bar { height: 8px; border-radius: 4px; background: #06b6d4; }
+  .bar.red { background: #e74c3c; }
+  .insight { display: flex; gap: 10px; padding: 12px 14px; border-radius: 8px; margin-top: 10px; font-size: 13px; line-height: 1.5; }
+  .insight.warn { background: #fef5e7; border-left: 3px solid #f39c12; }
+  .insight.info { background: #e0f7fa; border-left: 3px solid #06b6d4; }
+  .insight.danger { background: #fdedec; border-left: 3px solid #e74c3c; }
+  .insight.success { background: #eafaf1; border-left: 3px solid #27ae60; }
+  .data-note { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px 16px; font-size: 13px; color: #566573; line-height: 1.7; margin-bottom: 24px; }
+  .recovery-box { background: linear-gradient(135deg, #eafaf1, #d5f5e3); border: 1px solid #a9dfbf; border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; }
+  .recovery-box h3 { font-size: 15px; font-weight: 700; color: #1e8449; margin-bottom: 12px; }
+  .recovery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .recovery-item { text-align: center; }
+  .recovery-val { font-size: 22px; font-weight: 800; color: #1e8449; }
+  .recovery-lbl { font-size: 11px; color: #27ae60; font-weight: 600; margin-top: 3px; }
+  footer { background: #1a1a2e; color: rgba(255,255,255,0.4); text-align: center; padding: 20px; font-size: 12px; margin-top: 20px; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../../index.html">← Sila Brands</a><span>/</span>
+  <a href="index.html">Sila Services LLC</a><span>/</span>
+  <span style="color:rgba(255,255,255,0.7)">Memberships Overview</span>
+</nav>
+<div class="header">
+  <div class="header-inner">
+    <h1>Sila Services LLC — <span>Memberships Overview</span></h1>
+    <p>Active member base · ARR composition · Warranty vs. recurring breakdown · Re-engagement pool</p>
+    <div class="header-meta">55,160 total membership records · 3 files joined · All statuses included · Mar 2024–Mar 2026</div>
+  </div>
+</div>
+<div class="container">
+
+  <div class="data-note">
+    ℹ️ <strong>Data context:</strong> Memberships were exported as 3 separate files — Active Memberships, Expired &amp; Cancelled Memberships, and Suspended &amp; Deleted Memberships — and have been joined for analysis. Total records: 55,160 across all statuses. Of 10,305 "Active" records, <strong>6,123 (59.4%) are One Time billing</strong> (warranty products with no recurring revenue). True recurring ARR comes from the 4,182 Monthly, Annual, and Quarterly members.
+  </div>
+
+  <div class="kpi-strip">
+    <div class="kpi green">
+      <div class="kpi-val">10,305</div>
+      <div class="kpi-lbl">Active Members</div>
+      <div class="kpi-sub">6,123 warranty / 4,182 recurring</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">4,182</div>
+      <div class="kpi-lbl">Recurring Billing</div>
+      <div class="kpi-sub">Monthly + Annual + Quarterly</div>
+    </div>
+    <div class="kpi yellow">
+      <div class="kpi-val">38,988</div>
+      <div class="kpi-lbl">Expired / Canceled</div>
+      <div class="kpi-sub">Re-engagement opportunity</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">5,865</div>
+      <div class="kpi-lbl">Suspended / Deleted</div>
+      <div class="kpi-sub">Investigate status</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">55,160</div>
+      <div class="kpi-lbl">Total Records</div>
+      <div class="kpi-sub">3 files combined</div>
+    </div>
+    <div class="kpi red">
+      <div class="kpi-val">6,123</div>
+      <div class="kpi-lbl">One-Time Billing</div>
+      <div class="kpi-sub">Warranty / no ARR</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Membership Status Breakdown</div>
+    <div class="insight warn">
+      38,988 expired and canceled memberships is an enormous re-engagement pool — nearly 4x the active base. If even 5% of recently expired members can be re-activated through targeted outreach, that would add ~1,950 members and meaningfully grow recurring revenue. A win-back campaign targeting expired members within the past 12 months should be a top priority.
+    </div>
+    <table>
+      <thead><tr><th>Status</th><th class="num">Count</th><th class="num">% of Total</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-green">Active</span></td><td class="num">10,305</td><td class="num">18.7%</td></tr>
+        <tr><td><span class="badge badge-yellow">Expired / Canceled</span></td><td class="num">38,988</td><td class="num">70.7%</td></tr>
+        <tr><td><span class="badge badge-gray">Suspended / Deleted</span></td><td class="num">5,865</td><td class="num">10.6%</td></tr>
+        <tr style="font-weight:600;border-top:2px solid #e0f7fa;"><td>Total (3 files)</td><td class="num">55,160</td><td class="num">100%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="section">
+      <div class="section-title">Active Member Billing Cadence</div>
+      <div class="insight info">
+        59.4% of active members are "One Time" billing — these are warranty and install products with no recurring revenue. The true recurring base of 4,182 members is strong relative to the brand's size.
+      </div>
+      <table>
+        <thead><tr><th>Billing Cadence</th><th class="num">Members</th><th class="num">ARR Contribution</th></tr></thead>
+        <tbody>
+          <tr><td>One Time (Warranty / Install)</td><td class="num">6,123</td><td class="num">$0</td></tr>
+          <tr><td>Monthly</td><td class="num">3,991</td><td class="num">High (annualized)</td></tr>
+          <tr><td>Annual</td><td class="num">189</td><td class="num">Moderate</td></tr>
+          <tr><td>Quarterly</td><td class="num">2</td><td class="num">Minimal</td></tr>
+          <tr style="font-weight:600;border-top:2px solid #e0f7fa;"><td>Total Active</td><td class="num">10,305</td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+      <div class="insight warn" style="margin-top:10px;">
+        Monthly billing amounts from the ServiceTitan export reflect per-period amounts; annualized ARR requires multiplying monthly members × 12. The raw billing total extracted was $273,676 — true ARR is estimated at $1.5M–$2.0M when annualized.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Top Active Membership Types</div>
+      <table>
+        <thead><tr><th>Membership Type</th><th class="num">Active Count</th></tr></thead>
+        <tbody>
+          <tr><td>Maintenance Agreement HEAT/AC</td><td class="num">1,546</td></tr>
+          <tr><td>Install Warranty</td><td class="num">1,397</td></tr>
+          <tr><td>Extended Warranty HEAT/AC</td><td class="num">1,319</td></tr>
+          <tr><td>Other types</td><td class="num">6,043</td></tr>
+          <tr style="font-weight:600;border-top:2px solid #e0f7fa;"><td>Total Active</td><td class="num">10,305</td></tr>
+        </tbody>
+      </table>
+      <div class="insight info" style="margin-top:10px;">
+        Maintenance Agreement plans (HEAT/AC at 1,546) represent the highest-value recurring members and should be the model for converting warranty holders at their plan expiration.
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Recommended Actions</div>
+    <table>
+      <thead><tr><th>Action</th><th>Priority</th><th>Rationale</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Launch win-back campaign for recently expired members (within 12 months of expiration) — 38,988 expired/canceled is a large pool</td>
+          <td><span class="badge badge-red">High</span></td>
+          <td>5% re-activation rate = ~1,950 members; existing customer relationships dramatically lower cost of re-acquisition vs. new acquisition</td>
+        </tr>
+        <tr>
+          <td>Convert One Time warranty holders (6,123) to recurring Maintenance Agreement plans at warranty service touchpoints</td>
+          <td><span class="badge badge-red">High</span></td>
+          <td>Converting 10% of warranty holders to recurring plans could add ~600 recurring members and significant ARR; warranty expiration is a high-intent conversion moment</td>
+        </tr>
+        <tr>
+          <td>Clarify the 5,865 "Suspended / Deleted" records — determine whether these represent true cancellations, data artifacts, or re-engageable members</td>
+          <td><span class="badge badge-yellow">Medium</span></td>
+          <td>10.6% of total records in suspended/deleted status is unusual; some may be improperly classified or recoverable</td>
+        </tr>
+        <tr>
+          <td>Analyze the ARR per member for Monthly members — annualize the $273K raw billing figure and benchmark against other Sila brands</td>
+          <td><span class="badge badge-yellow">Medium</span></td>
+          <td>Understanding true ARR per member tier enables pricing optimization and a clearer target for membership growth</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<footer>Sila Services LLC · Memberships Overview · Data from ServiceTitan · Generated March 2026</footer>
+</body>
+</html>

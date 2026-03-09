@@ -1,104 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sila Services LLC – Sila Brands</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: #0f172a; color: #f1f5f9;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      min-height: 100vh; display: flex; flex-direction: column;
-    }
-    nav {
-      background: rgba(15,23,42,0.95); backdrop-filter: blur(12px);
-      border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 100; padding: 0 2rem;
-    }
-    .nav-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between; height: 60px;
-    }
-    .nav-brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
-    .nav-logo  { font-size: 1.1rem; font-weight: 800; letter-spacing: 0.05em; color: #06b6d4; }
-    .nav-sep   { color: #94a3b8; font-size: 0.85rem; }
-    .nav-sub   { font-size: 0.85rem; color: #94a3b8; }
-    .nav-back  {
-      font-size: 0.85rem; color: #94a3b8; text-decoration: none;
-      display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;
-    }
-    .nav-back:hover { color: #06b6d4; }
-    .hero {
-      background: linear-gradient(135deg, #083344 0%, #0f172a 50%, #0f172a 100%);
-      border-bottom: 1px solid #334155; padding: 3rem 2rem 2.5rem;
-    }
-    .hero-inner { max-width: 1200px; margin: 0 auto; }
-    .pending-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: rgba(100,116,139,0.15); border: 1px solid rgba(100,116,139,0.35);
-      border-radius: 50px; padding: 0.35rem 1rem;
-      font-size: 0.8rem; font-weight: 600; color: #94a3b8;
-      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.2rem;
-    }
-    h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.15; margin-bottom: 0.6rem; }
-    h1 span { color: #06b6d4; }
-    .hero-sub { font-size: 1rem; color: #94a3b8; max-width: 560px; line-height: 1.6; }
-    .content { flex: 1; display: flex; align-items: center; justify-content: center; }
-    .coming-soon { text-align: center; padding: 4rem 2rem; max-width: 520px; }
-    .cs-icon  { font-size: 4rem; margin-bottom: 1.5rem; opacity: 0.4; }
-    .cs-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: #94a3b8; }
-    .cs-body  { font-size: 0.95rem; color: #64748b; line-height: 1.6; margin-bottom: 2rem; }
-    .cs-btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: rgba(6,182,212,0.12); border: 1px solid rgba(6,182,212,0.3);
-      color: #06b6d4; text-decoration: none; border-radius: 8px;
-      padding: 0.7rem 1.5rem; font-size: 0.9rem; font-weight: 600; transition: background 0.2s;
-    }
-    .cs-btn:hover { background: rgba(6,182,212,0.2); }
-    footer {
-      border-top: 1px solid #334155; padding: 1.5rem 2rem;
-      text-align: center; color: #64748b; font-size: 0.78rem;
-    }
-    footer a { color: #06b6d4; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sila Services LLC — Operational Intelligence</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #0f172a; color: #e2e8f0; font-size: 14px; }
+  nav { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); padding: 0 36px; display: flex; align-items: center; height: 54px; gap: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  nav a { color: #22d3ee; text-decoration: none; font-size: 13px; opacity: 0.85; }
+  nav a:hover { opacity: 1; }
+  nav span { color: rgba(255,255,255,0.2); }
+  :root { --accent: #06b6d4; --accent2: #22d3ee; }
+  .hero { background: linear-gradient(135deg, #0a1628 0%, #0e3a4a 50%, #0891b2 100%); padding: 56px 36px 48px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(6,182,212,0.15) 0%, transparent 70%); }
+  .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+  .brand-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(39,174,96,0.15); border: 1px solid rgba(39,174,96,0.35); color: #2ecc71; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 18px; }
+  .brand-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #2ecc71; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .hero h1 { font-size: 38px; font-weight: 800; color: white; letter-spacing: 0.5px; }
+  .hero h1 span { color: var(--accent2); }
+  .hero-sub { font-size: 15px; color: rgba(255,255,255,0.65); margin-top: 10px; max-width: 600px; line-height: 1.6; }
+  .data-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+  .data-tag { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); padding: 4px 12px; border-radius: 16px; font-size: 11px; font-weight: 600; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 36px 24px; }
+  .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 40px; }
+  .kpi { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px 16px; text-align: center; border-top: 3px solid var(--accent); }
+  .kpi-val { font-size: 26px; font-weight: 800; color: white; }
+  .kpi-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; color: rgba(255,255,255,0.45); margin-top: 5px; font-weight: 600; }
+  .kpi-sub { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 3px; }
+  .kpi.warn { border-top-color: #e74c3c; }
+  .kpi.warn .kpi-val { color: #fc8181; }
+  .kpi.good { border-top-color: #27ae60; }
+  .kpi.good .kpi-val { color: #4ade80; }
+  .section-label { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+  .reports-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .report-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 22px; text-decoration: none; color: inherit; display: block; transition: all 0.15s; }
+  .report-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+  .rc-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px; }
+  .rc-title { font-size: 16px; font-weight: 700; color: white; }
+  .rc-desc { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 5px; line-height: 1.5; }
+  .rc-stats { display: flex; gap: 14px; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.07); }
+  .rc-stat-val { font-size: 18px; font-weight: 700; color: white; }
+  .rc-stat-lbl { font-size: 10px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+  .rc-arrow { margin-top: 14px; color: var(--accent2); font-size: 13px; font-weight: 700; }
+  .findings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; margin-bottom: 40px; }
+  .finding { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 18px; }
+  .finding.red { border-left: 3px solid #e74c3c; }
+  .finding.yellow { border-left: 3px solid #f39c12; }
+  .finding.green { border-left: 3px solid #27ae60; }
+  .finding-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 7px; }
+  .finding.red .finding-label { color: #fc8181; }
+  .finding.yellow .finding-label { color: #fbbf24; }
+  .finding.green .finding-label { color: #4ade80; }
+  .finding-text { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+  footer { background: rgba(0,0,0,0.3); color: rgba(255,255,255,0.25); text-align: center; padding: 22px; font-size: 12px; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); }
+</style>
 </head>
 <body>
+
 <nav>
-  <div class="nav-inner">
-    <a class="nav-brand" href="../../index.html">
-      <span class="nav-logo">SILA</span>
-      <span class="nav-sep">/</span>
-      <span class="nav-sub">Sila Services LLC</span>
-    </a>
-    <a class="nav-back" href="../../index.html">← Back to All Brands</a>
-  </div>
+  <a href="../../index.html">← Sila Brands</a>
+  <span>/</span>
+  <span style="color:rgba(255,255,255,0.7)">Sila Services LLC</span>
 </nav>
 
 <div class="hero">
   <div class="hero-inner">
-    <div class="pending-badge">⏳ Coming Soon</div>
+    <div class="brand-badge"><span class="dot"></span> Active Brand</div>
     <h1>Sila Services <span>LLC</span></h1>
-    <p class="hero-sub">Mid-Atlantic home services — data analysis pending upload of ServiceTitan exports.</p>
-  </div>
-</div>
-
-<div class="content">
-  <div class="coming-soon">
-    <div class="cs-icon">📋</div>
-    <div class="cs-title">Reports Not Yet Available</div>
-    <div class="cs-body">
-      ServiceTitan data exports for Sila Services LLC have not been uploaded yet.
-      Once the jobs, inventory, estimates, and membership files are provided,
-      the four operational intelligence reports will be generated and linked here.
+    <div class="hero-sub">DC Metro-area multi-trade home services company delivering HVAC, plumbing, and electrical. Industry-leading margins with the cleanest open job queue in the portfolio.</div>
+    <div class="data-tags">
+      <span class="data-tag">93,410 Jobs</span>
+      <span class="data-tag">328,182 Inventory Lines (2 files)</span>
+      <span class="data-tag">153,098 Estimates</span>
+      <span class="data-tag">55,160 Membership Records (3 files)</span>
+      <span class="data-tag">Mar 2024–Mar 2026</span>
     </div>
-    <a class="cs-btn" href="../../index.html">← Return to Sila Home</a>
   </div>
 </div>
 
-<footer>
-  <a href="../../index.html">← Sila Brands Home</a> &nbsp;|&nbsp;
-  Sila Brands Operational Intelligence &nbsp;|&nbsp; March 2026
-</footer>
+<div class="container">
+
+  <div class="kpi-strip">
+    <div class="kpi good">
+      <div class="kpi-val">$82.7M</div>
+      <div class="kpi-lbl">Revenue (2yr)</div>
+      <div class="kpi-sub">Completed jobs</div>
+    </div>
+    <div class="kpi good">
+      <div class="kpi-val">70.7%</div>
+      <div class="kpi-lbl">Gross Margin</div>
+      <div class="kpi-sub">Best in portfolio</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">$1.17M</div>
+      <div class="kpi-lbl">Open POs</div>
+      <div class="kpi-sub">Manageable exposure</div>
+    </div>
+    <div class="kpi warn">
+      <div class="kpi-val">$445.9M</div>
+      <div class="kpi-lbl">Open Estimates</div>
+      <div class="kpi-sub">54.3% no follow-up</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">25.0%</div>
+      <div class="kpi-lbl">Estimate Win Rate</div>
+      <div class="kpi-sub">38,234 sold</div>
+    </div>
+    <div class="kpi good">
+      <div class="kpi-val">0</div>
+      <div class="kpi-lbl">Stale Jobs</div>
+      <div class="kpi-sub">Cleanest in portfolio</div>
+    </div>
+  </div>
+
+  <div class="section-label">Reports</div>
+  <div class="reports-grid">
+    <a href="jobs_overview.html" class="report-card">
+      <div class="rc-icon" style="background:linear-gradient(135deg,#0e3a4a,#06b6d4)">📋</div>
+      <div class="rc-title">Jobs Overview</div>
+      <div class="rc-desc">Revenue by BU, 70.7% GM, clean open queue, warranty margin context, cancellation patterns</div>
+      <div class="rc-stats">
+        <div><div class="rc-stat-val">$82.7M</div><div class="rc-stat-lbl">Revenue</div></div>
+        <div><div class="rc-stat-val">70.7%</div><div class="rc-stat-lbl">GM</div></div>
+        <div><div class="rc-stat-val">78,712</div><div class="rc-stat-lbl">Completed</div></div>
+      </div>
+      <div class="rc-arrow">View report →</div>
+    </a>
+    <a href="inventory_overview.html" class="report-card">
+      <div class="rc-icon" style="background:linear-gradient(135deg,#145a32,#27ae60)">📦</div>
+      <div class="rc-title">Inventory Overview</div>
+      <div class="rc-desc">$1.17M unreceived POs · Ferguson HVAC + Lennox = 52% exposure · Phantom PO pattern</div>
+      <div class="rc-stats">
+        <div><div class="rc-stat-val">$1.17M</div><div class="rc-stat-lbl">Open POs</div></div>
+        <div><div class="rc-stat-val">2,275</div><div class="rc-stat-lbl">Unique POs</div></div>
+        <div><div class="rc-stat-val">~99%</div><div class="rc-stat-lbl">&gt;180 days</div></div>
+      </div>
+      <div class="rc-arrow">View report →</div>
+    </a>
+    <a href="estimates_overview.html" class="report-card">
+      <div class="rc-icon" style="background:linear-gradient(135deg,#6c3483,#a569bd)">📝</div>
+      <div class="rc-title">Estimates Overview</div>
+      <div class="rc-desc">$445.9M open pipeline · 54.3% zero follow-up · 25% win rate · $4.5M–$11M recovery opportunity</div>
+      <div class="rc-stats">
+        <div><div class="rc-stat-val">$445.9M</div><div class="rc-stat-lbl">Open Pipeline</div></div>
+        <div><div class="rc-stat-val">25.0%</div><div class="rc-stat-lbl">Win Rate</div></div>
+        <div><div class="rc-stat-val">54.3%</div><div class="rc-stat-lbl">0 Follow-ups</div></div>
+      </div>
+      <div class="rc-arrow">View report →</div>
+    </a>
+    <a href="memberships_overview.html" class="report-card">
+      <div class="rc-icon" style="background:linear-gradient(135deg,#1a5276,#2e86c1)">🏷️</div>
+      <div class="rc-title">Memberships Overview</div>
+      <div class="rc-desc">10,305 active members · 3 files joined · 4,182 recurring billing · 38,988 expired/canceled for re-engagement</div>
+      <div class="rc-stats">
+        <div><div class="rc-stat-val">10,305</div><div class="rc-stat-lbl">Active</div></div>
+        <div><div class="rc-stat-val">4,182</div><div class="rc-stat-lbl">Recurring</div></div>
+        <div><div class="rc-stat-val">38,988</div><div class="rc-stat-lbl">Exp/Cancel</div></div>
+      </div>
+      <div class="rc-arrow">View report →</div>
+    </a>
+  </div>
+
+  <div class="section-label">Key Findings &amp; Actions</div>
+  <div class="findings-grid">
+    <div class="finding red">
+      <div class="finding-label">🚨 Critical — Estimates Follow-Up</div>
+      <div class="finding-text">54.3% of 110,938 open estimates have zero follow-up contacts recorded — $445.9M in pipeline that has never been re-contacted since the initial estimate. The Sales-HVAC BU alone holds $235.7M across a large open estimate pool. A 2% close rate on estimates under 1 year would add $4.5M+ incremental revenue without additional marketing spend.</div>
+    </div>
+    <div class="finding yellow">
+      <div class="finding-label">⚠️ Attention — Outstanding Balance</div>
+      <div class="finding-text">$543,843 outstanding across 116 completed jobs. Completed jobs with unpaid balances represent work delivered but not fully collected. A systematic AR follow-up on these 116 accounts is needed — most are likely invoiced and contactable, making this a high-probability recovery.</div>
+    </div>
+    <div class="finding yellow">
+      <div class="finding-label">⚠️ Attention — Membership ARR Mix</div>
+      <div class="finding-text">Of 10,305 active members, 6,123 (59.4%) are One Time billing — warranty and install products with no recurring revenue. True recurring base is 4,182 members. The 38,988 expired and canceled membership pool represents a large re-engagement opportunity, particularly for cross-sell to recurring maintenance plans.</div>
+    </div>
+    <div class="finding green">
+      <div class="finding-label">✅ Strength — Gross Margin</div>
+      <div class="finding-text">70.7% gross margin across $82.7M in completed job revenue is the strongest in the Sila portfolio. HVAC Install RREP drives $58.7M at 68.6% GM. The HVAC Service BU delivers 80.2% GM and Plumbing 82.1% GM — indicating strong pricing discipline and efficient field operations throughout the organization.</div>
+    </div>
+    <div class="finding green">
+      <div class="finding-label">✅ Strength — Job Queue Health</div>
+      <div class="finding-text">Zero stale open jobs detected — all 2,352 current open jobs (50 Hold, 2,259 Scheduled, 43 In Progress) are active and current. This is the cleanest open job queue in the entire Sila portfolio and indicates strong dispatch hygiene, scheduling discipline, and job closure practices.</div>
+    </div>
+    <div class="finding yellow">
+      <div class="finding-label">⚠️ Attention — Inventory POs</div>
+      <div class="finding-text">$1.17M in unreceived POs with ~99% over 180 days old — consistent with the portfolio-wide pattern of goods received in-field but not marked received in ServiceTitan. While the lowest absolute exposure in the portfolio, the same workflow gap exists. Ferguson HVAC ($420K) and Lennox ($193K) are the top vendors to audit.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Sila Services LLC · Operational Intelligence · Data from ServiceTitan · Generated March 2026</footer>
 </body>
 </html>
