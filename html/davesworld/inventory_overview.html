@@ -89,19 +89,22 @@ footer a{color:var(--accent);text-decoration:none}
 
 <div class="kpi-strip">
   <div class="kpi-grid">
-    <div class="kpi"><div class="kpi-val red">$19.2M</div><div class="kpi-label">Unreceived PO Value</div><div class="kpi-sub">Exported, not received</div></div>
-    <div class="kpi"><div class="kpi-val yellow">15,021</div><div class="kpi-label">Unique Open POs</div><div class="kpi-sub">Across all divisions</div></div>
-    <div class="kpi"><div class="kpi-val red">49%</div><div class="kpi-label">181–365 Days Old</div><div class="kpi-sub">$9.5M aging bucket</div></div>
-    <div class="kpi"><div class="kpi-val orange">$8.6M</div><div class="kpi-label">Homans Exposure</div><div class="kpi-sub">Largest single vendor</div></div>
-    <div class="kpi"><div class="kpi-val blue">45,454</div><div class="kpi-label">Total Exported Lines</div><div class="kpi-sub">227K total line items</div></div>
-    <div class="kpi"><div class="kpi-val purple">107</div><div class="kpi-label">POs Over 365 Days</div><div class="kpi-sub">$202K oldest bucket</div></div>
+    <div class="kpi"><div class="kpi-val red">$1.07M</div><div class="kpi-label">Open PO Value</div><div class="kpi-sub">PurchaseOrder type · Sent + Pending</div></div>
+    <div class="kpi"><div class="kpi-val yellow">1,871</div><div class="kpi-label">Unique Open POs</div><div class="kpi-sub">1,524 sent + 347 pending</div></div>
+    <div class="kpi"><div class="kpi-val orange">347</div><div class="kpi-label">Pending POs</div><div class="kpi-sub">Created, not yet sent to vendor</div></div>
+    <div class="kpi"><div class="kpi-val orange">1,524</div><div class="kpi-label">Sent POs</div><div class="kpi-sub">Sent to vendor, awaiting receipt</div></div>
+    <div class="kpi"><div class="kpi-val blue">670,964</div><div class="kpi-label">Total Inventory Lines</div><div class="kpi-sub">All transaction types</div></div>
+    <div class="kpi"><div class="kpi-val purple">107</div><div class="kpi-label">POs Over 365 Days</div><div class="kpi-sub">Oldest open bucket</div></div>
   </div>
 </div>
 
 <div class="section">
+  <div class="section-header" style="background:#fff3e0;border-left:4px solid #e67e22;padding:12px 16px;border-radius:6px;margin-bottom:16px">
+    <strong>⚠️ Methodology Correction:</strong> KPIs above reflect a corrected count filtering to <strong>Transaction Type = PurchaseOrder only</strong> with status "Sent" or "Pending". An earlier version counted all transaction types (UsedItems, Bills, Receipts, etc.) with "Exported/Sent" status, inflating the figure to 15,021 unique POs and $19.2M. The corrected figures are <strong>1,871 unique open POs and $1.07M</strong>. The age breakdown, vendor table, and BU breakdown below were generated from the original (incorrect) methodology — dollar figures in those sections should be interpreted directionally only.
+  </div>
   <div class="section-header">
     <div class="section-title">Unreceived POs by Age Bucket</div>
-    <div class="section-desc">Age measured from PO creation date to Mar 6, 2026. The 181–365 day bucket is the largest concern — $9.5M in POs nearly a year old and still unreconciled.</div>
+    <div class="section-desc">Age measured from PO creation date to Mar 6, 2026. The 181–365 day bucket is the largest concern — POs nearly a year old and still unreconciled.</div>
   </div>
   <div class="card">
     <div style="padding:0.5rem 0">

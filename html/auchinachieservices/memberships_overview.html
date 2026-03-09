@@ -98,10 +98,10 @@
       <div class="kpi-value">$621K</div>
       <div class="kpi-sub">$271K balance remaining</div>
     </div>
-    <div class="kpi red">
-      <div class="kpi-label">Active — Never Billed</div>
-      <div class="kpi-value">971</div>
-      <div class="kpi-sub">$133K potential revenue at risk</div>
+    <div class="kpi orange">
+      <div class="kpi-label">Active — Overdue Never-Billed</div>
+      <div class="kpi-value">26</div>
+      <div class="kpi-sub">945 more are normal annual (future billing date)</div>
     </div>
   </div>
 
@@ -125,7 +125,7 @@
   </div>
 
   <div class="insight-box">
-    <strong>Context:</strong> In ServiceTitan, memberships generate recurring deferred revenue as the contract is earned over time. The <em>Deferred Revenue Balance</em> represents what's been invoiced but not yet fully "earned" through service delivery. <em>Active memberships that have never been billed</em> indicate either a billing setup failure or that the first billing cycle hasn't triggered yet. Memberships should always be associated with a valid payment method and a next billing date.
+    <strong>Context:</strong> In ServiceTitan, memberships generate recurring deferred revenue as the contract is earned over time. The <em>Deferred Revenue Balance</em> represents what's been invoiced but not yet fully "earned" through service delivery. <em>Active memberships that have never been billed</em> on a recurring basis may simply be annual memberships that were paid in full at point-of-sale — their <em>Last Billing Invoice Date</em> will be empty until the first annual renewal triggers. This is expected behavior. A true billing anomaly exists only when the <em>Next Billing Date</em> has already passed and no billing has occurred.
   </div>
 
   <!-- SECTION 1: ACTIVE MEMBERSHIP HEALTH -->
@@ -197,9 +197,9 @@
             <td>$2,911 in overdue billing</td>
           </tr>
           <tr>
-            <td>Active — NEVER billed</td>
-            <td class="number flag-red">971</td>
-            <td>$133,659 at risk</td>
+            <td>Active — never billed (total)</td>
+            <td class="number">971</td>
+            <td>945 normal annual (future billing date) · 26 truly overdue</td>
           </tr>
           <tr>
             <td>Active — no payment method</td>
@@ -214,9 +214,9 @@
   <!-- ANOMALY: NEVER BILLED -->
   <div class="section-title">Section 2 — Key Anomalies Requiring Action</div>
 
-  <div class="anomaly-card">
-    <div class="anomaly-title">🚨 Anomaly #1 — 971 Active Memberships Never Billed ($133,659 potential revenue)</div>
-    <p style="font-size:13px">Nearly half (47.2%) of all active memberships have never had a billing event. Of these, 971 have a billing template amount greater than $0, meaning ServiceTitan knows they should be billed — but hasn't yet. These are predominantly <strong>Annual billing cadence</strong> memberships sold within the last 12 months, so many may simply not have reached their first anniversary. However, older ones (sold 6–12 months ago) should be investigated for setup errors. Sample of unbilled members:</p>
+  <div class="anomaly-card" style="border-color:#e67e22;background:#fffbf5;">
+    <div class="anomaly-title" style="color:#d35400;">ℹ️ Finding #1 — 971 Active Memberships with No Recurring Billing History (26 truly overdue)</div>
+    <p style="font-size:13px"><strong>Corrected analysis:</strong> Of the 971 active memberships with a billing template but no Last Billing Invoice Date, <strong>945 (97.3%) have a future Next Billing Date</strong> — these are normal annual memberships paid at point-of-sale. The customer paid upfront; their first annual renewal hasn't arrived yet. Only <strong>26 have a Next Billing Date already in the past</strong> — these are genuinely overdue and need follow-up. The original analysis flagged all 971 as anomalies; the corrected view shows the issue is much smaller. Sample of the 971 (most are annual memberships within their first year):</p>
     <table style="margin-top:12px">
       <thead><tr><th>Customer Name</th><th>Membership Type</th><th>Billing Template</th><th>Billing Cadence</th><th>Sold On</th></tr></thead>
       <tbody>
@@ -232,7 +232,7 @@
         <tr><td>Mr. Nwugwo</td><td>Auchinachie Advantage</td><td class="number">$169.00</td><td>Annual</td><td>Feb 9, 2026</td></tr>
       </tbody>
     </table>
-    <p style="font-size:12px;color:#e67e22;margin-top:10px">Members sold in March–May 2025 (like Ajen Lewis, Alex Torres) should have received their first annual billing by now. These need to be checked for payment method setup issues or missing billing triggers in ServiceTitan.</p>
+    <p style="font-size:12px;color:#2980b9;margin-top:10px"><strong>Context:</strong> Members like Ajen Lewis (sold Mar 18, 2025) and Alex Torres (sold May 16, 2025) are just now approaching their first annual renewal — this is expected behavior, not a billing failure. For the 26 with a past Next Billing Date, those members' renewal dates have passed and their recurring charge hasn't processed — those should be individually reviewed in ServiceTitan.</p>
   </div>
 
   <div class="anomaly-card">
@@ -470,7 +470,7 @@
         </div>
         <div style="background:#fde8e8;border-radius:6px;padding:12px 14px;margin-bottom:12px;border-left:3px solid #e74c3c">
           <strong style="color:#c0392b">🚨 Critical Issues</strong><br>
-          <span style="font-size:12px">971 active members never billed ($133K). 4 members with expired cards. 4 active accounts with "MOVED" names. 27 past-due billing dates. These are immediate operational fixes needed in ServiceTitan.</span>
+          <span style="font-size:12px">26 active members with overdue never-billed status (945 more are normal annual memberships within first year). 4 members with expired cards. 4 active accounts with "MOVED" names. 27 past-due billing dates. These are immediate operational fixes needed in ServiceTitan.</span>
         </div>
         <div style="background:#fef3e2;border-radius:6px;padding:12px 14px;margin-bottom:12px;border-left:3px solid #e67e22">
           <strong style="color:#d35400">⚠️ Attrition Concern</strong><br>

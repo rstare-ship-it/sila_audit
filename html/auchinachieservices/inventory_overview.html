@@ -65,34 +65,37 @@
       <div class="kpi-sub">All inventory activity</div>
     </div>
     <div class="kpi red">
-      <div class="kpi-label">Unreceived PO Lines</div>
-      <div class="kpi-value">64,848</div>
-      <div class="kpi-sub">Status: Exported (sent, not received)</div>
+      <div class="kpi-label">Open PO Lines</div>
+      <div class="kpi-value">17,546</div>
+      <div class="kpi-sub">PurchaseOrder type · Exported + Pending</div>
     </div>
     <div class="kpi red">
-      <div class="kpi-label">Unique Unreceived POs</div>
-      <div class="kpi-value">15,158</div>
-      <div class="kpi-sub">Distinct purchase orders</div>
+      <div class="kpi-label">Unique Open POs</div>
+      <div class="kpi-value">4,143</div>
+      <div class="kpi-sub">4,055 sent to vendor + 88 pending</div>
     </div>
     <div class="kpi red">
-      <div class="kpi-label">Total PO Value — Not Received</div>
-      <div class="kpi-value">$7.5M</div>
+      <div class="kpi-label">Total Open PO Value</div>
+      <div class="kpi-value">$2.1M</div>
       <div class="kpi-sub">At risk / unconfirmed delivery</div>
     </div>
     <div class="kpi orange">
-      <div class="kpi-label">POs Over 90 Days Old</div>
-      <div class="kpi-value">12,597</div>
-      <div class="kpi-sub">83.1% of all unreceived POs</div>
+      <div class="kpi-label">Pending POs</div>
+      <div class="kpi-value">88</div>
+      <div class="kpi-sub">Created, not yet sent to vendor</div>
     </div>
     <div class="kpi orange">
-      <div class="kpi-label">Overdue POs</div>
+      <div class="kpi-label">Sent/Exported POs</div>
       <div class="kpi-value">4,055</div>
-      <div class="kpi-sub">Past Required By Date</div>
+      <div class="kpi-sub">Sent to vendor, awaiting receipt</div>
     </div>
   </div>
 
   <div class="insight-box">
-    <strong>Context:</strong> In ServiceTitan, a Purchase Order moves from <em>Pending</em> → <em>Exported</em> (sent to vendor) → <em>Received</em>. POs sitting in "Exported" status have been sent out but never marked as received in the system. This can mean (1) the goods were physically received but the PO was never closed in ServiceTitan, (2) the vendor hasn't shipped, or (3) the order was partially or incorrectly fulfilled. Either way, these represent unresolved open commitments that affect inventory accuracy and cost tracking.
+    <strong>Context:</strong> In ServiceTitan, a Purchase Order moves from <em>Pending</em> → <em>Exported/Sent</em> (sent to vendor) → <em>Received</em>. POs sitting in "Exported" or "Sent" status have been sent out but never marked as received in the system. This can mean (1) the goods were physically received but the PO was never closed in ServiceTitan, (2) the vendor hasn't shipped, or (3) the order was partially or incorrectly fulfilled. Either way, these represent unresolved open commitments that affect inventory accuracy and cost tracking.
+  </div>
+  <div class="insight-box" style="border-left-color:#e67e22">
+    <strong>⚠️ Methodology Note:</strong> KPIs above reflect a corrected count filtering to <strong>Transaction Type = PurchaseOrder only</strong>. An earlier version of this analysis counted all transaction types (UsedItems, Bills, Receipts, etc.) with "Exported" status, which inflated the unique PO count to 15,158 and value to $7.5M. The corrected figures are 4,143 unique open POs and $2.1M. The detailed vendor, age, and business unit breakdowns below were generated from the original analysis and should be interpreted directionally — the relative rankings are likely similar but the absolute dollar figures may differ.
   </div>
 
   <!-- SECTION: AGE ANALYSIS -->

@@ -72,16 +72,16 @@
   <div class="header-inner">
     <h1>Sila Services LLC — <span>Inventory Overview</span></h1>
     <p>Unreceived PO analysis · Vendor exposure · Age breakdown · 2 files combined</p>
-    <div class="header-meta">328,182 total rows (2 files) · 2,275 unique open POs · Mar 2024–Mar 2026</div>
+    <div class="header-meta">328,182 total rows (2 files) · 1,423 unique open POs · Mar 2024–Mar 2026</div>
   </div>
 </div>
 <div class="container">
 
   <div class="kpi-strip">
     <div class="kpi red">
-      <div class="kpi-val">$1.17M</div>
+      <div class="kpi-val">$1.41M</div>
       <div class="kpi-lbl">Open PO Value</div>
-      <div class="kpi-sub">Unreceived</div>
+      <div class="kpi-sub">Sent + Pending</div>
     </div>
     <div class="kpi red">
       <div class="kpi-val">~99%</div>
@@ -89,9 +89,9 @@
       <div class="kpi-sub">Portfolio pattern</div>
     </div>
     <div class="kpi">
-      <div class="kpi-val">2,275</div>
+      <div class="kpi-val">1,423</div>
       <div class="kpi-lbl">Unique POs</div>
-      <div class="kpi-sub">Open/unreceived</div>
+      <div class="kpi-sub">653 sent + 770 pending</div>
     </div>
     <div class="kpi">
       <div class="kpi-val">$420K</div>
@@ -111,6 +111,9 @@
   </div>
 
   <div class="section">
+    <div class="insight warn" style="margin-bottom:12px;">
+      <strong>Methodology Note:</strong> Open PO count corrected to <strong>1,423</strong> (was 2,275) and value to <strong>$1.41M</strong> (was $1.17M). Correction reflects filtering to Transaction Type = PurchaseOrder only: 653 Sent (sent to vendor, awaiting receipt) + 770 Pending (created, not yet sent). The value increase reflects that Pending POs were previously undercounted.
+    </div>
     <div class="section-title">⚠️ Phantom PO Assessment</div>
     <div class="insight danger">
       ~99% of open PO value is over 180 days old. With such a high proportion of aged open POs, these are almost certainly goods that were received on-site but the receiving step was never completed in ServiceTitan. This is a critical data hygiene issue — the inventory and AP records do not reflect reality.
@@ -129,7 +132,7 @@
           <tr><td>&lt;180 days</td><td class="num">~$11,700</td><td class="num">~1%</td></tr>
           <tr><td style="color:#d35400;font-weight:600">181–365 days</td><td class="num">~$350,000</td><td class="num">~30%</td></tr>
           <tr><td style="color:#c0392b;font-weight:600">&gt;365 days</td><td class="num">~$810,000</td><td class="num">~69%</td></tr>
-          <tr style="font-weight:600;border-top:2px solid #e0f7fa;"><td>Total</td><td class="num">$1,170,000</td><td class="num">100%</td></tr>
+          <tr style="font-weight:600;border-top:2px solid #e0f7fa;"><td>Total</td><td class="num">$1,410,000</td><td class="num">100%</td></tr>
         </tbody>
       </table>
       <div style="margin-top:14px;">

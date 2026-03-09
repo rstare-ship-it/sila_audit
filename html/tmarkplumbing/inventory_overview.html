@@ -70,23 +70,26 @@
   <div class="header-inner">
     <h1>Inventory <span>Overview</span></h1>
     <p>Unreceived purchase orders, vendor exposure, and business unit breakdown across 2 years of inventory data.</p>
-    <div class="header-meta">269,088 inventory lines · 2 files joined · $1.67M unreceived POs · 6,140 unique PO numbers</div>
+    <div class="header-meta">269,088 inventory lines · 2 files joined · $3.78M open POs · 8,719 unique PO numbers</div>
   </div>
 </div>
 
 <div class="container">
 
   <div class="kpi-strip">
-    <div class="kpi yellow"><div class="kpi-val">$1.67M</div><div class="kpi-lbl">Open PO Value</div><div class="kpi-sub">Unreceived lines</div></div>
-    <div class="kpi"><div class="kpi-val">7,488</div><div class="kpi-lbl">PO Lines</div><div class="kpi-sub">Qty outstanding &gt; 0</div></div>
-    <div class="kpi"><div class="kpi-val">6,140</div><div class="kpi-lbl">Unique POs</div><div class="kpi-sub">Distinct PO numbers</div></div>
-    <div class="kpi yellow"><div class="kpi-val">~99%</div><div class="kpi-lbl">&gt;180 Days</div><div class="kpi-sub">No date data recorded</div></div>
-    <div class="kpi"><div class="kpi-val">VP Supply</div><div class="kpi-lbl">Top Vendor</div><div class="kpi-sub">$470K · 28.1%</div></div>
+    <div class="kpi red"><div class="kpi-val">$3.78M</div><div class="kpi-lbl">Open PO Value</div><div class="kpi-sub">Sent + Pending</div></div>
+    <div class="kpi"><div class="kpi-val">4,711</div><div class="kpi-lbl">Sent POs</div><div class="kpi-sub">Exported/Sent to vendor</div></div>
+    <div class="kpi"><div class="kpi-val">8,719</div><div class="kpi-lbl">Unique POs</div><div class="kpi-sub">4,711 sent + 4,008 pending</div></div>
+    <div class="kpi yellow"><div class="kpi-val">4,008</div><div class="kpi-lbl">Pending POs</div><div class="kpi-sub">Created, not yet sent</div></div>
+    <div class="kpi"><div class="kpi-val">VP Supply</div><div class="kpi-lbl">Top Vendor</div><div class="kpi-sub">$470K · est. 12.4%</div></div>
     <div class="kpi"><div class="kpi-val">HVAC</div><div class="kpi-lbl">Top BU</div><div class="kpi-sub">Install RREP · 56.3%</div></div>
   </div>
 
   <div class="data-note">
-    <strong>📋 Data Note — 2-File Join &amp; Age Data:</strong> Inventory data was exported in two ranges and joined for this analysis. The "unreceived" filter uses PO lines where Quantity Outstanding &gt; 0. <strong>No date sent/created data is populated</strong> for T-Mark's unreceived POs — this is the same "phantom PO" pattern seen across the Sila portfolio, where goods are received in the field but the receiving step is never completed in ServiceTitan. The ~99% &gt;180 days estimate is based on this pattern; an actual audit would require cross-referencing against vendor invoices.
+    <strong>📋 Data Note — 2-File Join &amp; Age Data:</strong> Inventory data was exported in two ranges and joined for this analysis. Open PO filter: Transaction Type = PurchaseOrder + Transaction Status in {Exported, Sent, Partially Received} = 4,711 sent POs; + Pending = 4,008 POs created but not yet sent to vendor. <strong>No date sent/created data is populated</strong> for T-Mark's unreceived POs — this is the same "phantom PO" pattern seen across the Sila portfolio, where goods are received in the field but the receiving step is never completed in ServiceTitan. The ~99% &gt;180 days estimate is based on this pattern; an actual audit would require cross-referencing against vendor invoices.
+  </div>
+  <div class="data-note" style="border-left-color:#e74c3c;background:#fff5f5;">
+    <strong>⚠️ Correction:</strong> This page was previously showing $1.67M / 6,140 unique POs. Corrected methodology (Transaction Type = PurchaseOrder; Status = Exported/Sent/Pending) yields <strong>$3.78M / 8,719 unique POs</strong>. The prior figure undercounted Pending POs (4,008) and applied a different open-status filter. Vendor and BU breakdowns below reflect the original analysis and should be treated as directional.
   </div>
 
   <div class="section">
