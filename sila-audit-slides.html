@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sila Brands — Operational Audit Review</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      --primary:    #0D1B2A;
+      --secondary:  #1B4F72;
+      --accent:     #5DADE2;
+      --accent-dim: rgba(93, 173, 226, 0.15);
+      --green:      #52D9A0;
+      --green-dim:  rgba(82, 217, 160, 0.15);
+      --red:        #FF6B6B;
+      --red-dim:    rgba(255, 107, 107, 0.15);
+      --yellow:     #F5C842;
+      --yellow-dim: rgba(245, 200, 66, 0.15);
+      --text-light: #FFFFFF;
+      --text-muted: rgba(255,255,255,0.55);
+      --surface:    rgba(255,255,255,0.05);
+      --surface-border: rgba(255,255,255,0.10);
+      --font-heading: 'Plus Jakarta Sans', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --fade-duration: 550ms;
+      --fade-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #000; font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+
+    .deck { position: relative; width: 100vw; height: 100vh; }
+
+    .slide {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      opacity: 0; pointer-events: none;
+      transition: opacity var(--fade-duration) var(--fade-ease);
+      will-change: opacity; overflow: hidden;
+    }
+    .slide.active { opacity: 1; pointer-events: all; }
+    .slide h1, .slide h2, .slide h3 { font-family: var(--font-heading); }
+    .slide p, .slide li, .slide span { font-family: var(--font-body); }
+
+    .eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; font-family: var(--font-body);
+    }
+
+    /* ── TITLE ── */
+    .slide-title {
+      background: var(--primary); display: flex; align-items: center;
+      justify-content: center; text-align: center; color: var(--text-light); position: relative;
+    }
+    .slide-title .bg-img {
+      position: absolute; inset: 0; background-size: cover; background-position: center;
+      opacity: 0.15; filter: blur(6px); transform: scale(1.08); z-index: 0;
+    }
+    .slide-title::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(13,27,42,0.2) 0%, rgba(13,27,42,0.88) 100%); z-index: 1;
+    }
+    .slide-title .content { position: relative; z-index: 2; max-width: 860px; padding: 3rem; }
+    .slide-title .eyebrow { margin-bottom: 1.25rem; }
+    .slide-title h1 { font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.25rem; }
+    .slide-title .subtitle { font-size: clamp(1rem, 2vw, 1.3rem); color: var(--text-muted); max-width: 580px; margin: 0 auto; line-height: 1.6; }
+    .slide-title .meta { margin-top: 2.5rem; font-size: 0.8rem; color: rgba(255,255,255,0.35); letter-spacing: 0.05em; }
+    .title-accent-bar { width: 48px; height: 3px; background: var(--accent); margin: 1.5rem auto; border-radius: 2px; }
+
+    /* Tenant badge row */
+    .tenant-badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 1.75rem; }
+    .tenant-badge { background: rgba(93,173,226,0.12); border: 1px solid rgba(93,173,226,0.25); color: var(--accent); padding: 4px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+
+    /* ── STAT CALLOUT ── */
+    .slide-stat-callout {
+      background: var(--primary); display: flex; flex-direction: column;
+      align-items: center; justify-content: center; color: var(--text-light);
+      padding: 3rem; text-align: center; gap: 2rem;
+    }
+    .slide-stat-callout .slide-header { text-align: center; margin-bottom: 0.5rem; }
+    .slide-stat-callout .slide-header h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; }
+    .stat-row { display: flex; gap: 2px; width: 100%; max-width: 960px; }
+    .stat-card {
+      flex: 1; background: var(--surface); border: 1px solid var(--surface-border);
+      border-radius: 16px; padding: 2.2rem 1.75rem; display: flex; flex-direction: column;
+      gap: 0.5rem; margin: 0 6px;
+    }
+    .stat-card .stat-number { font-family: var(--font-heading); font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 800; color: var(--accent); line-height: 1; letter-spacing: -0.03em; }
+    .stat-card .stat-label { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
+    .stat-card .stat-change { font-size: 0.78rem; color: var(--green); font-weight: 600; margin-top: 0.25rem; }
+    .stat-card .stat-change.warn { color: var(--red); }
+    .stat-card .stat-change.neutral { color: var(--yellow); }
+
+    /* ── CHART ── */
+    .slide-chart {
+      background: var(--primary); display: grid; grid-template-rows: auto 1fr auto;
+      gap: 0; padding: 3rem 4rem 2.5rem; color: var(--text-light);
+    }
+    .slide-chart .chart-header { margin-bottom: 1.5rem; }
+    .slide-chart .chart-header h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin-top: 0.5rem; }
+    .chart-wrapper { position: relative; width: 100%; height: 100%; min-height: 0; }
+    .slide-chart .chart-insight { margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 2px solid var(--accent); padding-left: 0.75rem; line-height: 1.5; }
+
+    /* ── HERO SPLIT ── */
+    .slide-hero-split { display: grid; grid-template-columns: 1fr 1fr; height: 100%; color: var(--text-light); }
+    .slide-hero-split .text-panel { background: var(--secondary); padding: 4rem 3.5rem; display: flex; flex-direction: column; justify-content: center; gap: 1.25rem; }
+    .slide-hero-split .text-panel h2 { font-size: clamp(1.6rem, 2.8vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+    .slide-hero-split .text-panel p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+    .slide-hero-split .text-panel ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem; }
+    .slide-hero-split .text-panel ul li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.93rem; color: rgba(255,255,255,0.82); line-height: 1.5; }
+    .slide-hero-split .text-panel ul li::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; flex-shrink: 0; margin-top: 0.45em; }
+    .slide-hero-split .visual-panel { position: relative; overflow: hidden; }
+    .slide-hero-split .visual-panel img, .slide-hero-split .visual-panel .bg-gradient { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .slide-hero-split .visual-panel .bg-gradient { background: radial-gradient(ellipse at 30% 40%, rgba(93,173,226,0.4) 0%, transparent 60%), radial-gradient(ellipse at 70% 70%, rgba(27,79,114,0.6) 0%, transparent 60%), var(--primary); }
+
+    /* stat mini inside hero */
+    .hero-stat-row { display: flex; gap: 1.25rem; margin-top: 0.75rem; }
+    .hero-stat { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 0.9rem 1.25rem; flex: 1; }
+    .hero-stat .hs-num { font-family: var(--font-heading); font-size: 1.7rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .hero-stat .hs-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem; line-height: 1.3; }
+
+    /* ── TWO COLUMN ── */
+    .slide-two-column { background: var(--primary); display: flex; flex-direction: column; padding: 2.5rem 3.5rem 2rem; color: var(--text-light); gap: 1.5rem; height: 100%; }
+    .slide-two-column .slide-header { flex-shrink: 0; }
+    .slide-two-column .slide-header h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 700; letter-spacing: -0.02em; }
+    .two-col-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; flex: 1; min-height: 0; }
+    .col-card { background: var(--surface); border: 1px solid var(--surface-border); border-radius: 14px; padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 0.55rem; overflow: hidden; }
+    .col-card .col-icon { font-size: 1.9rem; line-height: 1; }
+    .col-card h3 { font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
+    .col-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; }
+    .col-card .tag { display: inline-block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.28rem 0.65rem; border-radius: 100px; background: var(--accent-dim); color: var(--accent); width: fit-content; }
+    .col-card .tag.green { background: var(--green-dim); color: var(--green); }
+    .col-card .tag.red { background: var(--red-dim); color: var(--red); }
+    .col-card .tag.yellow { background: var(--yellow-dim); color: var(--yellow); }
+    .col-card .card-tenants { margin-top: 0.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.35); }
+    .col-card .card-tenants span { color: var(--accent); font-weight: 600; }
+
+    /* mini bullet list in card */
+    .card-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.35rem; }
+    .card-bullets li { font-size: 0.82rem; color: rgba(255,255,255,0.65); display: flex; align-items: flex-start; gap: 0.5rem; line-height: 1.45; }
+    .card-bullets li::before { content: '›'; color: var(--accent); font-size: 1rem; flex-shrink: 0; margin-top: -0.05em; font-weight: 700; }
+
+    /* ── AGENDA ── */
+    .slide-agenda { background: var(--primary); display: flex; flex-direction: column; padding: 3rem 4rem; color: var(--text-light); gap: 2rem; }
+    .slide-agenda .slide-header h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 700; letter-spacing: -0.02em; }
+    .agenda-list { list-style: none; display: flex; flex-direction: column; gap: 0; flex: 1; justify-content: center; }
+    .agenda-list li { display: flex; align-items: center; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--surface-border); }
+    .agenda-list li:last-child { border-bottom: none; }
+    .agenda-num { font-family: var(--font-heading); font-size: 3.5rem; font-weight: 900; line-height: 1; min-width: 70px; text-align: right; -webkit-text-stroke: 1px rgba(93,173,226,0.3); color: transparent; }
+    .agenda-text { display: flex; flex-direction: column; gap: 0.2rem; }
+    .agenda-text .agenda-title { font-size: 1.05rem; font-weight: 600; }
+    .agenda-text .agenda-desc { font-size: 0.82rem; color: var(--text-muted); }
+
+    /* ── END ── */
+    .slide-end { background: var(--primary); display: flex; align-items: center; justify-content: center; text-align: center; color: var(--text-light); padding: 3rem; position: relative; overflow: hidden; }
+    .slide-end::before { content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(93,173,226,0.12) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .slide-end .content { position: relative; z-index: 2; max-width: 700px; }
+    .slide-end h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 1.5rem; }
+    .slide-end p { font-size: 1rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 0.75rem; }
+    .next-steps { display: flex; flex-direction: column; gap: 0.6rem; margin: 1.5rem auto; max-width: 460px; text-align: left; }
+    .next-step { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.5; }
+    .next-step .ns-num { font-family: var(--font-heading); font-weight: 800; color: var(--accent); font-size: 1rem; min-width: 22px; }
+    .slide-end .contact-info { margin-top: 2rem; font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+
+    /* ── NAV ── */
+    #slide-counter { position: fixed; bottom: 1.75rem; left: 2rem; font-size: 0.72rem; color: rgba(255,255,255,0.3); font-family: 'SF Mono', 'Fira Code', monospace; z-index: 1000; letter-spacing: 0.05em; }
+    #progress-dots { position: fixed; bottom: 1.85rem; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 1000; align-items: center; }
+    .dot { width: 6px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.25); cursor: pointer; transition: width 0.3s ease, background 0.3s ease; }
+    .dot.active { width: 20px; background: rgba(255,255,255,0.85); }
+    #nav-buttons { position: fixed; bottom: 1.5rem; right: 1.75rem; display: flex; gap: 0.5rem; z-index: 1000; }
+    .nav-btn { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.7); cursor: pointer; font-size: 1rem; transition: background 0.2s, border-color 0.2s, color 0.2s; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+    .nav-btn:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.4); color: #fff; }
+    .nav-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1: TITLE -->
+  <div class="slide slide-title active" id="slide-1">
+    <div class="bg-img" style="background-image: url('https://picsum.photos/seed/plumbing/1600/900')"></div>
+    <div class="content">
+      <div class="eyebrow">ServiceTitan · QPR Audit · March 2026</div>
+      <h1>Sila Brands<br>Operational Audit</h1>
+      <div class="title-accent-bar"></div>
+      <p class="subtitle">A cross-portfolio review of workflow gaps, revenue opportunities, and platform health findings across all 7 Sila tenant accounts.</p>
+      <div class="tenant-badges">
+        <span class="tenant-badge">Auchinachie Services</span>
+        <span class="tenant-badge">Dave's World</span>
+        <span class="tenant-badge">Jackson Comfort</span>
+        <span class="tenant-badge">My Plumber</span>
+        <span class="tenant-badge">Sila Services BOS</span>
+        <span class="tenant-badge">Sila Services LLC</span>
+        <span class="tenant-badge">T-Mark Plumbing</span>
+      </div>
+      <p class="meta">Prepared by Ryan Stare · Customer Success · ServiceTitan</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: AGENDA -->
+  <div class="slide slide-agenda" id="slide-2">
+    <div class="slide-header">
+      <div class="eyebrow">What we'll cover</div>
+      <h2>Audit Focus Areas</h2>
+    </div>
+    <ul class="agenda-list">
+      <li>
+        <div class="agenda-num">01</div>
+        <div class="agenda-text">
+          <span class="agenda-title">Revenue Leakage</span>
+          <span class="agenda-desc">Sold estimates not booked, unsold follow-up gaps, membership billing &amp; visit backlogs</span>
+        </div>
+      </li>
+      <li>
+        <div class="agenda-num">02</div>
+        <div class="agenda-text">
+          <span class="agenda-title">Dispatch &amp; Job Hygiene</span>
+          <span class="agenda-desc">Jobs scheduled in the past, on-hold backlogs, paused appointments, callback workflows</span>
+        </div>
+      </li>
+      <li>
+        <div class="agenda-num">03</div>
+        <div class="agenda-text">
+          <span class="agenda-title">Accounting &amp; Finance</span>
+          <span class="agenda-desc">Invoices not exported or sent, GL account inconsistencies, billing runs, returns</span>
+        </div>
+      </li>
+      <li>
+        <div class="agenda-num">04</div>
+        <div class="agenda-text">
+          <span class="agenda-title">Inventory &amp; Purchasing</span>
+          <span class="agenda-desc">Outstanding POs, replenishment not in use, items not in pricebook categories</span>
+        </div>
+      </li>
+      <li>
+        <div class="agenda-num">05</div>
+        <div class="agenda-text">
+          <span class="agenda-title">Platform Health &amp; Security</span>
+          <span class="agenda-desc">MFA rollout, stale user accounts, integration hygiene, marketing registration</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- SLIDE 3: STAT CALLOUT — Portfolio snapshot -->
+  <div class="slide slide-stat-callout" id="slide-3">
+    <div class="slide-header">
+      <div class="eyebrow">Portfolio Snapshot</div>
+      <h2>Audit by the Numbers</h2>
+    </div>
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-number">7</div>
+        <div class="stat-label">Tenants audited across the Sila Brands portfolio</div>
+        <div class="stat-change">Full portfolio coverage</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">181</div>
+        <div class="stat-label">Total audit findings logged across all tenants</div>
+        <div class="stat-change neutral">Avg 26 items per tenant</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">$12M+</div>
+        <div class="stat-label">Sold estimates not yet booked into jobs (last year)</div>
+        <div class="stat-change warn">Universal issue — all 7 tenants</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">~23k</div>
+        <div class="stat-label">Membership visits not completed from last year</div>
+        <div class="stat-change warn">5 of 7 tenants affected</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: CHART — Issue frequency across tenants -->
+  <div class="slide slide-chart" id="slide-4">
+    <div class="chart-header">
+      <div class="eyebrow">Cross-Portfolio Patterns</div>
+      <h2>Issues Appearing Across the Most Tenants</h2>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="chart-frequency"></canvas>
+    </div>
+    <p class="chart-insight">Three issues are universal — present in all 7 tenants: <strong style="color:#fff">Sold Estimates not booked, Sales Margin Control not active, and outdated Integrations</strong>. These represent the highest-priority opportunities for portfolio-wide impact.</p>
+  </div>
+
+  <!-- SLIDE 5: HERO SPLIT — Revenue Leakage -->
+  <div class="slide slide-hero-split" id="slide-5">
+    <div class="text-panel">
+      <div class="eyebrow">Focus Area 01</div>
+      <h2>Revenue Leakage is a Portfolio-Wide Problem</h2>
+      <p>Across all 7 tenants, significant revenue is being left on the table through missed bookings, untracked estimates, and lapsed membership programs.</p>
+      <ul>
+        <li><strong>Sold Estimates Not Booked</strong> — 7/7 tenants. Over $12M in sold work from last year never converted to jobs. Ranges from $46k to $5M per tenant.</li>
+        <li><strong>Unsold Estimate Follow-Up</strong> — 6/7 tenants. Millions in the 30-day pipeline with no recorded follow-up in ServiceTitan.</li>
+        <li><strong>Membership Visits Backlog</strong> — 5/7 tenants. ~23,000 visits not fulfilled last year, eroding membership value and renewal rates.</li>
+        <li><strong>Expired Memberships Not Followed Up</strong> — 4/7 tenants. Thousands of lapsed customers with no re-engagement activity in ST.</li>
+      </ul>
+      <div class="hero-stat-row">
+        <div class="hero-stat">
+          <div class="hs-num">$12M+</div>
+          <div class="hs-label">Unbooked sold estimates</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hs-num">~23k</div>
+          <div class="hs-label">Missed membership visits</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hs-num">6/7</div>
+          <div class="hs-label">Tenants w/ unsold gap</div>
+        </div>
+      </div>
+    </div>
+    <div class="visual-panel">
+      <img src="https://picsum.photos/seed/revenue/900/700" alt="Revenue">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,79,114,0.7),rgba(13,27,42,0.5));"></div>
+      <div style="position:absolute;bottom:2.5rem;left:2rem;right:2rem;">
+        <div style="background:rgba(13,27,42,0.88);border:1px solid rgba(93,173,226,0.2);border-radius:12px;padding:1.25rem 1.5rem;">
+          <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:0.5rem;">Sales Margin Control</div>
+          <div style="font-size:0.9rem;color:rgba(255,255,255,0.85);line-height:1.5;">100% of tenants have not activated Sales Margin Control — leaving technicians and CSRs able to discount without guardrails. A low-effort setup with immediate revenue protection impact.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: TWO COLUMN — Revenue Quick Wins -->
+  <div class="slide slide-two-column" id="slide-6">
+    <div class="slide-header">
+      <div class="eyebrow">Quick Wins · Revenue</div>
+      <h2>Top Revenue Opportunities — Low Effort, High Impact</h2>
+    </div>
+    <div class="two-col-grid" style="grid-template-rows: 1fr 1fr;">
+      <div class="col-card" style="border-color: rgba(93,173,226,0.25);">
+        <div class="col-icon">📋</div>
+        <div class="tag">Universal · 7/7 Tenants</div>
+        <h3>Sold Estimates → Book Them Into Jobs</h3>
+        <p>All 7 tenants have sold estimates sitting without a corresponding job. This is money already committed by customers that hasn't been converted to booked revenue.</p>
+        <ul class="card-bullets">
+          <li>T-Mark Plumbing: $5M unbooked last year</li>
+          <li>Sila Services BOS: $2.6M unbooked</li>
+          <li>My Plumber: $2.9M unbooked</li>
+          <li>Auchinachie: $1.1M unbooked</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>All 7 tenants</span> · Owner: CSR / Install Coordinator</div>
+      </div>
+      <div class="col-card" style="border-color: rgba(93,173,226,0.25);">
+        <div class="col-icon">🛡️</div>
+        <div class="tag">Universal · 7/7 Tenants</div>
+        <h3>Activate Sales Margin Control</h3>
+        <p>No tenant in the portfolio has Sales Margin Control active. Without it, discounts and pricing overrides go unchecked, quietly eroding margins on every job.</p>
+        <ul class="card-bullets">
+          <li>Single-fix setup — low effort, one-time configuration</li>
+          <li>Prevents accidental under-pricing by technicians</li>
+          <li>Sets floor margins by business unit or pricebook category</li>
+          <li>Immediate protection with no workflow disruption</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>All 7 tenants</span> · Owner: General Manager / Owner</div>
+      </div>
+      <div class="col-card">
+        <div class="col-icon">🔄</div>
+        <div class="tag green">High Revenue · 5/7 Tenants</div>
+        <h3>Resolve Membership Visit Backlogs</h3>
+        <p>Tens of thousands of membership visits went unfulfilled last year. Customers paying for memberships expect service — unfulfilled visits lead to cancellations and churn.</p>
+        <ul class="card-bullets">
+          <li>Sila Services BOS: 10,000+ visits not completed</li>
+          <li>Auchinachie: 5,000+ visits outstanding</li>
+          <li>My Plumber: 2,200+ visits not performed</li>
+          <li>Sila Services LLC: 1,900+ visits outstanding</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>5 tenants</span> · Owner: CSR / Dispatcher</div>
+      </div>
+      <div class="col-card">
+        <div class="col-icon">💰</div>
+        <div class="tag green">High Revenue · 6/7 Tenants</div>
+        <h3>Unsold Estimate Follow-Up Process</h3>
+        <p>6 tenants show millions in unsold estimates from the past 30 days with no recorded follow-up. A structured follow-up workflow in ST can recapture a significant share of this pipeline.</p>
+        <ul class="card-bullets">
+          <li>Sila Services BOS: $2.6M in 30 days, no follow-up</li>
+          <li>My Plumber: $1.6M in 30 days not followed up</li>
+          <li>Jackson Comfort: $1M+ in past 30 days</li>
+          <li>Sila Services LLC: $800k without follow-up</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>6 tenants</span> · Owner: Sales / Service Manager</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: CHART — Dispatch & Accounting issues by tenant -->
+  <div class="slide slide-chart" id="slide-7">
+    <div class="chart-header">
+      <div class="eyebrow">Accounting &amp; Finance Hygiene</div>
+      <h2>Financial Workflow Gaps Across Tenants</h2>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="chart-accounting"></canvas>
+    </div>
+    <p class="chart-insight">Invoices not being exported or sent to customers means revenue is earned but cannot be collected. AR invoices sitting unsent block cash flow — all while the customer doesn't even know they owe anything.</p>
+  </div>
+
+  <!-- SLIDE 8: TWO COLUMN — Accounting issues -->
+  <div class="slide slide-two-column" id="slide-8">
+    <div class="slide-header">
+      <div class="eyebrow">Focus Area 03 — Accounting &amp; Finance</div>
+      <h2>Financial Workflow Issues Requiring Attention</h2>
+    </div>
+    <div class="two-col-grid" style="grid-template-rows: 1fr 1fr;">
+      <div class="col-card">
+        <div class="col-icon">📤</div>
+        <div class="tag red">Cash Flow Risk · 7/7 Tenants</div>
+        <h3>AR Invoices Not Sent to Customers</h3>
+        <p>All 7 tenants have invoices in Accounts Receivable that were never sent to the customer. Customers cannot pay a bill they haven't received — this is a direct cash flow blocker.</p>
+        <ul class="card-bullets">
+          <li>My Plumber: ~50% of AR invoices unsent</li>
+          <li>Jackson Comfort: 174 statements not sent</li>
+          <li>Sila Services BOS: Most AR invoices not sent</li>
+          <li>T-Mark Plumbing: 69 invoices unsent</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>All 7 tenants</span> · Owner: Accounting</div>
+      </div>
+      <div class="col-card">
+        <div class="col-icon">🧾</div>
+        <div class="tag yellow">Reporting Risk · 5/7 Tenants</div>
+        <h3>Inconsistent GL Accounts in Pricebook</h3>
+        <p>5 tenants have inconsistent General Ledger account assignments in their pricebooks — e.g., some equipment mapped to "Parts" GL, others to "Equipment." This makes job costing and P&amp;L analysis unreliable.</p>
+        <ul class="card-bullets">
+          <li>Corrupts cost-of-goods and margin reporting</li>
+          <li>Makes financial reporting hard to trust</li>
+          <li>Single-fix cleanup with long-term reporting benefit</li>
+          <li>My Plumber: COGS account tied incorrectly to equipment</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>5 tenants</span> · Owner: Accounting</div>
+      </div>
+      <div class="col-card">
+        <div class="col-icon">📂</div>
+        <div class="tag yellow">Export Lag · 6/7 Tenants</div>
+        <h3>Invoices &amp; Payments Not Exported</h3>
+        <p>Invoices and payments are sitting in ServiceTitan without being exported to the accounting system, in some cases going back years. This creates a growing reconciliation burden.</p>
+        <ul class="card-bullets">
+          <li>Sila Services LLC: Invoices unexported since 2022</li>
+          <li>Auchinachie: Invoice from December 2025 not exported</li>
+          <li>Jackson Comfort: Payments going back to 2023</li>
+          <li>T-Mark: Both invoices (2025) and payments (2024) pending</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>6 tenants</span> · Owner: Accounting</div>
+      </div>
+      <div class="col-card">
+        <div class="col-icon">🔁</div>
+        <div class="tag">Efficiency · 5/7 Tenants</div>
+        <h3>Outstanding Returns &amp; Refund Workflow</h3>
+        <p>5 tenants have unresolved returns — some going back to 2022. Additionally, most tenants don't have the Automated Refunds Workflow configured, forcing manual processing.</p>
+        <ul class="card-bullets">
+          <li>Dave's World: 400+ returns not completed</li>
+          <li>Auchinachie: Returns outstanding since 2022</li>
+          <li>Automated Refunds not set up at 4/7 tenants</li>
+          <li>Manual refund processing is time-consuming and error-prone</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>5 tenants (returns) · 4 tenants (workflow)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: TWO COLUMN — Dispatch & Job Hygiene -->
+  <div class="slide slide-two-column" id="slide-9">
+    <div class="slide-header">
+      <div class="eyebrow">Focus Area 02 — Dispatch &amp; Job Hygiene</div>
+      <h2>Job Management Issues Clogging the Schedule</h2>
+    </div>
+    <div class="two-col-grid" style="grid-template-rows: 1fr 1fr;">
+      <div class="col-card" style="border-color:rgba(255,107,107,0.25);">
+        <div class="col-icon">📅</div>
+        <div class="tag red">Dispatch Hygiene · 5/7 Tenants</div>
+        <h3>Jobs Scheduled in the Past</h3>
+        <p>5 tenants have jobs sitting on the schedule with dates in the past. This pollutes the dispatch board, skews reporting, and makes it impossible to get a clear view of actual workload.</p>
+        <ul class="card-bullets">
+          <li>Auchinachie: Multiple past-dated jobs on board</li>
+          <li>Clutters CSR and dispatcher view in real-time</li>
+          <li>Inflates "scheduled" job counts in reporting</li>
+          <li>Quick fix: audit and close or reschedule each one</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>5 tenants</span> · Owner: CSR / Dispatcher</div>
+      </div>
+      <div class="col-card" style="border-color:rgba(255,107,107,0.25);">
+        <div class="col-icon">⏸️</div>
+        <div class="tag red">Backlog Risk · 7/7 Tenants</div>
+        <h3>On-Hold Job Backlogs</h3>
+        <p>Every tenant has jobs stuck in "On Hold" status — some going back 2+ years. On Hold is intended as a temporary status, not a long-term parking lot for unresolved work.</p>
+        <ul class="card-bullets">
+          <li>Auchinachie: 1,400+ jobs on hold</li>
+          <li>Sila Services BOS: 1,100+ on hold from 2024</li>
+          <li>My Plumber: 300+ jobs on hold since 2021</li>
+          <li>T-Mark: On hold jobs from over 2 years ago</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>All 7 tenants</span> · Owner: CSR / Install Coordinator</div>
+      </div>
+      <div class="col-card">
+        <div class="col-icon">📞</div>
+        <div class="tag">Efficiency · 3/7 Tenants</div>
+        <h3>Call Classification &amp; Leads Not Utilized</h3>
+        <p>CSRs at several tenants aren't classifying calls or using the Leads feature to track calls that didn't book. Without this, unbooked calls disappear with no follow-up path.</p>
+        <ul class="card-bullets">
+          <li>Jackson Comfort: Only 45% booking rate — no classification</li>
+          <li>T-Mark: 64.7% booking rate, calls not tracked</li>
+          <li>Leads feature unused — missed re-engagement opportunity</li>
+          <li>Second Chance Leads not configured at 3 tenants</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>3+ tenants</span> · Owner: CSR / Dispatcher</div>
+      </div>
+      <div class="col-card">
+        <div class="col-icon">🔧</div>
+        <div class="tag yellow">Technician Performance · 3/7 Tenants</div>
+        <h3>Multiple Options Not Being Presented</h3>
+        <p>3 tenants show technicians consistently presenting only a single option to customers rather than good/better/best pricing tiers. This limits average ticket value and customer choice.</p>
+        <ul class="card-bullets">
+          <li>Reduces average revenue per visit</li>
+          <li>Limits customer autonomy in the buying decision</li>
+          <li>ServiceTitan's estimates workflow supports this natively</li>
+          <li>Dave's World: Some calls show only 1 option presented</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>3 tenants</span> · Owner: Service Manager</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: HERO SPLIT — Inventory & Purchasing -->
+  <div class="slide slide-hero-split" id="slide-10">
+    <div class="text-panel">
+      <div class="eyebrow">Focus Area 04 — Inventory &amp; Purchasing</div>
+      <h2>Inventory Workflows Are Underused Across the Portfolio</h2>
+      <p>Inventory and purchasing features exist in ServiceTitan to drive cost control and field efficiency — but they're widely underutilized or misconfigured across Sila tenants.</p>
+      <ul>
+        <li><strong>Purchase Orders Outstanding</strong> — 3/7 tenants have hundreds to thousands of pending POs, some going back to 2021. T-Mark has 6,000+ outstanding POs.</li>
+        <li><strong>Replenishment Module Not Used</strong> — Trucks aren't being replenished through ServiceTitan at several tenants, causing parts to be added after the fact or missed entirely.</li>
+        <li><strong>Items Not in Pricebook Categories</strong> — Items without categories are invisible to technicians in the field. This contributes directly to missed materials charges and inaccurate job costing.</li>
+        <li><strong>Inventory Counts Not Performed</strong> — Multiple tenants have Inventory turned on but no counts being run, making inventory balances unreliable for cost reporting.</li>
+        <li><strong>Default Replenishment Vendor</strong> — 2 tenants have materials assigned to a generic "Default" vendor instead of actual vendors, breaking PO and cost workflows.</li>
+      </ul>
+    </div>
+    <div class="visual-panel">
+      <img src="https://picsum.photos/seed/warehouse/900/700" alt="Warehouse">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,79,114,0.65),rgba(13,27,42,0.45));"></div>
+      <div style="position:absolute;top:2.5rem;right:2rem;left:2rem;">
+        <div style="background:rgba(13,27,42,0.9);border:1px solid rgba(245,200,66,0.25);border-radius:12px;padding:1.25rem 1.5rem;">
+          <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--yellow);font-weight:600;margin-bottom:0.75rem;">T-Mark Plumbing — PO Backlog</div>
+          <div style="font-size:2.2rem;font-weight:800;color:var(--yellow);font-family:var(--font-heading);line-height:1;">6,000+</div>
+          <div style="font-size:0.85rem;color:rgba(255,255,255,0.65);margin-top:0.35rem;">Outstanding purchase orders, some going back years — the largest PO backlog in the portfolio</div>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:2.5rem;right:2rem;left:2rem;">
+        <div style="background:rgba(13,27,42,0.9);border:1px solid rgba(93,173,226,0.2);border-radius:12px;padding:1.1rem 1.5rem;display:flex;gap:1.5rem;">
+          <div style="text-align:center;flex:1;">
+            <div style="font-size:1.6rem;font-weight:800;color:var(--accent);font-family:var(--font-heading);">3/7</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.2rem;">PO backlogs</div>
+          </div>
+          <div style="text-align:center;flex:1;">
+            <div style="font-size:1.6rem;font-weight:800;color:var(--accent);font-family:var(--font-heading);">5/7</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.2rem;">Items not in categories</div>
+          </div>
+          <div style="text-align:center;flex:1;">
+            <div style="font-size:1.6rem;font-weight:800;color:var(--accent);font-family:var(--font-heading);">4/7</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.2rem;">Replenishment unused</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: CHART — Platform Health -->
+  <div class="slide slide-chart" id="slide-11">
+    <div class="chart-header">
+      <div class="eyebrow">Focus Area 05 — Platform &amp; Security Health</div>
+      <h2>Platform Hygiene Issues Across the Portfolio</h2>
+    </div>
+    <div class="chart-wrapper">
+      <canvas id="chart-platform"></canvas>
+    </div>
+    <p class="chart-insight"><strong style="color:#fff">MFA is not enabled at 6 of 7 tenants</strong> — a critical security gap. Combined with stale user accounts and outdated integrations at every tenant, the platform security posture needs attention portfolio-wide.</p>
+  </div>
+
+  <!-- SLIDE 12: TWO COLUMN — Priority Matrix / Summary -->
+  <div class="slide slide-two-column" id="slide-12">
+    <div class="slide-header">
+      <div class="eyebrow">Prioritization Framework</div>
+      <h2>Where to Focus First — Effort vs. Impact</h2>
+    </div>
+    <div class="two-col-grid" style="grid-template-rows: 1fr 1fr;">
+      <div class="col-card" style="border-color:rgba(82,217,160,0.35);">
+        <div class="col-icon">⚡</div>
+        <div class="tag green">Do Now — Low Effort / High Revenue</div>
+        <h3>Immediate Quick Wins</h3>
+        <p>These items require minimal setup or one-time fixes and have a direct, measurable revenue or cost impact.</p>
+        <ul class="card-bullets">
+          <li>Book all sold estimates into jobs (all 7 tenants)</li>
+          <li>Activate Sales Margin Control (all 7 tenants)</li>
+          <li>Send outstanding AR invoices to customers</li>
+          <li>Complete or close past-dated jobs on dispatch board</li>
+          <li>Set up automated refunds workflow</li>
+        </ul>
+      </div>
+      <div class="col-card" style="border-color:rgba(93,173,226,0.35);">
+        <div class="col-icon">📈</div>
+        <div class="tag">Plan — Low Effort / High Efficiency</div>
+        <h3>Workflow Improvements</h3>
+        <p>These items take more coordination but significantly improve day-to-day efficiency and reporting quality.</p>
+        <ul class="card-bullets">
+          <li>Implement call classification &amp; Leads workflow</li>
+          <li>Add all pricebook items to proper categories</li>
+          <li>Fix GL account inconsistencies across pricebooks</li>
+          <li>Export all outstanding invoices and payments</li>
+          <li>Configure membership billing rules and billing runs</li>
+        </ul>
+      </div>
+      <div class="col-card" style="border-color:rgba(245,200,66,0.25);">
+        <div class="col-icon">🔒</div>
+        <div class="tag yellow">Urgent — Security &amp; Compliance</div>
+        <h3>Platform Security Baseline</h3>
+        <p>These items represent security and compliance gaps that should be addressed regardless of revenue impact.</p>
+        <ul class="card-bullets">
+          <li>Roll out MFA to all users (6/7 tenants missing this)</li>
+          <li>Audit and deactivate stale user accounts</li>
+          <li>Complete Marketing Registration (email deliverability)</li>
+          <li>Review and update all active integrations</li>
+          <li>Clear scheduled reports with no recipients</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <div class="col-icon">🏗️</div>
+        <div class="tag">Long-Term — High Effort / High Effect</div>
+        <h3>Structural Projects</h3>
+        <p>These require a sustained effort over weeks or months but will fundamentally improve operational quality and cost control.</p>
+        <ul class="card-bullets">
+          <li>Resolve on-hold job backlogs (all 7 tenants)</li>
+          <li>Clear outstanding PO queues (especially T-Mark: 6k+)</li>
+          <li>Implement full replenishment workflow for trucks</li>
+          <li>Assign correct replenishment vendors to all materials</li>
+          <li>Establish consistent inventory count cadence</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 13: END -->
+  <div class="slide slide-end" id="slide-13">
+    <div class="content">
+      <div class="eyebrow" style="margin-bottom: 1rem;">Sila Brands · QPR Audit · March 2026</div>
+      <h2>Recommended<br>Next Steps</h2>
+      <div class="next-steps">
+        <div class="next-step">
+          <span class="ns-num">1</span>
+          <span>Schedule working sessions with each tenant's accounting team to address AR invoices, export backlogs, and billing run issues — these are the fastest cash flow unlocks.</span>
+        </div>
+        <div class="next-step">
+          <span class="ns-num">2</span>
+          <span>Coordinate with operations leadership to activate Sales Margin Control and establish a sold estimate → job booking SOP across all 7 tenants.</span>
+        </div>
+        <div class="next-step">
+          <span class="ns-num">3</span>
+          <span>Prioritize MFA rollout as an immediate security action — 6 of 7 tenants are currently exposed.</span>
+        </div>
+        <div class="next-step">
+          <span class="ns-num">4</span>
+          <span>Build tenant-specific remediation plans for on-hold jobs, PO backlogs, and inventory workflows — set 90-day milestones for each.</span>
+        </div>
+      </div>
+      <div class="contact-info">Ryan Stare · rstare@servicetitan.com · ServiceTitan Customer Success</div>
+    </div>
+  </div>
+
+</div><!-- /.deck -->
+
+<div id="slide-counter">1 / 13</div>
+<div id="progress-dots"></div>
+<div id="nav-buttons">
+  <button class="nav-btn" id="btn-prev" onclick="navigate(-1)" title="Previous (←)">←</button>
+  <button class="nav-btn" id="btn-next" onclick="navigate(1)" title="Next (→)">→</button>
+</div>
+
+<script>
+  // ── Chart 1: Issue Frequency ──
+  new Chart(document.getElementById('chart-frequency'), {
+    type: 'bar',
+    data: {
+      labels: [
+        'Sold Estimates Not Booked',
+        'Sales Margin Control',
+        'Integrations Outdated',
+        'Unsold Estimate Follow-up',
+        'MFA Not Enabled',
+        'Jobs Scheduled in Past',
+        'Membership Visits Backlog',
+        'GL Account Inconsistencies',
+        'Returns Outstanding',
+        'Marketing Registration',
+        'AR Invoices Not Sent',
+        'Invoices Not Exported'
+      ],
+      datasets: [{
+        label: 'Tenants Affected (out of 7)',
+        data: [7, 7, 7, 6, 6, 5, 5, 5, 5, 4, 7, 6],
+        backgroundColor: [
+          'rgba(255,107,107,0.85)',
+          'rgba(255,107,107,0.85)',
+          'rgba(255,107,107,0.85)',
+          'rgba(93,173,226,0.80)',
+          'rgba(245,200,66,0.80)',
+          'rgba(93,173,226,0.65)',
+          'rgba(93,173,226,0.65)',
+          'rgba(93,173,226,0.55)',
+          'rgba(93,173,226,0.50)',
+          'rgba(93,173,226,0.45)',
+          'rgba(255,107,107,0.70)',
+          'rgba(93,173,226,0.45)',
+        ],
+        borderRadius: 5,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(13,27,42,0.95)',
+          bodyColor: '#ccc', titleColor: '#fff', padding: 12,
+          callbacks: { label: ctx => ` ${ctx.raw} of 7 tenants affected` }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 11 } },
+          max: 7,
+          border: { display: false }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: 'rgba(255,255,255,0.75)', font: { size: 11 } }
+        }
+      }
+    }
+  });
+
+  // ── Chart 2: Accounting Issues ──
+  new Chart(document.getElementById('chart-accounting'), {
+    type: 'bar',
+    data: {
+      labels: ['Auchinachie', "Dave's World", 'Jackson Comfort', 'My Plumber', 'Sila BOS', 'Sila LLC', 'T-Mark'],
+      datasets: [
+        {
+          label: 'AR Invoices Not Sent',
+          data: [82, 1, 174, 1, 1, 75, 69],
+          backgroundColor: 'rgba(255,107,107,0.75)',
+          borderRadius: 4,
+          borderSkipped: false,
+        },
+        {
+          label: 'Invoices Not Exported (has issue)',
+          data: [1, 1, 0, 0, 1, 1, 1],
+          backgroundColor: 'rgba(245,200,66,0.65)',
+          borderRadius: 4,
+          borderSkipped: false,
+        },
+        {
+          label: 'GL Inconsistencies (has issue)',
+          data: [1, 0, 1, 1, 1, 1, 1],
+          backgroundColor: 'rgba(93,173,226,0.55)',
+          borderRadius: 4,
+          borderSkipped: false,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: { color: 'rgba(255,255,255,0.65)', font: { size: 11 }, padding: 16 }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(13,27,42,0.95)',
+          bodyColor: '#ccc', titleColor: '#fff', padding: 12
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: 'rgba(255,255,255,0.7)', font: { size: 11 } }
+        },
+        y: {
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 10 } },
+          border: { display: false }
+        }
+      }
+    }
+  });
+
+  // ── Chart 3: Platform Health ──
+  new Chart(document.getElementById('chart-platform'), {
+    type: 'bar',
+    data: {
+      labels: [
+        'MFA Not Enabled',
+        'Stale User Accounts',
+        'Integrations Need Review',
+        'Marketing Registration Gap',
+        'Scheduled Reports / No Recipient',
+        'Paused Appointments Misuse',
+        'Review Responses Missing'
+      ],
+      datasets: [{
+        label: 'Tenants Affected',
+        data: [6, 7, 7, 4, 3, 3, 3],
+        backgroundColor: [
+          'rgba(255,107,107,0.85)',
+          'rgba(93,173,226,0.70)',
+          'rgba(93,173,226,0.70)',
+          'rgba(245,200,66,0.75)',
+          'rgba(93,173,226,0.50)',
+          'rgba(93,173,226,0.45)',
+          'rgba(93,173,226,0.40)',
+        ],
+        borderRadius: 5,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(13,27,42,0.95)',
+          bodyColor: '#ccc', titleColor: '#fff', padding: 12,
+          callbacks: { label: ctx => ` ${ctx.raw} of 7 tenants` }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 11 } },
+          max: 7,
+          border: { display: false }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: 'rgba(255,255,255,0.75)', font: { size: 11 } }
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('slide-counter');
+  const dotsContainer = document.getElementById('progress-dots');
+  const btnPrev = document.getElementById('btn-prev');
+  const btnNext = document.getElementById('btn-next');
+  let current = 0;
+  const total = slides.length;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goTo(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  function updateNav() {
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    counter.textContent = `${current + 1} / ${total}`;
+    btnPrev.disabled = current === 0;
+    btnNext.disabled = current === total - 1;
+  }
+
+  function goTo(index) {
+    if (index < 0 || index >= total) return;
+    slides[current].classList.remove('active');
+    current = index;
+    slides[current].classList.add('active');
+    updateNav();
+  }
+
+  function navigate(dir) { goTo(current + dir); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); navigate(1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); navigate(-1); }
+  });
+
+  updateNav();
+</script>
+</body>
+</html>

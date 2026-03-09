@@ -81,7 +81,7 @@
     <div class="kpi"><div class="kpi-val">51.3%</div><div class="kpi-lbl">Gross Margin</div><div class="kpi-sub">Incl. Imported Default</div></div>
     <div class="kpi"><div class="kpi-val">118,985</div><div class="kpi-lbl">Completed</div><div class="kpi-sub">88.4% of all jobs</div></div>
     <div class="kpi yellow"><div class="kpi-val">15,211</div><div class="kpi-lbl">Cancelled</div><div class="kpi-sub">11.3% cancel rate</div></div>
-    <div class="kpi green"><div class="kpi-val">1</div><div class="kpi-lbl">Stale Jobs</div><div class="kpi-sub">Near-clean queue</div></div>
+    <div class="kpi yellow"><div class="kpi-val">108</div><div class="kpi-lbl">Stale Jobs</div><div class="kpi-sub">Scheduled · past appointment</div></div>
     <div class="kpi red"><div class="kpi-val">$1.60M</div><div class="kpi-lbl">Outstanding</div><div class="kpi-sub">652 completed jobs</div></div>
   </div>
 
@@ -144,16 +144,16 @@
   </div>
 
   <div class="section">
-    <div class="section-title">📂 Open Job Queue Health <span class="section-sub">379 total open jobs · 1 stale (&gt;30 days)</span></div>
-    <div class="insight success">✅ Only 1 stale job detected out of 379 open — near-perfect queue hygiene. This represents strong dispatch and scheduling discipline across a high-volume operation.</div>
+    <div class="section-title">📂 Open Job Queue Health <span class="section-sub">379 total open jobs · 108 stale (Scheduled + past appointment)</span></div>
+    <div class="insight warn">⚠️ 108 stale jobs detected — Scheduled status with an appointment date already passed. At 28.5% of the Scheduled queue, this represents real scheduling debt that should be cleared before the next QPR period.</div>
     <table>
       <tr><th>Status</th><th class="num">Count</th><th class="num">% of Open</th><th>Notes</th></tr>
-      <tr><td><span class="badge badge-yellow">Hold</span></td><td class="num">50</td><td class="num">13.2%</td><td>1 stale (Job 291558, BF-Electrical Install, 54 days)</td></tr>
-      <tr><td><span class="badge badge-blue">Scheduled</span></td><td class="num">267</td><td class="num">70.4%</td><td>All recently scheduled, no stale detected</td></tr>
+      <tr><td><span class="badge badge-yellow">Hold</span></td><td class="num">50</td><td class="num">13.2%</td><td>Awaiting action — not included in stale count</td></tr>
+      <tr><td><span class="badge badge-blue">Scheduled</span></td><td class="num">267</td><td class="num">70.4%</td><td>108 with past appointment date — appointment passed without completion</td></tr>
       <tr><td><span class="badge badge-green">In Progress</span></td><td class="num">62</td><td class="num">16.4%</td><td>Active jobs in field</td></tr>
       <tr style="font-weight:700"><td>TOTAL OPEN</td><td class="num">379</td><td class="num">100%</td><td></td></tr>
     </table>
-    <div class="insight info">💡 The single stale job (291558) should be reviewed for disposition — reschedule, close, or cancel. The Hold queue (50 jobs) should be spot-checked monthly to prevent future aging.</div>
+    <div class="insight info">💡 Age breakdown of 108 stale jobs: 38 within 30 days, 47 aged 31–90 days, 21 aged 91–180 days, 1 aged 181–365 days, 1 over 365 days. The majority are recent misses — most could be recovered with a targeted rescheduling sweep. Outstanding balance on stale jobs: $84,470.</div>
   </div>
 
   <div class="section">

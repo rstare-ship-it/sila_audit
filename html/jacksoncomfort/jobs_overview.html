@@ -78,9 +78,9 @@
       <div class="kpi-sub">88.1% completion rate</div>
     </div>
     <div class="kpi orange">
-      <div class="kpi-label">Open / Stale Jobs</div>
-      <div class="kpi-value">624</div>
-      <div class="kpi-sub">Hold · Scheduled · In Progress</div>
+      <div class="kpi-label">Stale Jobs</div>
+      <div class="kpi-value">180</div>
+      <div class="kpi-sub">Scheduled status · past appointment</div>
     </div>
     <div class="kpi red">
       <div class="kpi-label">Negative Margin Jobs</div>
@@ -286,14 +286,14 @@
   <div class="section-title">Section 2 — Old &amp; Unclosed Jobs</div>
 
   <div class="alert-box">
-    <strong>What this means:</strong> In ServiceTitan, jobs in <em>Hold</em>, <em>Scheduled</em>, or <em>In Progress</em> status are considered open. Jobs that remain in these states for extended periods inflate WIP on the books, prevent accurate job costing, and can indicate scheduling or customer follow-up failures. They should be closed out, rescheduled, or canceled.
+    <strong>What this means:</strong> In ServiceTitan, jobs with <em>Scheduled</em> status where the booked appointment date has already passed without completion are considered stale. These missed appointments inflate WIP on the books, prevent accurate job costing, and can indicate scheduling or customer follow-up failures. They should be closed out, rescheduled, or canceled.
   </div>
 
   <div class="kpi-grid">
     <div class="kpi orange">
       <div class="kpi-label">Total Stale Jobs</div>
-      <div class="kpi-value">624</div>
-      <div class="kpi-sub">Hold · Scheduled · In Progress</div>
+      <div class="kpi-value">180</div>
+      <div class="kpi-sub">Scheduled status · past appointment</div>
     </div>
     <div class="kpi red">
       <div class="kpi-label">Over 1 Year Old</div>
@@ -307,12 +307,12 @@
     </div>
     <div class="kpi orange">
       <div class="kpi-label">Balance on Stale Jobs</div>
-      <div class="kpi-value">$394K</div>
+      <div class="kpi-value">$26K</div>
       <div class="kpi-sub">Unpaid on open jobs</div>
     </div>
     <div class="kpi orange">
       <div class="kpi-label">Job Value on Stale</div>
-      <div class="kpi-value">$456K</div>
+      <div class="kpi-value">$27K</div>
       <div class="kpi-sub">Total of stale job values</div>
     </div>
   </div>
@@ -323,11 +323,11 @@
       <table style="margin-top:14px">
         <thead><tr><th>Age Range</th><th>Count</th><th>Job Value</th><th>Balance</th></tr></thead>
         <tbody>
-          <tr><td><span class="badge badge-green">0–30 days</span></td><td>149</td><td class="number">$78,418</td><td class="number">$60,096</td></tr>
-          <tr><td><span class="badge badge-blue">31–90 days</span></td><td>72</td><td class="number">$97,105</td><td class="number">$71,085</td></tr>
-          <tr><td><span class="badge badge-orange">91–180 days</span></td><td>147</td><td class="number">$61,266</td><td class="number">$61,080</td></tr>
-          <tr><td><span class="badge badge-orange">181–365 days</span></td><td>152</td><td class="number">$162,563</td><td class="number">$146,002</td></tr>
-          <tr><td><span class="badge badge-red">365+ days</span></td><td>104</td><td class="number">$56,652</td><td class="number">$55,564</td></tr>
+          <tr><td><span class="badge badge-green">0–30 days</span></td><td>77</td><td class="number">$78,418</td><td class="number">$60,096</td></tr>
+          <tr><td><span class="badge badge-blue">31–90 days</span></td><td>20</td><td class="number">$97,105</td><td class="number">$71,085</td></tr>
+          <tr><td><span class="badge badge-orange">91–180 days</span></td><td>45</td><td class="number">$61,266</td><td class="number">$61,080</td></tr>
+          <tr><td><span class="badge badge-orange">181–365 days</span></td><td>32</td><td class="number">$162,563</td><td class="number">$146,002</td></tr>
+          <tr><td><span class="badge badge-red">365+ days</span></td><td>6</td><td class="number">$56,652</td><td class="number">$55,564</td></tr>
         </tbody>
       </table>
     </div>

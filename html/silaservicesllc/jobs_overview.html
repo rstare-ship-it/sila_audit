@@ -81,7 +81,7 @@
     <div class="kpi green"><div class="kpi-val">$82.7M</div><div class="kpi-lbl">Revenue (2yr)</div><div class="kpi-sub">Completed jobs</div></div>
     <div class="kpi green"><div class="kpi-val">70.7%</div><div class="kpi-lbl">Gross Margin</div><div class="kpi-sub">Best in portfolio</div></div>
     <div class="kpi"><div class="kpi-val">78,712</div><div class="kpi-lbl">Completed Jobs</div><div class="kpi-sub">84.3% completion rate</div></div>
-    <div class="kpi green"><div class="kpi-val">0</div><div class="kpi-lbl">Stale Jobs</div><div class="kpi-sub">Clean open queue</div></div>
+    <div class="kpi red"><div class="kpi-val">2,259</div><div class="kpi-lbl">Stale Jobs</div><div class="kpi-sub">Scheduled · past appointment</div></div>
     <div class="kpi yellow"><div class="kpi-val">5,332</div><div class="kpi-lbl">Neg Margin Jobs</div><div class="kpi-sub">Mostly warranty BUs</div></div>
     <div class="kpi"><div class="kpi-val">$544K</div><div class="kpi-lbl">Outstanding Balance</div><div class="kpi-sub">116 completed jobs</div></div>
   </div>
@@ -139,17 +139,17 @@
   </div>
 
   <div class="section">
-    <div class="section-title">✅ Open Job Queue — Zero Stale Jobs <span class="section-sub">2,352 open jobs · All current</span></div>
+    <div class="section-title">⚠️ Open Job Queue — 2,259 Stale Jobs <span class="section-sub">2,352 open jobs · 2,259 Scheduled with past appointment date</span></div>
     <div class="insight success">
-      All 2,352 open jobs have zero outstanding days recorded — no jobs are stale (&gt;30 days open without activity). This is the cleanest open job queue in the entire Sila portfolio and stands in sharp contrast to Sila Services BOS (1,685 stale jobs). The scheduling and dispatch operations here are running at an exceptional level.
+      <strong>⚠️ 2,259 of 2,352 open jobs are stale</strong> — Status = Scheduled with an appointment date that has already passed. Under the portfolio-standard definition (Scheduled status + past appointment date), Sila Services LLC has the <strong>highest stale job count in the entire Sila portfolio</strong>. This likely reflects a pattern of jobs being created and scheduled but never rescheduled or closed when appointments pass. The $16,759 outstanding balance is low, suggesting most are $0-value service calls or diagnosis jobs — but the volume creates significant WIP clutter and scheduling noise. Recommend a bulk review: cancel zero-value jobs older than 90 days and reschedule any with legitimate open work. Age breakdown: 109 within 30 days, 225 aged 31–90 days, 230 aged 91–180 days, 633 aged 181–365 days, 1,062 over 365 days.
     </div>
     <table>
       <thead><tr><th>Open Job Status</th><th class="num">Count</th><th>Context</th></tr></thead>
       <tbody>
         <tr><td><span class="badge badge-orange">Hold</span></td><td class="num">50</td><td>Awaiting customer confirmation or parts — small, manageable hold queue with no aged backlog</td></tr>
-        <tr><td><span class="badge badge-blue">Scheduled</span></td><td class="num">2,259</td><td>Active future appointments — healthy forward scheduling pipeline</td></tr>
+        <tr><td><span class="badge badge-blue">Scheduled</span></td><td class="num">2,259</td><td>2,259 with past appointment date — stale (appointment passed, job not completed)</td></tr>
         <tr><td><span class="badge badge-gray">In Progress</span></td><td class="num">43</td><td>Currently active jobs — within normal operational range</td></tr>
-        <tr style="font-weight:600;border-top:2px solid #e0f7fa;"><td>Total Open</td><td class="num">2,352</td><td>0 stale jobs (&gt;30 days) — best in portfolio</td></tr>
+        <tr style="font-weight:600;border-top:2px solid #e0f7fa;"><td>Total Open</td><td class="num">2,352</td><td>2,259 stale jobs (Scheduled + past appointment date)</td></tr>
       </tbody>
     </table>
   </div>
