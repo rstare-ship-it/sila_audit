@@ -46,7 +46,7 @@
     .slide p, .slide li, .slide span { font-family: var(--font-body); }
 
     .eyebrow {
-      font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+      font-size: 0.85rem; letter-spacing: 0.22em; text-transform: uppercase;
       color: var(--accent); font-weight: 600; font-family: var(--font-body);
     }
 
@@ -65,14 +65,13 @@
     }
     .slide-title .content { position: relative; z-index: 2; max-width: 860px; padding: 3rem; }
     .slide-title .eyebrow { margin-bottom: 1.25rem; }
-    .slide-title h1 { font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.25rem; }
-    .slide-title .subtitle { font-size: clamp(1rem, 2vw, 1.3rem); color: var(--text-muted); max-width: 580px; margin: 0 auto; line-height: 1.6; }
-    .slide-title .meta { margin-top: 2.5rem; font-size: 0.8rem; color: rgba(255,255,255,0.35); letter-spacing: 0.05em; }
+    .slide-title h1 { font-size: clamp(3rem, 6vw, 5.2rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.25rem; }
+    .slide-title .subtitle { font-size: clamp(1.1rem, 2vw, 1.45rem); color: var(--text-muted); max-width: 580px; margin: 0 auto; line-height: 1.6; }
+    .slide-title .meta { margin-top: 2.5rem; font-size: 0.92rem; color: rgba(255,255,255,0.35); letter-spacing: 0.05em; }
     .title-accent-bar { width: 48px; height: 3px; background: var(--accent); margin: 1.5rem auto; border-radius: 2px; }
 
-    /* Tenant badge row */
     .tenant-badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 1.75rem; }
-    .tenant-badge { background: rgba(93,173,226,0.12); border: 1px solid rgba(93,173,226,0.25); color: var(--accent); padding: 4px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+    .tenant-badge { background: rgba(93,173,226,0.12); border: 1px solid rgba(93,173,226,0.25); color: var(--accent); padding: 5px 16px; border-radius: 100px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
 
     /* ── STAT CALLOUT ── */
     .slide-stat-callout {
@@ -81,16 +80,16 @@
       padding: 3rem; text-align: center; gap: 2rem;
     }
     .slide-stat-callout .slide-header { text-align: center; margin-bottom: 0.5rem; }
-    .slide-stat-callout .slide-header h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; }
+    .slide-stat-callout .slide-header h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; }
     .stat-row { display: flex; gap: 2px; width: 100%; max-width: 960px; }
     .stat-card {
       flex: 1; background: var(--surface); border: 1px solid var(--surface-border);
       border-radius: 16px; padding: 2.2rem 1.75rem; display: flex; flex-direction: column;
       gap: 0.5rem; margin: 0 6px;
     }
-    .stat-card .stat-number { font-family: var(--font-heading); font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 800; color: var(--accent); line-height: 1; letter-spacing: -0.03em; }
-    .stat-card .stat-label { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
-    .stat-card .stat-change { font-size: 0.78rem; color: var(--green); font-weight: 600; margin-top: 0.25rem; }
+    .stat-card .stat-number { font-family: var(--font-heading); font-size: clamp(2.4rem, 4vw, 3.8rem); font-weight: 800; color: var(--accent); line-height: 1; letter-spacing: -0.03em; }
+    .stat-card .stat-label { font-size: 1rem; color: var(--text-muted); line-height: 1.4; }
+    .stat-card .stat-change { font-size: 0.9rem; color: var(--green); font-weight: 600; margin-top: 0.25rem; }
     .stat-card .stat-change.warn { color: var(--red); }
     .stat-card .stat-change.neutral { color: var(--yellow); }
 
@@ -100,70 +99,152 @@
       gap: 0; padding: 3rem 4rem 2.5rem; color: var(--text-light);
     }
     .slide-chart .chart-header { margin-bottom: 1.5rem; }
-    .slide-chart .chart-header h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin-top: 0.5rem; }
+    .slide-chart .chart-header h2 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin-top: 0.5rem; }
     .chart-wrapper { position: relative; width: 100%; height: 100%; min-height: 0; }
-    .slide-chart .chart-insight { margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted); border-left: 2px solid var(--accent); padding-left: 0.75rem; line-height: 1.5; }
+    .slide-chart .chart-insight { margin-top: 1rem; font-size: 1rem; color: var(--text-muted); border-left: 2px solid var(--accent); padding-left: 0.75rem; line-height: 1.55; }
 
     /* ── HERO SPLIT ── */
     .slide-hero-split { display: grid; grid-template-columns: 1fr 1fr; height: 100%; color: var(--text-light); }
     .slide-hero-split .text-panel { background: var(--secondary); padding: 4rem 3.5rem; display: flex; flex-direction: column; justify-content: center; gap: 1.25rem; }
-    .slide-hero-split .text-panel h2 { font-size: clamp(1.6rem, 2.8vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
-    .slide-hero-split .text-panel p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+    .slide-hero-split .text-panel h2 { font-size: clamp(1.75rem, 2.8vw, 2.7rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+    .slide-hero-split .text-panel p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; }
     .slide-hero-split .text-panel ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem; }
-    .slide-hero-split .text-panel ul li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.93rem; color: rgba(255,255,255,0.82); line-height: 1.5; }
+    .slide-hero-split .text-panel ul li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 1.02rem; color: rgba(255,255,255,0.82); line-height: 1.5; }
     .slide-hero-split .text-panel ul li::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; flex-shrink: 0; margin-top: 0.45em; }
     .slide-hero-split .visual-panel { position: relative; overflow: hidden; }
     .slide-hero-split .visual-panel img, .slide-hero-split .visual-panel .bg-gradient { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .slide-hero-split .visual-panel .bg-gradient { background: radial-gradient(ellipse at 30% 40%, rgba(93,173,226,0.4) 0%, transparent 60%), radial-gradient(ellipse at 70% 70%, rgba(27,79,114,0.6) 0%, transparent 60%), var(--primary); }
 
-    /* stat mini inside hero */
     .hero-stat-row { display: flex; gap: 1.25rem; margin-top: 0.75rem; }
     .hero-stat { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 0.9rem 1.25rem; flex: 1; }
-    .hero-stat .hs-num { font-family: var(--font-heading); font-size: 1.7rem; font-weight: 800; color: var(--accent); line-height: 1; }
-    .hero-stat .hs-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem; line-height: 1.3; }
+    .hero-stat .hs-num { font-family: var(--font-heading); font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .hero-stat .hs-label { font-size: 0.88rem; color: var(--text-muted); margin-top: 0.2rem; line-height: 1.3; }
 
     /* ── TWO COLUMN ── */
     .slide-two-column { background: var(--primary); display: flex; flex-direction: column; padding: 2.5rem 3.5rem 2rem; color: var(--text-light); gap: 1.5rem; height: 100%; }
     .slide-two-column .slide-header { flex-shrink: 0; }
-    .slide-two-column .slide-header h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 700; letter-spacing: -0.02em; }
+    .slide-two-column .slide-header h2 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; }
     .two-col-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; flex: 1; min-height: 0; }
     .col-card { background: var(--surface); border: 1px solid var(--surface-border); border-radius: 14px; padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 0.55rem; overflow: hidden; }
-    .col-card .col-icon { font-size: 1.9rem; line-height: 1; }
-    .col-card h3 { font-size: 1.05rem; font-weight: 700; line-height: 1.3; }
-    .col-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; }
-    .col-card .tag { display: inline-block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.28rem 0.65rem; border-radius: 100px; background: var(--accent-dim); color: var(--accent); width: fit-content; }
+    .col-card .col-icon { font-size: 2rem; line-height: 1; }
+    .col-card h3 { font-size: 1.15rem; font-weight: 700; line-height: 1.3; }
+    .col-card p { font-size: 0.98rem; color: var(--text-muted); line-height: 1.65; }
+    .col-card .tag { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.28rem 0.65rem; border-radius: 100px; background: var(--accent-dim); color: var(--accent); width: fit-content; }
     .col-card .tag.green { background: var(--green-dim); color: var(--green); }
     .col-card .tag.red { background: var(--red-dim); color: var(--red); }
     .col-card .tag.yellow { background: var(--yellow-dim); color: var(--yellow); }
-    .col-card .card-tenants { margin-top: 0.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.35); }
+    .col-card .card-tenants { margin-top: 0.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.35); }
     .col-card .card-tenants span { color: var(--accent); font-weight: 600; }
 
-    /* mini bullet list in card */
-    .card-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.35rem; }
-    .card-bullets li { font-size: 0.82rem; color: rgba(255,255,255,0.65); display: flex; align-items: flex-start; gap: 0.5rem; line-height: 1.45; }
-    .card-bullets li::before { content: '›'; color: var(--accent); font-size: 1rem; flex-shrink: 0; margin-top: -0.05em; font-weight: 700; }
+    .card-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.35rem; }
+    .card-bullets li { font-size: 0.95rem; color: rgba(255,255,255,0.65); display: flex; align-items: flex-start; gap: 0.5rem; line-height: 1.5; }
+    .card-bullets li::before { content: '›'; color: var(--accent); font-size: 1.1rem; flex-shrink: 0; margin-top: -0.05em; font-weight: 700; }
 
     /* ── AGENDA ── */
     .slide-agenda { background: var(--primary); display: flex; flex-direction: column; padding: 3rem 4rem; color: var(--text-light); gap: 2rem; }
-    .slide-agenda .slide-header h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 700; letter-spacing: -0.02em; }
+    .slide-agenda .slide-header h2 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; }
     .agenda-list { list-style: none; display: flex; flex-direction: column; gap: 0; flex: 1; justify-content: center; }
-    .agenda-list li { display: flex; align-items: center; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--surface-border); }
+    .agenda-list li { display: flex; align-items: center; gap: 1.5rem; padding: 0.9rem 0; border-bottom: 1px solid var(--surface-border); }
     .agenda-list li:last-child { border-bottom: none; }
-    .agenda-num { font-family: var(--font-heading); font-size: 3.5rem; font-weight: 900; line-height: 1; min-width: 70px; text-align: right; -webkit-text-stroke: 1px rgba(93,173,226,0.3); color: transparent; }
+    .agenda-num { font-family: var(--font-heading); font-size: 3.2rem; font-weight: 900; line-height: 1; min-width: 70px; text-align: right; -webkit-text-stroke: 1px rgba(93,173,226,0.3); color: transparent; }
     .agenda-text { display: flex; flex-direction: column; gap: 0.2rem; }
-    .agenda-text .agenda-title { font-size: 1.05rem; font-weight: 600; }
-    .agenda-text .agenda-desc { font-size: 0.82rem; color: var(--text-muted); }
+    .agenda-text .agenda-title { font-size: 1.2rem; font-weight: 600; }
+    .agenda-text .agenda-desc { font-size: 0.95rem; color: var(--text-muted); }
+
+    /* ── SWOT ── */
+    .slide-swot { background: var(--primary); display: flex; flex-direction: column; padding: 2.5rem 3.5rem 2rem; color: var(--text-light); gap: 1.25rem; height: 100%; }
+    .slide-swot .slide-header h2 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; }
+    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 1rem; flex: 1; min-height: 0; }
+    .swot-card { border-radius: 14px; padding: 1.4rem 1.6rem; display: flex; flex-direction: column; gap: 0.65rem; overflow: hidden; }
+    .swot-card .swot-label { font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; }
+    .swot-card h3 { font-size: 1.08rem; font-weight: 700; }
+    .swot-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .swot-card ul li { font-size: 0.95rem; line-height: 1.55; display: flex; gap: 0.5rem; color: rgba(255,255,255,0.75); }
+    .swot-card ul li::before { flex-shrink: 0; font-weight: 700; }
+    .swot-strengths { background: rgba(82,217,160,0.07); border: 1px solid rgba(82,217,160,0.2); }
+    .swot-strengths .swot-label { color: var(--green); }
+    .swot-strengths ul li::before { content: '✓'; color: var(--green); }
+    .swot-weaknesses { background: rgba(255,107,107,0.07); border: 1px solid rgba(255,107,107,0.2); }
+    .swot-weaknesses .swot-label { color: var(--red); }
+    .swot-weaknesses ul li::before { content: '✗'; color: var(--red); }
+    .swot-opportunities { background: rgba(93,173,226,0.07); border: 1px solid rgba(93,173,226,0.2); }
+    .swot-opportunities .swot-label { color: var(--accent); }
+    .swot-opportunities ul li::before { content: '→'; color: var(--accent); }
+    .swot-threats { background: rgba(245,200,66,0.07); border: 1px solid rgba(245,200,66,0.2); }
+    .swot-threats .swot-label { color: var(--yellow); }
+    .swot-threats ul li::before { content: '⚠'; color: var(--yellow); font-size: 0.75rem; }
+
+    /* ── THREE COLUMN (IPO) ── */
+    .slide-three-col { background: var(--primary); display: flex; flex-direction: column; padding: 2.5rem 3.5rem 2rem; color: var(--text-light); gap: 1.5rem; height: 100%; }
+    .slide-three-col .slide-header h2 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; }
+    .three-col-grid { display: grid; grid-template-columns: 1fr 52px 1fr 52px 1fr; gap: 0; flex: 1; min-height: 0; align-items: stretch; }
+    .ipo-col { display: flex; flex-direction: column; gap: 0.85rem; padding: 1.75rem 1.6rem; background: var(--surface); border: 1px solid var(--surface-border); border-radius: 14px; }
+    .ipo-arrow { display: flex; align-items: center; justify-content: center; font-size: 1.9rem; color: var(--accent); opacity: 0.6; }
+    .ipo-col .ipo-header { display: flex; align-items: center; gap: 0.75rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--surface-border); }
+    .ipo-col .ipo-icon { font-size: 2rem; }
+    .ipo-col h3 { font-size: 1.2rem; font-weight: 700; }
+    .ipo-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; flex: 1; justify-content: space-evenly; }
+    .ipo-col ul li { font-size: 0.98rem; color: rgba(255,255,255,0.80); display: flex; gap: 0.55rem; line-height: 1.5; }
+    .ipo-col ul li::before { content: '›'; color: var(--accent); font-weight: 700; flex-shrink: 0; font-size: 1.1rem; }
+    .ipo-breakdown { margin-top: auto; padding-top: 0.85rem; border-top: 1px solid var(--surface-border); font-size: 0.93rem; color: var(--red); line-height: 1.5; display: flex; gap: 0.4rem; }
+    .ipo-breakdown::before { content: '⚠'; flex-shrink: 0; }
+
+    /* ── WHY THIS MATTERS — 4 COLUMN ── */
+    .slide-why-matters { background: var(--primary); display: flex; flex-direction: column; padding: 2.5rem 3.5rem 2rem; color: var(--text-light); gap: 1.25rem; height: 100%; }
+    .slide-why-matters .slide-header h2 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; }
+    .why-matters-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1rem; flex: 1; min-height: 0; }
+    .wm-card { border-radius: 14px; padding: 0 0 1.4rem 0; display: flex; flex-direction: column; gap: 0; overflow: hidden; }
+    .wm-header { padding: 0.9rem 1.2rem; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.9rem; }
+    .wm-card ul { list-style: none; display: flex; flex-direction: column; gap: 0; flex: 1; padding: 0 1.2rem; justify-content: space-evenly; }
+    .wm-card ul li { font-size: 0.95rem; color: rgba(255,255,255,0.78); display: flex; gap: 0.55rem; line-height: 1.55; padding: 0.35rem 0; }
+    .wm-card ul li::before { content: '✓'; font-size: 0.85rem; flex-shrink: 0; margin-top: 0.15em; }
+    .wm-blue { background: rgba(93,173,226,0.08); border: 1px solid rgba(93,173,226,0.2); }
+    .wm-blue .wm-header { background: rgba(93,173,226,0.2); color: var(--accent); }
+    .wm-blue ul li::before { color: var(--accent); }
+    .wm-green { background: rgba(82,217,160,0.08); border: 1px solid rgba(82,217,160,0.2); }
+    .wm-green .wm-header { background: rgba(82,217,160,0.2); color: var(--green); }
+    .wm-green ul li::before { color: var(--green); }
+    .wm-yellow { background: rgba(245,200,66,0.08); border: 1px solid rgba(245,200,66,0.2); }
+    .wm-yellow .wm-header { background: rgba(245,200,66,0.2); color: var(--yellow); }
+    .wm-yellow ul li::before { color: var(--yellow); }
+    .wm-red { background: rgba(255,107,107,0.08); border: 1px solid rgba(255,107,107,0.2); }
+    .wm-red .wm-header { background: rgba(255,107,107,0.2); color: var(--red); }
+    .wm-red ul li::before { color: var(--red); }
+
+    /* ── TIMELINE (Now / Short / Long) ── */
+    .slide-timeline { background: var(--primary); display: flex; flex-direction: column; padding: 2.5rem 3.5rem 2rem; color: var(--text-light); gap: 1.5rem; height: 100%; }
+    .slide-timeline .slide-header h2 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; }
+    .timeline-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; flex: 1; min-height: 0; }
+    .tl-col { display: flex; flex-direction: column; gap: 0.7rem; }
+    .tl-header { display: flex; align-items: center; gap: 0.75rem; padding-bottom: 0.85rem; border-bottom: 2px solid var(--surface-border); flex-shrink: 0; }
+    .tl-header .tl-icon { font-size: 1.6rem; }
+    .tl-header .tl-title-wrap { display: flex; flex-direction: column; gap: 0.05rem; }
+    .tl-header h3 { font-size: 1.2rem; font-weight: 700; }
+    .tl-header .tl-timeframe { font-size: 0.82rem; color: var(--text-muted); letter-spacing: 0.05em; }
+    .tl-items { display: flex; flex-direction: column; gap: 0.5rem; flex: 1; justify-content: space-evenly; }
+    .tl-item { display: flex; gap: 0.65rem; align-items: flex-start; padding: 0.65rem 0.85rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--surface-border); }
+    .tl-item .tl-check { font-size: 0.95rem; flex-shrink: 0; margin-top: 0.1em; }
+    .tl-item span { font-size: 0.97rem; color: rgba(255,255,255,0.82); line-height: 1.5; }
+    .tl-col-now .tl-header { border-bottom-color: rgba(255,107,107,0.4); }
+    .tl-col-now .tl-header h3 { color: var(--red); }
+    .tl-col-now .tl-item { border-color: rgba(255,107,107,0.18); }
+    .tl-col-short .tl-header { border-bottom-color: rgba(245,200,66,0.4); }
+    .tl-col-short .tl-header h3 { color: var(--yellow); }
+    .tl-col-short .tl-item { border-color: rgba(245,200,66,0.18); }
+    .tl-col-long .tl-header { border-bottom-color: rgba(82,217,160,0.4); }
+    .tl-col-long .tl-header h3 { color: var(--green); }
+    .tl-col-long .tl-item { border-color: rgba(82,217,160,0.18); }
 
     /* ── END ── */
     .slide-end { background: var(--primary); display: flex; align-items: center; justify-content: center; text-align: center; color: var(--text-light); padding: 3rem; position: relative; overflow: hidden; }
     .slide-end::before { content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(93,173,226,0.12) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); }
     .slide-end .content { position: relative; z-index: 2; max-width: 700px; }
-    .slide-end h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 1.5rem; }
-    .slide-end p { font-size: 1rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 0.75rem; }
-    .next-steps { display: flex; flex-direction: column; gap: 0.6rem; margin: 1.5rem auto; max-width: 460px; text-align: left; }
-    .next-step { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.5; }
-    .next-step .ns-num { font-family: var(--font-heading); font-weight: 800; color: var(--accent); font-size: 1rem; min-width: 22px; }
-    .slide-end .contact-info { margin-top: 2rem; font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+    .slide-end h2 { font-size: clamp(2.7rem, 5vw, 4.8rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 1.5rem; }
+    .slide-end p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 0.75rem; }
+    .next-steps { display: flex; flex-direction: column; gap: 0.7rem; margin: 1.5rem auto; max-width: 520px; text-align: left; }
+    .next-step { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 1rem; color: rgba(255,255,255,0.78); line-height: 1.55; }
+    .next-step .ns-num { font-family: var(--font-heading); font-weight: 800; color: var(--accent); font-size: 1.1rem; min-width: 24px; }
+    .slide-end .contact-info { margin-top: 2rem; font-size: 0.9rem; color: rgba(255,255,255,0.3); }
 
     /* ── NAV ── */
     #slide-counter { position: fixed; bottom: 1.75rem; left: 2rem; font-size: 0.72rem; color: rgba(255,255,255,0.3); font-family: 'SF Mono', 'Fira Code', monospace; z-index: 1000; letter-spacing: 0.05em; }
@@ -210,29 +291,29 @@
       <li>
         <div class="agenda-num">01</div>
         <div class="agenda-text">
-          <span class="agenda-title">Revenue Leakage</span>
-          <span class="agenda-desc">Sold estimates not booked, unsold follow-up gaps, membership billing &amp; visit backlogs</span>
+          <span class="agenda-title">Audit Overview</span>
+          <span class="agenda-desc">What we did, scope &amp; methodology, SWOT analysis, and the IPO workflow framework</span>
         </div>
       </li>
       <li>
         <div class="agenda-num">02</div>
         <div class="agenda-text">
-          <span class="agenda-title">Dispatch &amp; Job Hygiene</span>
-          <span class="agenda-desc">Jobs scheduled in the past, on-hold backlogs, paused appointments, callback workflows</span>
+          <span class="agenda-title">Revenue Leakage</span>
+          <span class="agenda-desc">Sold estimates not booked, unsold follow-up gaps, membership billing &amp; visit backlogs</span>
         </div>
       </li>
       <li>
         <div class="agenda-num">03</div>
         <div class="agenda-text">
-          <span class="agenda-title">Accounting &amp; Finance</span>
-          <span class="agenda-desc">Invoices not exported or sent, GL account inconsistencies, billing runs, returns</span>
+          <span class="agenda-title">Dispatch &amp; Job Hygiene</span>
+          <span class="agenda-desc">Why job status matters — on-hold backlogs, past-dated jobs, in-progress cleanup, call classification</span>
         </div>
       </li>
       <li>
         <div class="agenda-num">04</div>
         <div class="agenda-text">
-          <span class="agenda-title">Inventory &amp; Purchasing</span>
-          <span class="agenda-desc">Outstanding POs, replenishment not in use, items not in pricebook categories</span>
+          <span class="agenda-title">Accounting, Finance &amp; Job Costing</span>
+          <span class="agenda-desc">Invoices not exported or sent, GL inconsistencies, how audit gaps break job costing</span>
         </div>
       </li>
       <li>
@@ -242,11 +323,84 @@
           <span class="agenda-desc">MFA rollout, stale user accounts, integration hygiene, marketing registration</span>
         </div>
       </li>
+      <li>
+        <div class="agenda-num">06</div>
+        <div class="agenda-text">
+          <span class="agenda-title">Inventory &amp; Purchasing</span>
+          <span class="agenda-desc">Outstanding POs, replenishment workflows, pricebook categories, inventory count cadence</span>
+        </div>
+      </li>
+      <li>
+        <div class="agenda-num">07</div>
+        <div class="agenda-text">
+          <span class="agenda-title">Action Plan</span>
+          <span class="agenda-desc">What we can start now, tackle in the short term, and build toward long-term</span>
+        </div>
+      </li>
     </ul>
   </div>
 
-  <!-- SLIDE 3: STAT CALLOUT — Portfolio snapshot -->
-  <div class="slide slide-stat-callout" id="slide-3">
+  <!-- SLIDE 3: WHAT WE DID — Advisory Services Audit -->
+  <div class="slide slide-hero-split" id="slide-3">
+    <div class="text-panel">
+      <div class="eyebrow">Audit Scope &amp; Methodology</div>
+      <h2>Advisory Services Audit — What We Did</h2>
+      <p>ServiceTitan's Advisory Services team conducted a structured deep-dive review of all 7 Sila Brands tenant instances, analyzing platform configuration, workflow hygiene, and financial operations against best practices.</p>
+      <ul>
+        <li><strong>Platform Configuration Review</strong> — Compared each tenant's feature settings, integrations, and security posture against ServiceTitan best practices.</li>
+        <li><strong>Workflow Hygiene Analysis</strong> — Identified open backlogs, unprocessed queues, and breakdown points in the job lifecycle from booking through invoicing.</li>
+        <li><strong>Financial Workflow Audit</strong> — Reviewed AR invoices, export status, GL account mapping, returns, and billing run configurations.</li>
+        <li><strong>Cross-Tenant Pattern Matching</strong> — Catalogued each finding by category and cross-referenced across all 7 tenants to identify portfolio-wide patterns vs. isolated issues.</li>
+        <li><strong>Effort vs. Impact Scoring</strong> — Each finding was scored by effort required and revenue / efficiency effect to prioritize the action plan.</li>
+      </ul>
+    </div>
+    <div class="visual-panel">
+      <div class="bg-gradient"></div>
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:3rem 2.5rem;gap:1rem;">
+        <div style="background:rgba(13,27,42,0.85);border:1px solid rgba(93,173,226,0.25);border-radius:14px;padding:1.5rem;">
+          <div style="font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:0.75rem;">Audit Coverage</div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.88rem;color:rgba(255,255,255,0.8);">
+              <span style="color:var(--green);font-weight:700;">✓</span> Revenue &amp; Estimates
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.88rem;color:rgba(255,255,255,0.8);">
+              <span style="color:var(--green);font-weight:700;">✓</span> Dispatch &amp; Job Management
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.88rem;color:rgba(255,255,255,0.8);">
+              <span style="color:var(--green);font-weight:700;">✓</span> Accounting &amp; Finance
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.88rem;color:rgba(255,255,255,0.8);">
+              <span style="color:var(--green);font-weight:700;">✓</span> Platform Health &amp; Security
+            </div>
+            <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.88rem;color:rgba(255,255,255,0.8);">
+              <span style="color:var(--green);font-weight:700;">✓</span> Inventory &amp; Purchasing
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+          <div style="background:rgba(13,27,42,0.85);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:1rem;text-align:center;">
+            <div style="font-size:2rem;font-weight:800;color:var(--accent);font-family:var(--font-heading);">7</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.15rem;">Tenants Reviewed</div>
+          </div>
+          <div style="background:rgba(13,27,42,0.85);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:1rem;text-align:center;">
+            <div style="font-size:2rem;font-weight:800;color:var(--accent);font-family:var(--font-heading);">181</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.15rem;">Findings Logged</div>
+          </div>
+          <div style="background:rgba(13,27,42,0.85);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:1rem;text-align:center;">
+            <div style="font-size:2rem;font-weight:800;color:var(--accent);font-family:var(--font-heading);">5</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.15rem;">Focus Areas</div>
+          </div>
+          <div style="background:rgba(13,27,42,0.85);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:1rem;text-align:center;">
+            <div style="font-size:2rem;font-weight:800;color:var(--yellow);font-family:var(--font-heading);">3</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.15rem;">Universal Issues</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: STAT CALLOUT — Portfolio snapshot -->
+  <div class="slide slide-stat-callout" id="slide-4">
     <div class="slide-header">
       <div class="eyebrow">Portfolio Snapshot</div>
       <h2>Audit by the Numbers</h2>
@@ -275,8 +429,8 @@
     </div>
   </div>
 
-  <!-- SLIDE 4: CHART — Issue frequency across tenants -->
-  <div class="slide slide-chart" id="slide-4">
+  <!-- SLIDE 5: CHART — Issue frequency across tenants -->
+  <div class="slide slide-chart" id="slide-5">
     <div class="chart-header">
       <div class="eyebrow">Cross-Portfolio Patterns</div>
       <h2>Issues Appearing Across the Most Tenants</h2>
@@ -287,10 +441,115 @@
     <p class="chart-insight">Three issues are universal — present in all 7 tenants: <strong style="color:#fff">Sold Estimates not booked, Sales Margin Control not active, and outdated Integrations</strong>. These represent the highest-priority opportunities for portfolio-wide impact.</p>
   </div>
 
-  <!-- SLIDE 5: HERO SPLIT — Revenue Leakage -->
-  <div class="slide slide-hero-split" id="slide-5">
+  <!-- SLIDE 6: SWOT ANALYSIS -->
+  <div class="slide slide-swot" id="slide-6">
+    <div class="slide-header">
+      <div class="eyebrow">Strategic Assessment</div>
+      <h2>Sila Brands — SWOT Analysis</h2>
+    </div>
+    <div class="swot-grid">
+      <div class="swot-card swot-strengths">
+        <div class="swot-label">Strengths</div>
+        <h3>Platform &amp; Portfolio Foundation</h3>
+        <ul>
+          <li><em style="color:rgba(255,255,255,0.35);">[To be completed with Sila leadership]</em></li>
+          <li><em style="color:rgba(255,255,255,0.35);">[Multi-tenant portfolio scale &amp; brand diversity]</em></li>
+          <li><em style="color:rgba(255,255,255,0.35);">[Existing ServiceTitan adoption across all 7 tenants]</em></li>
+        </ul>
+      </div>
+      <div class="swot-card swot-weaknesses">
+        <div class="swot-label">Weaknesses</div>
+        <h3>Operational &amp; Process Gaps</h3>
+        <ul>
+          <li>$12M+ in sold estimates never converted to booked jobs</li>
+          <li>Zero tenants have Sales Margin Control active — discounts go unchecked</li>
+          <li>Accounting export backlogs at multiple tenants going back 3+ years</li>
+          <li>On-hold job backlogs clogging the system at all 7 tenants</li>
+          <li>MFA not enabled at 6 of 7 tenants — active security exposure</li>
+        </ul>
+      </div>
+      <div class="swot-card swot-opportunities">
+        <div class="swot-label">Opportunities</div>
+        <h3>Platform Features Ready to Activate</h3>
+        <ul>
+          <li>Activate Sales Margin Control, Leads, &amp; Automated Refunds — already available</li>
+          <li>~23,000 membership visits represent near-term billable service revenue</li>
+          <li>$2M–$5M per tenant in 30-day unsold estimate pipeline is within reach</li>
+          <li>GL and pricebook cleanup will unlock reliable job costing and margin reporting</li>
+          <li>Replenishment workflow can automate purchasing &amp; reduce manual PO burden</li>
+        </ul>
+      </div>
+      <div class="swot-card swot-threats">
+        <div class="swot-label">Threats</div>
+        <h3>Risks If Left Unaddressed</h3>
+        <ul>
+          <li>Outdated integrations at all 7 tenants risk data sync failures &amp; billing errors</li>
+          <li>Growing PO, returns, and on-hold backlogs compound in cost monthly</li>
+          <li>Stale user accounts pose access control and data security risks</li>
+          <li>Unreliable job costing data limits management's ability to make sound decisions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: IPO FRAMEWORK -->
+  <div class="slide slide-three-col" id="slide-7">
+    <div class="slide-header">
+      <div class="eyebrow">Operational Framework</div>
+      <h2>Input → Process → Output: Where Things Break Down</h2>
+    </div>
+    <div class="three-col-grid">
+      <div class="ipo-col" style="border-color:rgba(93,173,226,0.3);">
+        <div class="ipo-header">
+          <span class="ipo-icon">📥</span>
+          <h3 style="color:var(--accent);">Input</h3>
+        </div>
+        <ul>
+          <li>Customer calls &amp; web leads</li>
+          <li>Sold &amp; unsold estimates</li>
+          <li>Membership renewals &amp; visits</li>
+          <li>Purchase orders for materials</li>
+          <li>Technician time &amp; timesheet entries</li>
+        </ul>
+        <div class="ipo-breakdown">Calls not classified. Unsold estimates have no follow-up process. Memberships lapsing without re-engagement.</div>
+      </div>
+      <div class="ipo-arrow">→</div>
+      <div class="ipo-col" style="border-color:rgba(245,200,66,0.3);">
+        <div class="ipo-header">
+          <span class="ipo-icon">⚙️</span>
+          <h3 style="color:var(--yellow);">Process</h3>
+        </div>
+        <ul>
+          <li>CSR classifies &amp; books job</li>
+          <li>Dispatcher assigns to technician</li>
+          <li>Tech completes work &amp; invoices</li>
+          <li>Materials received via POs</li>
+          <li>Accounting exports &amp; bills customer</li>
+        </ul>
+        <div class="ipo-breakdown">Past-dated &amp; on-hold jobs clog the board. GL mis-mapped. Invoices not exported or sent. POs stuck unrecovered.</div>
+      </div>
+      <div class="ipo-arrow">→</div>
+      <div class="ipo-col" style="border-color:rgba(82,217,160,0.3);">
+        <div class="ipo-header">
+          <span class="ipo-icon">📤</span>
+          <h3 style="color:var(--green);">Output</h3>
+        </div>
+        <ul>
+          <li>Booked revenue collected from customer</li>
+          <li>Accurate job costs &amp; margins reported</li>
+          <li>Customer billing sent &amp; AR current</li>
+          <li>Inventory levels accurate &amp; replenished</li>
+          <li>Reliable reporting for decisions</li>
+        </ul>
+        <div class="ipo-breakdown">$12M+ in booked revenue in limbo. GL inconsistencies corrupt margin reports. AR invoices never reach customers.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: HERO SPLIT — Revenue Leakage -->
+  <div class="slide slide-hero-split" id="slide-8">
     <div class="text-panel">
-      <div class="eyebrow">Focus Area 01</div>
+      <div class="eyebrow">Focus Area 01 — Revenue</div>
       <h2>Revenue Leakage is a Portfolio-Wide Problem</h2>
       <p>Across all 7 tenants, significant revenue is being left on the table through missed bookings, untracked estimates, and lapsed membership programs.</p>
       <ul>
@@ -319,15 +578,15 @@
       <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,79,114,0.7),rgba(13,27,42,0.5));"></div>
       <div style="position:absolute;bottom:2.5rem;left:2rem;right:2rem;">
         <div style="background:rgba(13,27,42,0.88);border:1px solid rgba(93,173,226,0.2);border-radius:12px;padding:1.25rem 1.5rem;">
-          <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:0.5rem;">Sales Margin Control</div>
+          <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:0.5rem;">Sales Margin Control — Universal Gap</div>
           <div style="font-size:0.9rem;color:rgba(255,255,255,0.85);line-height:1.5;">100% of tenants have not activated Sales Margin Control — leaving technicians and CSRs able to discount without guardrails. A low-effort setup with immediate revenue protection impact.</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 6: TWO COLUMN — Revenue Quick Wins -->
-  <div class="slide slide-two-column" id="slide-6">
+  <!-- SLIDE 9: TWO COLUMN — Revenue Quick Wins -->
+  <div class="slide slide-two-column" id="slide-9">
     <div class="slide-header">
       <div class="eyebrow">Quick Wins · Revenue</div>
       <h2>Top Revenue Opportunities — Low Effort, High Impact</h2>
@@ -388,82 +647,54 @@
     </div>
   </div>
 
-  <!-- SLIDE 7: CHART — Dispatch & Accounting issues by tenant -->
-  <div class="slide slide-chart" id="slide-7">
-    <div class="chart-header">
-      <div class="eyebrow">Accounting &amp; Finance Hygiene</div>
-      <h2>Financial Workflow Gaps Across Tenants</h2>
-    </div>
-    <div class="chart-wrapper">
-      <canvas id="chart-accounting"></canvas>
-    </div>
-    <p class="chart-insight">Invoices not being exported or sent to customers means revenue is earned but cannot be collected. AR invoices sitting unsent block cash flow — all while the customer doesn't even know they owe anything.</p>
-  </div>
-
-  <!-- SLIDE 8: TWO COLUMN — Accounting issues -->
-  <div class="slide slide-two-column" id="slide-8">
+  <!-- SLIDE 10: WHY THIS MATTERS — Job Status & Workflows -->
+  <div class="slide slide-why-matters" id="slide-10">
     <div class="slide-header">
-      <div class="eyebrow">Focus Area 03 — Accounting &amp; Finance</div>
-      <h2>Financial Workflow Issues Requiring Attention</h2>
+      <div class="eyebrow">Focus Area 02 — Dispatch</div>
+      <h2>Why Job Status Hygiene Matters</h2>
     </div>
-    <div class="two-col-grid" style="grid-template-rows: 1fr 1fr;">
-      <div class="col-card">
-        <div class="col-icon">📤</div>
-        <div class="tag red">Cash Flow Risk · 7/7 Tenants</div>
-        <h3>AR Invoices Not Sent to Customers</h3>
-        <p>All 7 tenants have invoices in Accounts Receivable that were never sent to the customer. Customers cannot pay a bill they haven't received — this is a direct cash flow blocker.</p>
-        <ul class="card-bullets">
-          <li>My Plumber: ~50% of AR invoices unsent</li>
-          <li>Jackson Comfort: 174 statements not sent</li>
-          <li>Sila Services BOS: Most AR invoices not sent</li>
-          <li>T-Mark Plumbing: 69 invoices unsent</li>
+    <div class="why-matters-grid">
+      <div class="wm-card wm-blue">
+        <div class="wm-header">📋 Job Status</div>
+        <ul>
+          <li>No job left behind means no revenue left behind — every open status is a potential uncollected dollar.</li>
+          <li>Watch for patterns by business unit — high on-hold rates in one BU often signal a training or accountability gap.</li>
+          <li>Establish daily, weekly &amp; monthly review cadences with ownership at each service center.</li>
+          <li>Job tags and task management in ST ensure visibility and accountability across the whole team.</li>
         </ul>
-        <div class="card-tenants">Affects: <span>All 7 tenants</span> · Owner: Accounting</div>
       </div>
-      <div class="col-card">
-        <div class="col-icon">🧾</div>
-        <div class="tag yellow">Reporting Risk · 5/7 Tenants</div>
-        <h3>Inconsistent GL Accounts in Pricebook</h3>
-        <p>5 tenants have inconsistent General Ledger account assignments in their pricebooks — e.g., some equipment mapped to "Parts" GL, others to "Equipment." This makes job costing and P&amp;L analysis unreliable.</p>
-        <ul class="card-bullets">
-          <li>Corrupts cost-of-goods and margin reporting</li>
-          <li>Makes financial reporting hard to trust</li>
-          <li>Single-fix cleanup with long-term reporting benefit</li>
-          <li>My Plumber: COGS account tied incorrectly to equipment</li>
+      <div class="wm-card wm-green">
+        <div class="wm-header">⏸ On Hold</div>
+        <ul>
+          <li>Putting jobs on Hold makes sense for permits or parts — but they should never stay on Hold beyond 30 days without review.</li>
+          <li>Keep on-hold jobs updated with Notes, Tags, and Task Management so nothing gets forgotten.</li>
+          <li>Jobs on hold for 60+ days with no update should be evaluated for cancellation or closure.</li>
+          <li>Cancel or close jobs that will never be run — they pollute reporting and dispatch views.</li>
         </ul>
-        <div class="card-tenants">Affects: <span>5 tenants</span> · Owner: Accounting</div>
       </div>
-      <div class="col-card">
-        <div class="col-icon">📂</div>
-        <div class="tag yellow">Export Lag · 6/7 Tenants</div>
-        <h3>Invoices &amp; Payments Not Exported</h3>
-        <p>Invoices and payments are sitting in ServiceTitan without being exported to the accounting system, in some cases going back years. This creates a growing reconciliation burden.</p>
-        <ul class="card-bullets">
-          <li>Sila Services LLC: Invoices unexported since 2022</li>
-          <li>Auchinachie: Invoice from December 2025 not exported</li>
-          <li>Jackson Comfort: Payments going back to 2023</li>
-          <li>T-Mark: Both invoices (2025) and payments (2024) pending</li>
+      <div class="wm-card wm-yellow">
+        <div class="wm-header">🔄 In Progress</div>
+        <ul>
+          <li>There should be no In Progress jobs from 2024 or prior — these represent revenue that was earned but never finalized.</li>
+          <li>Old in-progress jobs are typically caused by additional appointments added after completion, or incomplete technician timesheets.</li>
+          <li>Each in-progress job from a prior year requires individual review to confirm completion and close correctly.</li>
+          <li>Closing these unlocks accurate revenue reporting for those periods.</li>
         </ul>
-        <div class="card-tenants">Affects: <span>6 tenants</span> · Owner: Accounting</div>
       </div>
-      <div class="col-card">
-        <div class="col-icon">🔁</div>
-        <div class="tag">Efficiency · 5/7 Tenants</div>
-        <h3>Outstanding Returns &amp; Refund Workflow</h3>
-        <p>5 tenants have unresolved returns — some going back to 2022. Additionally, most tenants don't have the Automated Refunds Workflow configured, forcing manual processing.</p>
-        <ul class="card-bullets">
-          <li>Dave's World: 400+ returns not completed</li>
-          <li>Auchinachie: Returns outstanding since 2022</li>
-          <li>Automated Refunds not set up at 4/7 tenants</li>
-          <li>Manual refund processing is time-consuming and error-prone</li>
+      <div class="wm-card wm-red">
+        <div class="wm-header">📅 Scheduled Past</div>
+        <ul>
+          <li>Jobs scheduled in the past mean dispatch board pollution — CSRs and dispatchers can't get a clean view of today's real workload.</li>
+          <li>Use Business Unit and Tag filters to surface past-dated jobs and ensure they are rescheduled or cancelled.</li>
+          <li>Sila tenants: 5 of 7 have jobs on the schedule with dates that have already passed.</li>
+          <li>Cancel those that will not be run — rescheduling stale jobs keeps the board actionable.</li>
         </ul>
-        <div class="card-tenants">Affects: <span>5 tenants (returns) · 4 tenants (workflow)</span></div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 9: TWO COLUMN — Dispatch & Job Hygiene -->
-  <div class="slide slide-two-column" id="slide-9">
+  <!-- SLIDE 11: TWO COLUMN — Dispatch & Job Hygiene -->
+  <div class="slide slide-two-column" id="slide-11">
     <div class="slide-header">
       <div class="eyebrow">Focus Area 02 — Dispatch &amp; Job Hygiene</div>
       <h2>Job Management Issues Clogging the Schedule</h2>
@@ -524,53 +755,139 @@
     </div>
   </div>
 
-  <!-- SLIDE 10: HERO SPLIT — Inventory & Purchasing -->
-  <div class="slide slide-hero-split" id="slide-10">
-    <div class="text-panel">
-      <div class="eyebrow">Focus Area 04 — Inventory &amp; Purchasing</div>
-      <h2>Inventory Workflows Are Underused Across the Portfolio</h2>
-      <p>Inventory and purchasing features exist in ServiceTitan to drive cost control and field efficiency — but they're widely underutilized or misconfigured across Sila tenants.</p>
-      <ul>
-        <li><strong>Purchase Orders Outstanding</strong> — 3/7 tenants have hundreds to thousands of pending POs, some going back to 2021. T-Mark has 6,000+ outstanding POs.</li>
-        <li><strong>Replenishment Module Not Used</strong> — Trucks aren't being replenished through ServiceTitan at several tenants, causing parts to be added after the fact or missed entirely.</li>
-        <li><strong>Items Not in Pricebook Categories</strong> — Items without categories are invisible to technicians in the field. This contributes directly to missed materials charges and inaccurate job costing.</li>
-        <li><strong>Inventory Counts Not Performed</strong> — Multiple tenants have Inventory turned on but no counts being run, making inventory balances unreliable for cost reporting.</li>
-        <li><strong>Default Replenishment Vendor</strong> — 2 tenants have materials assigned to a generic "Default" vendor instead of actual vendors, breaking PO and cost workflows.</li>
-      </ul>
+  <!-- SLIDE 12: CHART — Accounting Issues by Tenant (FIXED) -->
+  <div class="slide slide-chart" id="slide-12">
+    <div class="chart-header">
+      <div class="eyebrow">Focus Area 03 — Accounting &amp; Finance</div>
+      <h2>Accounting Issue Load by Tenant</h2>
     </div>
-    <div class="visual-panel">
-      <img src="https://picsum.photos/seed/warehouse/900/700" alt="Warehouse">
-      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,79,114,0.65),rgba(13,27,42,0.45));"></div>
-      <div style="position:absolute;top:2.5rem;right:2rem;left:2rem;">
-        <div style="background:rgba(13,27,42,0.9);border:1px solid rgba(245,200,66,0.25);border-radius:12px;padding:1.25rem 1.5rem;">
-          <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--yellow);font-weight:600;margin-bottom:0.75rem;">T-Mark Plumbing — PO Backlog</div>
-          <div style="font-size:2.2rem;font-weight:800;color:var(--yellow);font-family:var(--font-heading);line-height:1;">6,000+</div>
-          <div style="font-size:0.85rem;color:rgba(255,255,255,0.65);margin-top:0.35rem;">Outstanding purchase orders, some going back years — the largest PO backlog in the portfolio</div>
-        </div>
+    <div class="chart-wrapper">
+      <canvas id="chart-accounting"></canvas>
+    </div>
+    <p class="chart-insight">Across 4 accounting issue categories — <strong style="color:#fff">AR invoices not sent, export backlogs, GL account inconsistencies, and outstanding returns</strong> — most tenants are carrying 3 or more simultaneous problems. Auchinachie and Sila LLC each carry all 4.</p>
+  </div>
+
+  <!-- SLIDE 13: TWO COLUMN — Accounting & Finance -->
+  <div class="slide slide-two-column" id="slide-13">
+    <div class="slide-header">
+      <div class="eyebrow">Focus Area 03 — Accounting &amp; Finance</div>
+      <h2>Financial Workflow Issues Requiring Attention</h2>
+    </div>
+    <div class="two-col-grid" style="grid-template-rows: 1fr 1fr;">
+      <div class="col-card">
+        <div class="col-icon">📤</div>
+        <div class="tag red">Cash Flow Risk · 7/7 Tenants</div>
+        <h3>AR Invoices Not Sent to Customers</h3>
+        <p>All 7 tenants have invoices in Accounts Receivable that were never sent to the customer. Customers cannot pay a bill they haven't received — this is a direct cash flow blocker.</p>
+        <ul class="card-bullets">
+          <li>My Plumber: ~50% of AR invoices unsent</li>
+          <li>Jackson Comfort: 174 statements not sent</li>
+          <li>Sila Services BOS: Most AR invoices not sent</li>
+          <li>T-Mark Plumbing: 69 invoices unsent</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>All 7 tenants</span> · Owner: Accounting</div>
       </div>
-      <div style="position:absolute;bottom:2.5rem;right:2rem;left:2rem;">
-        <div style="background:rgba(13,27,42,0.9);border:1px solid rgba(93,173,226,0.2);border-radius:12px;padding:1.1rem 1.5rem;display:flex;gap:1.5rem;">
-          <div style="text-align:center;flex:1;">
-            <div style="font-size:1.6rem;font-weight:800;color:var(--accent);font-family:var(--font-heading);">3/7</div>
-            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.2rem;">PO backlogs</div>
-          </div>
-          <div style="text-align:center;flex:1;">
-            <div style="font-size:1.6rem;font-weight:800;color:var(--accent);font-family:var(--font-heading);">5/7</div>
-            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.2rem;">Items not in categories</div>
-          </div>
-          <div style="text-align:center;flex:1;">
-            <div style="font-size:1.6rem;font-weight:800;color:var(--accent);font-family:var(--font-heading);">4/7</div>
-            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.2rem;">Replenishment unused</div>
-          </div>
-        </div>
+      <div class="col-card">
+        <div class="col-icon">🧾</div>
+        <div class="tag yellow">Reporting Risk · 5/7 Tenants</div>
+        <h3>Inconsistent GL Accounts in Pricebook</h3>
+        <p>5 tenants have inconsistent General Ledger account assignments in their pricebooks — e.g., some equipment mapped to "Parts" GL, others to "Equipment." This makes job costing and P&amp;L analysis unreliable.</p>
+        <ul class="card-bullets">
+          <li>Corrupts cost-of-goods and margin reporting</li>
+          <li>Makes financial reporting hard to trust</li>
+          <li>Single-fix cleanup with long-term reporting benefit</li>
+          <li>My Plumber: COGS account tied incorrectly to equipment</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>5 tenants</span> · Owner: Accounting</div>
+      </div>
+      <div class="col-card">
+        <div class="col-icon">📂</div>
+        <div class="tag yellow">Export Lag · 6/7 Tenants</div>
+        <h3>Invoices &amp; Payments Not Exported</h3>
+        <p>Invoices and payments are sitting in ServiceTitan without being exported to the accounting system, in some cases going back years. This creates a growing reconciliation burden.</p>
+        <ul class="card-bullets">
+          <li>Sila Services LLC: Invoices unexported since 2022</li>
+          <li>Auchinachie: Invoice from December 2025 not exported</li>
+          <li>Jackson Comfort: Payments going back to 2023</li>
+          <li>T-Mark: Both invoices (2025) and payments (2024) pending</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>6 tenants</span> · Owner: Accounting</div>
+      </div>
+      <div class="col-card">
+        <div class="col-icon">🔁</div>
+        <div class="tag">Efficiency · 5/7 Tenants</div>
+        <h3>Outstanding Returns &amp; Refund Workflow</h3>
+        <p>5 tenants have unresolved returns — some going back to 2022. Additionally, most tenants don't have the Automated Refunds Workflow configured, forcing manual processing.</p>
+        <ul class="card-bullets">
+          <li>Dave's World: 400+ returns not completed</li>
+          <li>Auchinachie: Returns outstanding since 2022</li>
+          <li>Automated Refunds not set up at 4/7 tenants</li>
+          <li>Manual refund processing is time-consuming and error-prone</li>
+        </ul>
+        <div class="card-tenants">Affects: <span>5 tenants (returns) · 4 tenants (workflow)</span></div>
       </div>
     </div>
   </div>
 
-  <!-- SLIDE 11: CHART — Platform Health -->
-  <div class="slide slide-chart" id="slide-11">
+  <!-- SLIDE 14: JOB COSTING IMPACT -->
+  <div class="slide slide-two-column" id="slide-14">
+    <div class="slide-header">
+      <div class="eyebrow">How Audit Gaps Connect</div>
+      <h2>How These Issues Corrupt Job Costing</h2>
+    </div>
+    <div class="two-col-grid" style="grid-template-rows: 1fr 1fr;">
+      <div class="col-card" style="border-color:rgba(255,107,107,0.2);">
+        <div class="col-icon">🗂️</div>
+        <div class="tag red">Reporting Impact</div>
+        <h3>GL Inconsistencies → Unreliable Job Margins</h3>
+        <p>When pricebook items are mapped to wrong GL accounts, the revenue and COGS sides of a job don't tell a coherent story. Job margin reports can't be trusted for pricing or compensation decisions.</p>
+        <ul class="card-bullets">
+          <li>Equipment billed as "Parts" understates equipment revenue line</li>
+          <li>COGS categories mixed up → P&amp;L breaks at the BU level</li>
+          <li>Management decisions made on incorrect margin data</li>
+        </ul>
+      </div>
+      <div class="col-card" style="border-color:rgba(255,107,107,0.2);">
+        <div class="col-icon">📦</div>
+        <div class="tag red">Cost Attribution Impact</div>
+        <h3>Unreceived POs → Missing Material Costs</h3>
+        <p>When purchase orders are not received in ServiceTitan, the cost of materials never flows to the job. The job appears more profitable than it actually is — creating phantom margins.</p>
+        <ul class="card-bullets">
+          <li>T-Mark: 6,000+ outstanding POs = massive cost attribution gap</li>
+          <li>Completed jobs show no material cost → misleading tech performance data</li>
+          <li>AP reconciliation becomes nearly impossible</li>
+        </ul>
+      </div>
+      <div class="col-card" style="border-color:rgba(245,200,66,0.2);">
+        <div class="col-icon">🏷️</div>
+        <div class="tag yellow">Field Execution Impact</div>
+        <h3>Pricebook Items Without Categories → Missed Charges</h3>
+        <p>Items not assigned to pricebook categories are invisible to technicians in the field. When techs can't find items, they either skip the charge or add informal notes — both result in missing job cost data.</p>
+        <ul class="card-bullets">
+          <li>5/7 tenants have items outside proper category structure</li>
+          <li>Missed material charges reduce actual revenue collected per job</li>
+          <li>Replenishment can't run correctly without proper categorization</li>
+        </ul>
+      </div>
+      <div class="col-card" style="border-color:rgba(82,217,160,0.2);">
+        <div class="col-icon">📊</div>
+        <div class="tag green">What Accurate Job Costing Enables</div>
+        <h3>Why Fixing This Matters</h3>
+        <p>Clean job costing is the foundation of every business decision in ServiceTitan. When it's working correctly, leadership can see what's actually happening.</p>
+        <ul class="card-bullets">
+          <li>Accurate profit/loss per job, tech, and business unit</li>
+          <li>Pricing decisions backed by real margin data</li>
+          <li>Reliable P&amp;L feeds your accounting system correctly</li>
+          <li>Identifies high vs. low margin job types for growth focus</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 15: CHART — Platform Health -->
+  <div class="slide slide-chart" id="slide-15">
     <div class="chart-header">
-      <div class="eyebrow">Focus Area 05 — Platform &amp; Security Health</div>
+      <div class="eyebrow">Focus Area 04 — Platform &amp; Security Health</div>
       <h2>Platform Hygiene Issues Across the Portfolio</h2>
     </div>
     <div class="chart-wrapper">
@@ -579,8 +896,8 @@
     <p class="chart-insight"><strong style="color:#fff">MFA is not enabled at 6 of 7 tenants</strong> — a critical security gap. Combined with stale user accounts and outdated integrations at every tenant, the platform security posture needs attention portfolio-wide.</p>
   </div>
 
-  <!-- SLIDE 12: TWO COLUMN — Priority Matrix / Summary -->
-  <div class="slide slide-two-column" id="slide-12">
+  <!-- SLIDE 16: TWO COLUMN — Priority Matrix / Summary -->
+  <div class="slide slide-two-column" id="slide-16">
     <div class="slide-header">
       <div class="eyebrow">Prioritization Framework</div>
       <h2>Where to Focus First — Effort vs. Impact</h2>
@@ -641,8 +958,111 @@
     </div>
   </div>
 
-  <!-- SLIDE 13: END -->
-  <div class="slide slide-end" id="slide-13">
+  <!-- SLIDE 17: HERO SPLIT — Inventory & Purchasing (MOVED TO END) -->
+  <div class="slide slide-hero-split" id="slide-17">
+    <div class="text-panel">
+      <div class="eyebrow">Focus Area 05 — Inventory &amp; Purchasing</div>
+      <h2>Inventory Workflows Are Underused Across the Portfolio</h2>
+      <p>Inventory and purchasing features exist in ServiceTitan to drive cost control and field efficiency — but they're widely underutilized or misconfigured across Sila tenants.</p>
+      <ul>
+        <li><strong>Purchase Orders Outstanding</strong> — 3/7 tenants have hundreds to thousands of pending POs, some going back to 2021. T-Mark has 6,000+ outstanding POs.</li>
+        <li><strong>Replenishment Module Not Used</strong> — Trucks aren't being replenished through ServiceTitan at several tenants, causing parts to be added after the fact or missed entirely.</li>
+        <li><strong>Items Not in Pricebook Categories</strong> — Items without categories are invisible to technicians in the field. This contributes directly to missed materials charges and inaccurate job costing.</li>
+        <li><strong>Inventory Counts Not Performed</strong> — Multiple tenants have Inventory turned on but no counts being run, making inventory balances unreliable for cost reporting.</li>
+        <li><strong>Default Replenishment Vendor</strong> — 2 tenants have materials assigned to a generic "Default" vendor instead of actual vendors, breaking PO and cost workflows.</li>
+      </ul>
+    </div>
+    <div class="visual-panel">
+      <img src="https://picsum.photos/seed/warehouse/900/700" alt="Warehouse">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(27,79,114,0.65),rgba(13,27,42,0.45));"></div>
+      <div style="position:absolute;top:2.5rem;right:2rem;left:2rem;">
+        <div style="background:rgba(13,27,42,0.9);border:1px solid rgba(245,200,66,0.25);border-radius:12px;padding:1.25rem 1.5rem;">
+          <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--yellow);font-weight:600;margin-bottom:0.75rem;">T-Mark Plumbing — PO Backlog</div>
+          <div style="font-size:2.2rem;font-weight:800;color:var(--yellow);font-family:var(--font-heading);line-height:1;">6,000+</div>
+          <div style="font-size:0.85rem;color:rgba(255,255,255,0.65);margin-top:0.35rem;">Outstanding purchase orders, some going back years — the largest PO backlog in the portfolio</div>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:2.5rem;right:2rem;left:2rem;">
+        <div style="background:rgba(13,27,42,0.9);border:1px solid rgba(93,173,226,0.2);border-radius:12px;padding:1.1rem 1.5rem;display:flex;gap:1.5rem;">
+          <div style="text-align:center;flex:1;">
+            <div style="font-size:1.6rem;font-weight:800;color:var(--accent);font-family:var(--font-heading);">3/7</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.2rem;">PO backlogs</div>
+          </div>
+          <div style="text-align:center;flex:1;">
+            <div style="font-size:1.6rem;font-weight:800;color:var(--accent);font-family:var(--font-heading);">5/7</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.2rem;">Items not in categories</div>
+          </div>
+          <div style="text-align:center;flex:1;">
+            <div style="font-size:1.6rem;font-weight:800;color:var(--accent);font-family:var(--font-heading);">4/7</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.2rem;">Replenishment unused</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 18: NOW / SHORT-TERM / LONG-TERM ACTION PLAN -->
+  <div class="slide slide-timeline" id="slide-18">
+    <div class="slide-header">
+      <div class="eyebrow">Advisory Findings — Roadmap</div>
+      <h2>Action Plan: Now, Short-Term &amp; Long-Term</h2>
+    </div>
+    <div class="timeline-grid">
+      <div class="tl-col tl-col-now">
+        <div class="tl-header">
+          <span class="tl-icon">🚨</span>
+          <div class="tl-title-wrap">
+            <h3>Do Now</h3>
+            <span class="tl-timeframe">This week — immediate action</span>
+          </div>
+        </div>
+        <div class="tl-items">
+          <div class="tl-item"><span class="tl-check" style="color:var(--red);">✓</span><span>Book all sold estimates into jobs across all 7 tenants</span></div>
+          <div class="tl-item"><span class="tl-check" style="color:var(--red);">✓</span><span>Send outstanding AR invoices to customers</span></div>
+          <div class="tl-item"><span class="tl-check" style="color:var(--red);">✓</span><span>Enable MFA for all user accounts</span></div>
+          <div class="tl-item"><span class="tl-check" style="color:var(--red);">✓</span><span>Activate Sales Margin Control at all 7 tenants</span></div>
+          <div class="tl-item"><span class="tl-check" style="color:var(--red);">✓</span><span>Clean up past-dated jobs from dispatch boards</span></div>
+        </div>
+      </div>
+      <div class="tl-col tl-col-short">
+        <div class="tl-header">
+          <span class="tl-icon">⏱</span>
+          <div class="tl-title-wrap">
+            <h3>Short-Term</h3>
+            <span class="tl-timeframe">Within 2 months</span>
+          </div>
+        </div>
+        <div class="tl-items">
+          <div class="tl-item"><span class="tl-check" style="color:var(--yellow);">✓</span><span>Export all outstanding invoices &amp; payments to accounting</span></div>
+          <div class="tl-item"><span class="tl-check" style="color:var(--yellow);">✓</span><span>Fix GL account assignments in all pricebooks</span></div>
+          <div class="tl-item"><span class="tl-check" style="color:var(--yellow);">✓</span><span>Set up Automated Refunds Workflow at all tenants</span></div>
+          <div class="tl-item"><span class="tl-check" style="color:var(--yellow);">✓</span><span>Implement call classification &amp; Leads/Bookings process</span></div>
+          <div class="tl-item"><span class="tl-check" style="color:var(--yellow);">✓</span><span>Audit on-hold job backlogs — close, cancel, or reschedule</span></div>
+          <div class="tl-item"><span class="tl-check" style="color:var(--yellow);">✓</span><span>Start pricebook item categorization &amp; vendor cleanup</span></div>
+        </div>
+      </div>
+      <div class="tl-col tl-col-long">
+        <div class="tl-header">
+          <span class="tl-icon">🚀</span>
+          <div class="tl-title-wrap">
+            <h3>Long-Term</h3>
+            <span class="tl-timeframe">Beyond 2 months</span>
+          </div>
+        </div>
+        <div class="tl-items">
+          <div class="tl-item"><span class="tl-check" style="color:var(--green);">✓</span><span>Build full replenishment workflow for all truck fleets</span></div>
+          <div class="tl-item"><span class="tl-check" style="color:var(--green);">✓</span><span>Establish inventory cycle count cadence across all locations</span></div>
+          <div class="tl-item"><span class="tl-check" style="color:var(--green);">✓</span><span>Resolve T-Mark's 6,000+ outstanding PO backlog</span></div>
+          <div class="tl-item"><span class="tl-check" style="color:var(--green);">✓</span><span>Pricebook standardization &amp; brand alignment across portfolio</span></div>
+          <div class="tl-item"><span class="tl-check" style="color:var(--green);">✓</span><span>Model tenant refresh for new tenant onboarding template</span></div>
+          <div class="tl-item"><span class="tl-check" style="color:var(--green);">✓</span><span>Membership growth plan — visit outreach &amp; renewal campaigns</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 19: END -->
+  <div class="slide slide-end" id="slide-19">
     <div class="content">
       <div class="eyebrow" style="margin-bottom: 1rem;">Sila Brands · QPR Audit · March 2026</div>
       <h2>Recommended<br>Next Steps</h2>
@@ -657,11 +1077,11 @@
         </div>
         <div class="next-step">
           <span class="ns-num">3</span>
-          <span>Prioritize MFA rollout as an immediate security action — 6 of 7 tenants are currently exposed.</span>
+          <span>Prioritize MFA rollout as an immediate security action — 6 of 7 tenants are currently exposed. Follow with a stale-user-account audit.</span>
         </div>
         <div class="next-step">
           <span class="ns-num">4</span>
-          <span>Build tenant-specific remediation plans for on-hold jobs, PO backlogs, and inventory workflows — set 90-day milestones for each.</span>
+          <span>Fix GL account mappings and pricebook categorization before addressing PO backlogs — clean data in means clean job costing out.</span>
         </div>
       </div>
       <div class="contact-info">Ryan Stare · rstare@servicetitan.com · ServiceTitan Customer Success</div>
@@ -670,7 +1090,7 @@
 
 </div><!-- /.deck -->
 
-<div id="slide-counter">1 / 13</div>
+<div id="slide-counter">1 / 19</div>
 <div id="progress-dots"></div>
 <div id="nav-buttons">
   <button class="nav-btn" id="btn-prev" onclick="navigate(-1)" title="Previous (←)">←</button>
@@ -684,33 +1104,33 @@
     data: {
       labels: [
         'Sold Estimates Not Booked',
-        'Sales Margin Control',
+        'Sales Margin Control Not Active',
         'Integrations Outdated',
+        'AR Invoices Not Sent',
         'Unsold Estimate Follow-up',
         'MFA Not Enabled',
+        'Invoices Not Exported',
         'Jobs Scheduled in Past',
         'Membership Visits Backlog',
         'GL Account Inconsistencies',
         'Returns Outstanding',
-        'Marketing Registration',
-        'AR Invoices Not Sent',
-        'Invoices Not Exported'
+        'Marketing Registration Gap'
       ],
       datasets: [{
         label: 'Tenants Affected (out of 7)',
-        data: [7, 7, 7, 6, 6, 5, 5, 5, 5, 4, 7, 6],
+        data: [7, 7, 7, 7, 6, 6, 6, 5, 5, 5, 5, 4],
         backgroundColor: [
           'rgba(255,107,107,0.85)',
           'rgba(255,107,107,0.85)',
           'rgba(255,107,107,0.85)',
+          'rgba(255,107,107,0.75)',
           'rgba(93,173,226,0.80)',
           'rgba(245,200,66,0.80)',
           'rgba(93,173,226,0.65)',
           'rgba(93,173,226,0.65)',
+          'rgba(93,173,226,0.60)',
           'rgba(93,173,226,0.55)',
           'rgba(93,173,226,0.50)',
-          'rgba(93,173,226,0.45)',
-          'rgba(255,107,107,0.70)',
           'rgba(93,173,226,0.45)',
         ],
         borderRadius: 5,
@@ -732,19 +1152,19 @@
       scales: {
         x: {
           grid: { color: 'rgba(255,255,255,0.05)' },
-          ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 11 } },
+          ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 13 } },
           max: 7,
           border: { display: false }
         },
         y: {
           grid: { display: false },
-          ticks: { color: 'rgba(255,255,255,0.75)', font: { size: 11 } }
+          ticks: { color: 'rgba(255,255,255,0.75)', font: { size: 13 } }
         }
       }
     }
   });
 
-  // ── Chart 2: Accounting Issues ──
+  // ── Chart 2: Accounting Issue Load by Tenant (FIXED — count of issues per tenant, out of 4) ──
   new Chart(document.getElementById('chart-accounting'), {
     type: 'bar',
     data: {
@@ -752,23 +1172,30 @@
       datasets: [
         {
           label: 'AR Invoices Not Sent',
-          data: [82, 1, 174, 1, 1, 75, 69],
-          backgroundColor: 'rgba(255,107,107,0.75)',
-          borderRadius: 4,
+          data: [1, 1, 1, 1, 1, 1, 1],
+          backgroundColor: 'rgba(255,107,107,0.80)',
+          borderRadius: 0,
           borderSkipped: false,
         },
         {
-          label: 'Invoices Not Exported (has issue)',
-          data: [1, 1, 0, 0, 1, 1, 1],
-          backgroundColor: 'rgba(245,200,66,0.65)',
-          borderRadius: 4,
+          label: 'Export Backlog',
+          data: [1, 0, 1, 0, 1, 1, 1],
+          backgroundColor: 'rgba(245,200,66,0.70)',
+          borderRadius: 0,
           borderSkipped: false,
         },
         {
-          label: 'GL Inconsistencies (has issue)',
-          data: [1, 0, 1, 1, 1, 1, 1],
-          backgroundColor: 'rgba(93,173,226,0.55)',
-          borderRadius: 4,
+          label: 'GL Inconsistencies',
+          data: [1, 0, 1, 1, 1, 1, 0],
+          backgroundColor: 'rgba(93,173,226,0.60)',
+          borderRadius: 0,
+          borderSkipped: false,
+        },
+        {
+          label: 'Outstanding Returns',
+          data: [1, 1, 0, 1, 1, 1, 1],
+          backgroundColor: 'rgba(82,217,160,0.50)',
+          borderRadius: [4, 4, 0, 0],
           borderSkipped: false,
         }
       ]
@@ -780,21 +1207,31 @@
         legend: {
           display: true,
           position: 'top',
-          labels: { color: 'rgba(255,255,255,0.65)', font: { size: 11 }, padding: 16 }
+          labels: { color: 'rgba(255,255,255,0.65)', font: { size: 13 }, padding: 18, boxWidth: 14 }
         },
         tooltip: {
           backgroundColor: 'rgba(13,27,42,0.95)',
-          bodyColor: '#ccc', titleColor: '#fff', padding: 12
+          bodyColor: '#ccc', titleColor: '#fff', padding: 12,
+          callbacks: {
+            label: ctx => ` ${ctx.dataset.label}: ${ctx.raw === 1 ? 'Has issue' : 'Clear'}`
+          }
         }
       },
       scales: {
         x: {
+          stacked: true,
           grid: { display: false },
-          ticks: { color: 'rgba(255,255,255,0.7)', font: { size: 11 } }
+          ticks: { color: 'rgba(255,255,255,0.7)', font: { size: 13 } }
         },
         y: {
+          stacked: true,
           grid: { color: 'rgba(255,255,255,0.05)' },
-          ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 10 } },
+          ticks: {
+            color: 'rgba(255,255,255,0.5)', font: { size: 13 },
+            stepSize: 1,
+            callback: val => val + ' issues'
+          },
+          max: 4,
           border: { display: false }
         }
       }
@@ -845,13 +1282,13 @@
       scales: {
         x: {
           grid: { color: 'rgba(255,255,255,0.05)' },
-          ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 11 } },
+          ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 13 } },
           max: 7,
           border: { display: false }
         },
         y: {
           grid: { display: false },
-          ticks: { color: 'rgba(255,255,255,0.75)', font: { size: 11 } }
+          ticks: { color: 'rgba(255,255,255,0.75)', font: { size: 13 } }
         }
       }
     }
